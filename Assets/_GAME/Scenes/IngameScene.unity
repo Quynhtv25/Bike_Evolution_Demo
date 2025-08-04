@@ -1189,6 +1189,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2400809742532039629, guid: f5cb383edf1579b4196530ae3ef1b8e3, type: 3}
+      propertyPath: needleSmoothTime
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2794284497789290285, guid: f5cb383edf1579b4196530ae3ef1b8e3, type: 3}
       propertyPath: m_Name
       value: UICtrl

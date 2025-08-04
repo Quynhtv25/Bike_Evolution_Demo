@@ -34,15 +34,16 @@ namespace MCL.Bike_Evolution {
 
         private void OnUpdateVisual() {
             float t = Mathf.InverseLerp(minSpeed, maxSpeed, currentSpeed);
+
             targetAngle = Mathf.Lerp(minRotateZ, maxRotateZ, t);
 
             float currentZ = speedometer_needle.rectTransform.localEulerAngles.z;
-            if(currentZ > 180)
-                currentZ -= 360f; 
+            if(currentZ > 180f)
+                currentZ -= 360f;
 
             float smoothAngle = Mathf.SmoothDampAngle(currentZ, targetAngle, ref needleVelocity, needleSmoothTime);
 
-            speedometer_needle.rectTransform.localEulerAngles = new Vector3(0, 0, smoothAngle);
+            speedometer_needle.rectTransform.localRotation = Quaternion.Euler(0, 0, smoothAngle);
         }
     }
 }
