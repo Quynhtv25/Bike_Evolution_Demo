@@ -1,10 +1,16 @@
-using UnityEngine;
+﻿using UnityEngine;
 using IPS;
 
 [RequireComponent(typeof(Rigidbody))]
-public class PlaneMoving : MonoBehaviour , IInteract {
+public class PlaneMoving : MonoBehaviour, IInteract {
+    [SerializeField] private Transform targetCenter; 
+    [SerializeField] private float maxFlyDistance = 10f; 
+    [SerializeField] private float forceMultiplier = 10f;
+
     private Rigidbody rb;
     private Vector3 startPos;
+
+    public Vector3 Tf => transform.position;
 
     void Awake() {
         rb = GetComponent<Rigidbody>();
@@ -13,7 +19,8 @@ public class PlaneMoving : MonoBehaviour , IInteract {
     private void OnEnable() {
         this.AddListener<TouchInputEvent>(OnTouchInput);
         this.AddListener<DragInputEvent>(OnDragInput);
-        this.AddListener<OnEndDragInput>(OnEndDrag);
+        this.AddListener<EndDragInput>(OnEndDrag);
+        startPos = Tf;
     }
 
     private void OnTouchInput(TouchInputEvent param) {
@@ -21,11 +28,27 @@ public class PlaneMoving : MonoBehaviour , IInteract {
             Logs.LogError("Touched this plane via IInteract");
         }
     }
+
     private void OnDragInput(DragInputEvent param) {
-        transform.position = param.startPos;
-        Logs.LogError("value_" + param.startPos);
+        if (!ReferenceEquals(param.target, this)) return;
+
+        if (targetCenter != null) {
+            Vector3 lookDirection = (targetCenter.position - transform.position).normalized;
+            if (lookDirection.sqrMagnitude > 0.001f) {
+                transform.forward = lookDirection;
+            }
+        }
+
+        transform.position = param.dragPos;
     }
 
-    private void OnEndDrag(OnEndDragInput data) {
+    private void OnEndDrag(EndDragInput param) {
+        if (!ReferenceEquals(param.target, this)) return;
+
+        Vector3 dirToTarget = (targetCenter.position - transform.position).normalized;
+
+        Vector3 finalForce = transform.forward*100f;
+
+        rb.AddForce(finalForce, ForceMode.Impulse);
     }
 }
