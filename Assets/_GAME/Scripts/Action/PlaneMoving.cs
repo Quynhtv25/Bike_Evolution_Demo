@@ -33,6 +33,7 @@ public class PlaneMoving : MonoBehaviour, IInteract {
     }
     private void Update() {
         if (!isFly) return;
+        Logs.LogError("On MOve");
         this.Dispatch(new SpeedBikeRuntime() {
             CurrentSpeed = rb.velocity.z,
             MinSpeed = 0,
@@ -41,6 +42,10 @@ public class PlaneMoving : MonoBehaviour, IInteract {
 
         float currentDistance = Vector3.Distance(startPos, Tf);
         this.Dispatch(new PercentDistanceTravel { CurrentDistanceTravel = currentDistance, TotalDistanceTravel = totalDistance });
+        //if(Vector3.Distance(rb.velocity, Vector3.zero) < .05f){
+        //    isFly = false;
+
+        //}
     }
     private void OnTouchInput(TouchInputEvent param) {
         if (ReferenceEquals(param.target, this)) {
