@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using IPS;
 using DG.Tweening;
+using UnityEngine.Rendering;
 
 [RequireComponent(typeof(Rigidbody))]
 public class PlaneMoving : MonoBehaviour, IInteract {
@@ -10,7 +11,7 @@ public class PlaneMoving : MonoBehaviour, IInteract {
     [SerializeField] private Transform targetCenterRight;
     private Rigidbody rb;
     private Vector3 startPos;
-
+    private bool isFly;
     public Vector3 Tf => transform.position;
 
     void Awake() {
@@ -22,8 +23,17 @@ public class PlaneMoving : MonoBehaviour, IInteract {
         this.AddListener<DragInputEvent>(OnDragInput);
         this.AddListener<EndDragInput>(OnEndDrag);
         startPos = Tf;
+        isFly = false;
     }
+    private void Update() {
+        if (!isFly) return;
+        this.Dispatch(new SpeedBikeRuntime() {
+            CurrentSpeed = rb.velocity.z,
+            MinSpeed = 0,
+            MaxSpeed = GameData.Instance.AtributesData.GetBikeData(1).GetInfoUpgradeData(1).speed
+        });
 
+    }
     private void OnTouchInput(TouchInputEvent param) {
         if (ReferenceEquals(param.target, this)) {
             Logs.LogError("Touched this plane via IInteract");
@@ -49,13 +59,13 @@ public class PlaneMoving : MonoBehaviour, IInteract {
 
     private void OnEndDrag(EndDragInput param) {
         if (!ReferenceEquals(param.target, this)) return;
-        if (Vector3.Distance(Tf, param.endPos) <= 5f) {
-            transform.DOMove(startPos, .5f);
-            transform.DOLocalRotate(Vector3.zero, .5f);
-            Logs.LogError("EndDragFail_");
+        //if (Vector3.Distance(Tf, param.endPos) <= 5f) {
+        //    transform.DOMove(startPos, .5f);
+        //    transform.DOLocalRotate(Vector3.zero, .5f);
+        //    Logs.LogError("EndDragFail_");
 
-            return;
-        }
+        //    return;
+        //}
 
         Vector3 dirToTarget = (targetCenter.position - transform.position).normalized;
 
@@ -64,10 +74,9 @@ public class PlaneMoving : MonoBehaviour, IInteract {
         float percent = Mathf.Clamp(1 - (distance / targetCenterBack.position.z), 0, 1);
 
         float baseSpeed = GameData.Instance.AtributesData.GetBikeData(1).GetInfoUpgradeData(1).speed;
-        float finalValue = baseSpeed * percent;
+        float finalValue =  baseSpeed * percent;
         Vector3 finalForce = (transform.forward * finalValue) /*+ (finalValue * Vector3.up)*/;
-        Logs.LogError("value_" + finalForce);
-
+        isFly = true;
         rb.AddForce(finalForce, ForceMode.Impulse);
     }
 }
