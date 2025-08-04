@@ -1350,14 +1350,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: UICtrl
       objectReference: {fileID: 0}
-    - target: {fileID: 4662142599124971662, guid: f5cb383edf1579b4196530ae3ef1b8e3, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7175920719373702186, guid: f5cb383edf1579b4196530ae3ef1b8e3, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
