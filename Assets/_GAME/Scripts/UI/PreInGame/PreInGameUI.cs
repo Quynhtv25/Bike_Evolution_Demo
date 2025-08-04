@@ -8,7 +8,6 @@ public class PreInGameUI : Frame
         bntTapPlay.onClick.AddListener(OnPlayGame);
     }
     private void OnPlayGame() {
-        Logs.LogError("fasf");
         this.Dispatch(new StartGameEvent());
     }
 }
