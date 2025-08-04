@@ -1,7 +1,5 @@
 ﻿using UnityEngine;
 using IPS;
-using DG.Tweening;
-using UnityEngine.Rendering;
 
 [RequireComponent(typeof(Rigidbody))]
 public class PlaneMoving : MonoBehaviour, IInteract {
