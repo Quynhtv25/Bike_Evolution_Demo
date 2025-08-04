@@ -25,4 +25,12 @@ public class PopupHUD: HUD<PopupHUD> {
         Get<WinUI>().SetTextDistance(currentDistance);
         Show<WinUI>();
     }
+
+    public void ShowUpgradePopup() {
+        Show<UpgradePopup>();
+    }
+
+    public void HideUpgradePopup() {
+        Hide<UpgradePopup>();
+    }
 }
