@@ -10,8 +10,8 @@ namespace MCL.Bike_Evolution {
         [SerializeField] float maxSpeed = 0;
         [SerializeField] float currentSpeed = 0;
 
-        [SerializeField] float minRotateZ = 30f;
-        [SerializeField] float maxRotateZ = -180f;
+        [SerializeField] float minRotateZ = 390f;
+        [SerializeField] float maxRotateZ = 180f;
 
         [SerializeField] Image speedometer_needle;
 
@@ -33,16 +33,7 @@ namespace MCL.Bike_Evolution {
         }
 
         private void OnUpdateVisual() {
-            float t = Mathf.InverseLerp(minSpeed, maxSpeed, currentSpeed);
-            targetAngle = Mathf.Lerp(minRotateZ, maxRotateZ, t);
 
-            float currentZ = speedometer_needle.rectTransform.localEulerAngles.z;
-            if(currentZ > 180)
-                currentZ -= 360f; 
-
-            float smoothAngle = Mathf.SmoothDampAngle(currentZ, targetAngle, ref needleVelocity, needleSmoothTime);
-
-            speedometer_needle.rectTransform.localEulerAngles = new Vector3(0, 0, smoothAngle);
         }
     }
 }
