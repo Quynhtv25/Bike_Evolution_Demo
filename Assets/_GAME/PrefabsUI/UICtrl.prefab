@@ -420,6 +420,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8501522280497225155}
   - component: {fileID: 3489183815903667288}
+  - component: {fileID: 1466839154153145691}
   m_Layer: 5
   m_Name: PreInGame
   m_TagString: Untagged
@@ -469,6 +470,18 @@ MonoBehaviour:
   hideType: 27
   hideTo: 1
   bntTapPlay: {fileID: 6828019085351395886}
+--- !u!225 &1466839154153145691
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4662142599124971662}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &4691031695392257688
 GameObject:
   m_ObjectHideFlags: 0
@@ -580,8 +593,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 2024363101079514097}
   - {fileID: 3708821284893491823}
+  - {fileID: 2024363101079514097}
   m_Father: {fileID: 8501522280497225155}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -1089,7 +1102,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:

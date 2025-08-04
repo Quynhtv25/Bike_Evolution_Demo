@@ -11,9 +11,11 @@ public class UICtrl : HUD<UICtrl>
     }
     private void OnEnable() {
         this.AddListener<StartGameEvent>(OnStartGame);
-        //Show<PreInGameUI>();
+        Show<PreInGameUI>();
     }
     private void OnStartGame() {
+        Hide<PreInGameUI>();
+
         Show<IngameUI>();
     }
 }

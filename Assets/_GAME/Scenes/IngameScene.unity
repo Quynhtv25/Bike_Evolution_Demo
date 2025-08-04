@@ -875,6 +875,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3532601920570208009, guid: c3ac819ab014e224cadc9a895bf49ced, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3532601920570208009, guid: c3ac819ab014e224cadc9a895bf49ced, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 11.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3532601920570208009, guid: c3ac819ab014e224cadc9a895bf49ced, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -24
+      objectReference: {fileID: 0}
     - target: {fileID: 3667221262056477782, guid: c3ac819ab014e224cadc9a895bf49ced, type: 3}
       propertyPath: m_Name
       value: CameraController
@@ -1199,7 +1211,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7175920719373702186, guid: f5cb383edf1579b4196530ae3ef1b8e3, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
