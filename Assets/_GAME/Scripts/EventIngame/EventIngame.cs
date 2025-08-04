@@ -13,3 +13,16 @@ public struct EndDragInput : IEventParam {
     public float magnitude;
     public Vector3 force;
 }
+
+
+// --------------- UI Event ----------------------
+public struct SpeedBikeRuntime : IEventParam {
+    public float CurrentSpeed;
+    public float MinSpeed;
+    public float MaxSpeed;
+}
+
+public struct PercentDistanceTravel : IEventParam {
+    public float TotalDistanceTravel;
+    public float CurrentDistanceTravel;
+}
