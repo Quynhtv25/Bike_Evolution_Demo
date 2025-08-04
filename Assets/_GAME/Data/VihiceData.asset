@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6016d4f35b325c84f83747f822258f92, type: 3}
-  m_Name: GameData
+  m_Name: VihiceData
   m_EditorClassIdentifier: 
   slingshotState: []
   bikeState: []
