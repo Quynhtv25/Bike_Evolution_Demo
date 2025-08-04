@@ -1,0 +1,75 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40f95025eedbc264bac75b6b46a7eea0, type: 3}
+  m_Name: AdmobSettings
+  m_EditorClassIdentifier: 
+  EnableUMP: 0
+  iOSATTMessage: Blast Drop is supported by ads. To make these ads as relevant to
+    you as possible, we would like to collect and share data with our ads partners.
+    Please note that choosing no will not remove ads - Instead you may see ads that
+    maybe unrelated to your interests, therefore may not appeal to you.
+  EnableLog: 0
+  UseTestAd: 0
+  TestDevice_android: e0718837-13e1-4b56-ad69-7007de7dd749
+  TestDevice_iOS: A040DCE4-5BA0-4E2C-B97B-0507DA270CF2
+  appID_android: ca-app-pub-8528720911783805~1010703411
+  appID_iOS: 
+  AdResumeEnable: 1
+  AdsResumeCapping: 0
+  AdsResumeFromPlayedTime: 1
+  useAOAAd: 1
+  aoaTierId_Android: 
+  aoaTierId_iOS: 
+  aoaOpenEnable: 1
+  aoaOpenFirstInstallEnable: 0
+  aoaResumeEnable: 1
+  AoaShowBeforeSceneIdx: 1
+  useNativeAd: 0
+  UseNativeAd_UI: 0
+  UseNativeAd_3D: 0
+  nativeId_Android: 
+  nativeId_iOS: 
+  PreloadNativeAd: 0
+  useBannerAd: 0
+  bannerID_android: 
+  bannerID_iOS: 
+  BannerSize: 0
+  useBannerCollapsible: 0
+  CollapsibleFallbackEnable: 0
+  CollapsibleAutoRefresh: 0
+  CollapsibleReloadInterval: 30
+  BannerFromPlayTimes: 0
+  BannerFromLevel: 6
+  BannerReloadCapping: 0
+  BannerReloadByLevelCapping: 0
+  showBannerOnBottom: 1
+  useMRecAd: 0
+  mrecrID_android: 
+  mrecID_iOS: 
+  ShowMRecOnBottom: 0
+  useInterstitialAd: 1
+  interstitialID_android: 
+  interstitialID_iOS: 
+  interResumeEnable: 1
+  interCapping: 60
+  interAfterRewardCapping: 60
+  InterFromPlayTimes: 0
+  InterFromLevel: 16
+  InterFromSeconds: 0
+  ForceInterEnable: 0
+  ForceInterCapping: 90
+  useRewardVideoAd: 1
+  rewardID_android: 
+  rewardID_iOS: 
+  useRewardInterstitialAd: 0
+  rewardInterID_android: 
+  rewardInterID_iOS: 

@@ -1,0 +1,3 @@
+# Facebook proguard
+-keep class com.facebook.** { *; }
+-keepattributes Signature

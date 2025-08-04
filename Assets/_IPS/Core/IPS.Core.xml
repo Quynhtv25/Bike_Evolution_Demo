@@ -1,0 +1,262 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>IPS.Core</name>
+    </assembly>
+    <members>
+        <member name="M:IPS.Core.Data.SecureData.HasKey(System.String)">
+            <summary>
+            Check whether has data of 'key' or not.
+            <para>'key': is normal string with no encrypt</para>
+            </summary>
+            <param name="key">Normal string with no encrypt</param>
+            <returns></returns>
+        </member>
+        <member name="M:IPS.Core.Data.SecureData.SaveKey(System.String,System.String,System.String)">
+            <summary> 'key' is normal string with no encrypt </summary>
+        </member>
+        <member name="M:IPS.Core.Data.SecureData.EncryptedKey(System.String)">
+            <summary> 'key' is normal string with no encrypt </summary>
+        </member>
+        <member name="T:IPS.Excutor">
+            <summary>
+            The helper class to excute a function from any where into Unity mainthread. Usefull for call back by Ads, Firebase, Facebook... or other third party.
+            </summary>
+        </member>
+        <member name="M:IPS.Excutor.Schedule(System.Action,System.Single,System.Boolean)">
+            <summary>The task will be add into a queue after 'delayTime' seconds, then be excute from main thread (on Update) </summary>
+        </member>
+        <member name="M:IPS.Excutor.Schedule``1(System.Action{``0},``0,System.Single,System.Boolean)">
+            <summary>The task will be add into a queue after 'delayTime' seconds, then be excute from main thread (on Update) </summary>
+        </member>
+        <member name="M:IPS.Excutor.Schedule(System.Collections.IEnumerator,System.Single,System.Boolean)">
+            <summary>The enumerator will be add into a queue to be excute from main thread (on Update) </summary>
+        </member>
+        <member name="P:IPS.Networker.IsInternetAvaiable">
+            <summary>
+            CAUTION: This need to be call from mainthread. 
+            <para>If use this from other thirdparty (firebase, ads, facebook...): call inside "Excutor.Schedule"</para>
+            </summary>
+        </member>
+        <member name="T:IPS.Service`1">
+            <summary> 
+            Singleton class which is not MonoBehavior. 
+            <para> Call T.Instance.Preload() at the first script startup of application to prepare init. </para>
+            </summary>
+        </member>
+        <member name="F:IPS.Service`1.__instance">
+            <summary> This is local variable. Use 'Instance' from outsite. </summary>
+        </member>
+        <member name="P:IPS.Service`1.Initialized">
+            <summary> 
+             If you want to check null, use this property instead of calling to "Instance" 
+             because "Instance" can auto create an emty object, so "Instance" can never null 
+             </summary> */
+        </member>
+        <member name="P:IPS.Service`1.Instance">
+            <summary> 
+            This will auto create new if instance is null.
+            <para> If you want to check null, use 'if (T.Initialized)' instead of 'if (T.Instance != null)' </para>
+            </summary>
+        </member>
+        <member name="M:IPS.Service`1.#ctor">
+            <summary>
+            Constructor will call automaticaly on the first call of "Instance"
+            <para>If you want to create your custom constructor, note that deliver from this "base" </para>
+            </summary>
+        </member>
+        <member name="M:IPS.Service`1.Finalize">
+            <summary>
+            This will call automaticly by GC.Collect when no one reference to this instance.
+            </summary>
+        </member>
+        <member name="M:IPS.Service`1.Initialize">
+            <summary> 
+            This function will be call automaticaly only one times (on the first call of "Instance")
+            <para>Put your custom initialize here. No need to call "base.Initialize" </para>
+            </summary>
+        </member>
+        <member name="M:IPS.Service`1.Preload">
+            <summary> 
+            This method is empty function, just use to prepare initialize the "Instance" to improve Ram/ CPU (to preload or decompress all asset inside)
+            <para>Call this at the first application script (exp: BasePreload.cs)</para>
+            <para>Be carefully if you override this and put your custom initialzation here, 
+            because this function can be call many times on any where, so the initialization inside will be init many times too</para>
+            </summary>
+        </member>
+        <member name="M:IPS.Service`1.Dispose">
+            <summary>
+            Call this method to manual release (destroy) the instance.
+            </summary>
+        </member>
+        <member name="M:IPS.Service`1.OnDispose">
+            <summary>
+            Override this and set all field which are reference type to null to release RAM because GC will not care for type of this Singleton.
+            </summary>
+        </member>
+        <member name="T:IPS.SingletonBehaviour`1">
+            <summary> "Instance" = Instantiate new Gameobject if it does not exist in the scene</summary>>
+        </member>
+        <member name="P:IPS.SingletonBehaviour`1.Instance">
+            <summary>
+            This will be create a new game object if instance is null
+            So if you want to check this null, use bool 'Initialized' instead.
+            </summary>
+        </member>
+        <member name="P:IPS.SingletonBehaviour`1.Initialized">
+            <summary>
+            Use for checking whether Instance is null or not. 
+            <para>Use "if (Initialized)" instead of "if (Instance != null)"</para>
+            </summary>
+        </member>
+        <member name="M:IPS.SingletonBehaviour`1.Awake">
+            <summary> DO NOT OVERRIDE THIS METHOD. USE "OnAwake" instead </summary>
+        </member>
+        <member name="M:IPS.SingletonBehaviour`1.Preload">
+            <summary>Call 'T.Instance.Preload()' at the first application script to preload the service.</summary>
+        </member>
+        <member name="M:IPS.SingletonBehaviour`1.OnDestroy">
+            <summary>
+            If you want to override this method, remember to call this base.
+            </summary>
+        </member>
+        <member name="T:IPS.SingletonBehaviourResources`1">
+            <summary> 
+            <para> "Instance" = Instantiate from Resources folder when be called at runtime.</para>
+            <para> Place your prefab in Resources: "T/T", T is the name of class </para> 
+            </summary>
+        </member>
+        <member name="P:IPS.SingletonBehaviourResources`1.ResourcePath">
+            <summary> 
+            <para> Place your prefab in Resources folder: "Scriptable/T/T", T is the name of class </para> 
+            </summary>
+        </member>
+        <member name="P:IPS.SingletonBehaviourResources`1.Instance">
+            <summary> 
+            <para> "Instance" = Instantiate from Resources folder when be called at runtime.</para>
+            <para> Place your prefab in Resources: "Scriptable/T/T", T is the name of class </para> 
+            </summary>
+        </member>
+        <member name="P:IPS.SingletonBehaviourResources`1.Initialized">
+            <summary>
+            Use for checking whether Instance is null or not. 
+            <para>Use "if (Initialized)" instead of "if (Instance != null)"</para>
+            </summary>
+        </member>
+        <member name="M:IPS.SingletonBehaviourResources`1.Awake">
+            <summary> DO NOT OVERRIDE THIS METHOD. USE "OnAwake" instead </summary>
+        </member>
+        <member name="M:IPS.SingletonBehaviourResources`1.Preload">
+            <summary>Call 'T.Instance.Preload()' at the first application script to preload the service.</summary>
+        </member>
+        <member name="M:IPS.SingletonBehaviourResources`1.OnDestroy">
+            <summary>
+            If you want to override this method, remember to call this base.
+            </summary>
+        </member>
+        <member name="T:IPS.SingletonBehaviourResourcesDontDestroy`1">
+            <summary> 
+            <para> "Instance" = Instantiate from Resources folder when be called at runtime.</para>
+            <para> Place your prefab in Resources: "T/T", T is the name of class </para> 
+            </summary>
+        </member>
+        <member name="T:IPS.SingletonScriptable`1">
+            <summary> 
+            An Esily of create Instance of ScriptableObject.
+            </summary>
+        </member>
+        <member name="F:IPS.SingletonScriptable`1.__instance">
+            <summary> This is local variable. Use 'Instance' from outsite. </summary>
+        </member>
+        <member name="P:IPS.SingletonScriptable`1.Initialized">
+            <summary> 
+             If you want to check null, use this property instead of calling to "Instance" 
+             because "Instance" can auto create an emty gameobject, so "Instance" can never null 
+             </summary>
+        </member>
+        <member name="P:IPS.SingletonScriptable`1.Instance">
+            <summary> 
+            This will auto create new if instance is null.
+            <para> If you want to check null, use 'if (T.Initialized)' instead of 'if (T.Instance != null)' </para>
+            </summary>
+        </member>
+        <member name="M:IPS.SingletonScriptable`1.Initialize">
+            <summary> 
+            This function will be call automaticaly only one times (on the first call of "Instance")
+            <para>Put your custom initialize here. No need to call "base.Initialize" </para>
+            </summary>
+        </member>
+        <member name="T:IPS.SingletonResourcesScriptable`1">
+            <summary> 
+            <para> "Instance" = Instantiate from Resources folder when be called at runtime.</para>
+            <para> Place your prefab in Resources: "T/T", T is the name of class </para> 
+            </summary>
+        </member>
+        <member name="F:IPS.SingletonResourcesScriptable`1.__instance">
+            <summary> This is local variable. Use 'Instance' from outsite. </summary>
+        </member>
+        <member name="P:IPS.SingletonResourcesScriptable`1.Initialized">
+            <summary> 
+             If you want to check null, use this property instead of calling to "Instance" 
+             because "Instance" can auto create an emty gameobject, so "Instance" can never null 
+             </summary>
+        </member>
+        <member name="P:IPS.SingletonResourcesScriptable`1.ResourcePath">
+            <summary> 
+            <para> Place your prefab in Resources folder: "Scriptable/T/T", T is the name of class </para> 
+            </summary>
+        </member>
+        <member name="P:IPS.SingletonResourcesScriptable`1.Instance">
+            <summary> 
+            <para> "Instance" = Instantiate from Resources folder when be called at runtime.</para>
+            <para> Place your prefab in Resources: "Scriptable/T/T", T is the name of class </para> 
+            </summary>
+        </member>
+        <member name="M:IPS.SingletonResourcesScriptable`1.Initialize">
+            <summary> 
+            This function will be call automaticaly only one times (on the first call of "Instance")
+            <para>Put your custom initialize here. No need to call "base.Initialize" </para>
+            </summary>
+        </member>
+        <member name="M:IPS.SingletonResourcesScriptable`1.Preload">
+            <summary> 
+            This method is empty function, just use to prepare initialize the "Instance" to improve Ram/ CPU (to preload or decompress all asset inside)
+            <para>Call this at the first application script (exp: BasePreload.cs)</para>
+            <para>Be carefully if you override this and put your custom initialzation here, 
+            because this function can be call many times on any where, so the initialization inside will be init many times too</para>
+            </summary>
+        </member>
+        <member name="T:IPS.Yielder">
+            <summary>
+            The helper class to get a yielder waiting, use this for GC optimization
+            </summary>
+        </member>
+        <member name="M:IPS.Yielder.Wait(System.Single)">
+            <summary>
+            Find a cached WaitForSeconds object, if null, create new one then add to cache.
+            </summary>
+            <param name="seconds">float seconds</param>
+            <returns></returns>
+        </member>
+        <member name="M:IPS.Yielder.WaitForMiliseconds(System.UInt32)">
+            <summary>
+            Find a cached WaitForSeconds object, if null, create new one then add to cache.
+            </summary>
+            <param name="miliseconds">1 seconds = 1000 miliseconds</param>
+            <returns></returns>
+        </member>
+        <member name="M:IPS.Yielder.WaitRealtime(System.Single)">
+            <summary>
+            Find a cached WaitForSecondsRealtime object, if null, create new one then add to cache.
+            </summary>
+            <param name="seconds">float seconds</param>
+            <returns></returns>
+        </member>
+        <member name="T:Logs">
+            <summary>
+            Use this instead of UnityEngine.Debug.Log because this can be remove all log for production version.
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "P:IPSConfig.LogEnable" -->
+    </members>
+</doc>

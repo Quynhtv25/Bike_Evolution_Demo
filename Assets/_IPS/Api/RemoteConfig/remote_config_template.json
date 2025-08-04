@@ -1,0 +1,285 @@
+{  
+  "version": {
+    "versionNumber": "1",
+    "updateTime": "2024-11-10T08:11:17.275555Z",
+    "updateUser": {
+      "email": "thuongltt@minder.studio"
+    },
+    "updateOrigin": "CONSOLE",
+    "updateType": "INCREMENTAL_UPDATE"
+  },
+  "parameters": {
+    "admob_UMP_enable": {
+      "defaultValue": {
+        "value": "false"
+      },
+      "description": "Show admob UMP consent popup or not",
+      "valueType": "BOOLEAN"
+    },
+    "level_internet_require": {
+      "defaultValue": {
+        "value": "0"
+      },
+      "description": "Allow user can play game offline utils this level (value in range 0 - 999999999999999999)",
+      "valueType": "NUMBER"
+    }
+  },
+  "parameterGroups": {
+    "Ads App Open (AOA) Config": {
+      "parameters": {
+        "ad_aoa_openapp": {
+          "defaultValue": {
+            "value": "false"
+          },
+          "description": "Show AOA when open app or not",
+          "valueType": "BOOLEAN"
+        },
+        "ad_aoa_openapp_first_install": {
+          "defaultValue": {
+            "value": "false"
+          },
+          "description": "Show AOA for first install or not",
+          "valueType": "BOOLEAN"
+        },
+		"ad_aoa_max_enable": {
+          "defaultValue": {
+            "value": "false"
+          },
+          "description": "true: use AOA max. false: use AOA Admob. (if true and max return no ad eligible then use Admob fallback)",
+          "valueType": "BOOLEAN"
+        }
+      }
+    },
+    "Ads MRec Config": {
+      "parameters": {
+        "ad_mrec_enable": {
+          "defaultValue": {
+            "value": "false"
+          },
+          "description": "Use MRec or not",
+          "valueType": "BOOLEAN"
+        }
+      }
+    },
+    "Ads Banner Config": {
+      "parameters": {
+        "ad_banner_enable": {
+          "defaultValue": {
+            "value": "true"
+          },
+          "description": "Use Banner or not",
+          "valueType": "BOOLEAN"
+        },
+		"ad_banner_from_played_times": {
+          "defaultValue": {
+            "value": "0"
+          },
+          "description": "Value=0 mean banner will show immediatly after first open loading finished. Banner will destroyed and reload for every scene loaded callback. Played times are counted for each level start triggered.",
+          "valueType": "NUMBER"
+        },
+		"ad_banner_from_level": {
+          "defaultValue": {
+            "value": "0"
+          },
+          "description": "Same as played_times but use level (1 level can has many played_times)",
+          "valueType": "NUMBER"
+        },
+		"ad_banner_reload_capping": {
+          "defaultValue": {
+            "value": "1"
+          },
+          "description": "The seconds interval will be reload banner. Set value=0 to use reload interval from console.",
+          "valueType": "NUMBER"
+        },
+		"ad_banner_reload_level_capping": {
+          "defaultValue": {
+            "value": "1"
+          },
+          "description": "Banner will be destroy and reload new one when load scene or not. Value 0 mean never destroy. Example: value = 1 mean banner will be reload for each complete 1 levels.",
+          "valueType": "NUMBER"
+        },
+        "ad_banner_adaptive_enable": {
+          "defaultValue": {
+            "value": "false"
+          },
+          "description": "Use adaptive banner or smart banner for Ironsource or Max",
+          "valueType": "BOOLEAN"
+        }
+      }
+    },
+	"Ads Banner Collapsible Config": {
+      "parameters": {
+        "ad_banner_collapsible_enable": {
+          "defaultValue": {
+            "value": "false"
+          },
+          "description": "(Admob only) Use collapsible for banner or not (If true, also need to set value to true for param ad_banner_enable)",
+          "valueType": "BOOLEAN"
+        },
+        "ad_banner_collapsible_fallback_enable": {
+          "defaultValue": {
+            "value": "true"
+          },
+          "description": "Use other mediation if load collapsible failed or not",
+          "valueType": "BOOLEAN"
+        },
+        "ad_banner_collapsible_auto_refresh": {
+          "defaultValue": {
+            "value": "false"
+          },
+          "description": "If true, collapsible will auto reload and popup after interval setup from admob console (30-120s), else it only reload by logic in game",
+          "valueType": "BOOLEAN"
+        },
+        "ad_banner_collapsible_reload_interval": {
+          "defaultValue": {
+            "value": "30"
+          },
+          "description": "The interval in seconds which collapsible can show popup (trigger show by logic ingame), only work in case `banner_collapsible_auto_refresh`=false",
+          "valueType": "NUMBER"
+        }
+      }
+    },
+    "Ads Resume Config": {
+      "parameters": {
+        "ad_inter_resume_enable": {
+          "defaultValue": {
+            "value": "true"
+          },
+          "description": "Show Interstitial when resume or not (if both AOA and Inter resume enable, prefer AOA)",
+          "valueType": "BOOLEAN"
+        },
+        "ad_resume_capping": {
+          "defaultValue": {
+            "value": "0"
+          },
+          "description": "The interval (seconds) for pause time to show ad resume",
+          "valueType": "NUMBER"
+        },
+        "ad_resume_enable": {
+          "defaultValue": {
+            "value": "true"
+          },
+          "description": "Show AOA or Interstitial when resume or not",
+          "valueType": "BOOLEAN"
+        },
+        "ad_resume_from_played_times": {
+          "defaultValue": {
+            "value": "0"
+          },
+          "description": "For first install only, played times are counted for each level start triggered.",
+          "valueType": "NUMBER"
+        },
+        "ad_aoa_resume_enable": {
+          "defaultValue": {
+            "value": "true"
+          },
+          "description": "Show AOA when resume game or not (if both AOA and Inter resume enable, prefer AOA)",
+          "valueType": "BOOLEAN"
+        }
+      }
+    },
+    "Ads Interstitial Config": {
+      "parameters": {
+        "ad_inter_after_reward_capping": {
+          "defaultValue": {
+            "value": "20"
+          },
+          "description": "the interval (seconds) for inter can be show from last rewarded ad closed",
+          "valueType": "NUMBER"
+        },
+        "ad_inter_capping": {
+          "defaultValue": {
+            "value": "20"
+          },
+          "description": "(ads_interval) the interval (seconds) to show next inter from last inter closed",
+          "valueType": "NUMBER"
+        },
+        "ad_inter_from_played_times": {
+          "defaultValue": {
+            "value": "2"
+          },
+          "description": "Use for first inter, only show if match all condition from played times + from level + from seconds. (Played times are counted for each level start triggered.)",
+          "valueType": "NUMBER"
+        },
+        "ad_inter_from_level": {
+          "defaultValue": {
+            "value": "0"
+          },
+          "description": "Use for first inter, only show if match all condition from played times + from level + from seconds",
+          "valueType": "NUMBER"
+        },
+        "ad_inter_from_seconds": {
+          "defaultValue": {
+            "value": "0"
+          },
+          "description": "Use for first inter, only show if match all condition from played times + from level + from seconds",
+          "valueType": "NUMBER"
+        },
+        "ad_inter_enable": {
+          "defaultValue": {
+            "value": "true"
+          },
+          "description": "Use Interstitial ad or not",
+          "valueType": "BOOLEAN"
+        },
+        "ad_inter_force_capping": {
+          "defaultValue": {
+            "value": "90"
+          },
+          "description": "the interval (seconds) to show next inter from last force inter trigger. This is independence with `ad_inter_capping` ",
+          "valueType": "NUMBER"
+        },
+        "ad_inter_force_enable": {
+          "defaultValue": {
+            "value": "true"
+          },
+          "description": "Force inter after x seconds, usefull incase endless level or level need very long time to finish",
+          "valueType": "BOOLEAN"
+        }
+      }
+    },
+	"Rating Popup Config": {
+      "parameters": {
+		"rating_popup_enable": {
+		  "defaultValue": {
+			"value": "true"
+		  },
+		  "description": "Show rate popup or not",
+		  "valueType": "BOOLEAN"
+		},
+		"rating_popup_level_capping": {
+		  "defaultValue": {
+			"value": "3"
+		  },
+		  "description": "If user never rated, Rate popup will show when total levels played from open app equal this value (Only show one times for each open app session)",
+		  "valueType": "NUMBER"
+		}
+      }
+    },
+	"Debug Config": {
+      "parameters": {
+        "debug_devices": {
+          "defaultValue": {
+            "value": "e7f4c538-3fff-479c-a9ee-161f4e819ba3,8BA75785-C0EF-4A65-B8E1-CC8264F0BFD8"
+          },
+          "description": "List of SystemInfo.deviceUnique, GAID, IDFA which needs to turn on full log and cheat (seperate by ',')",
+          "valueType": "STRING"
+        },
+        "ad_test_devices_ios": {
+          "defaultValue": {
+            "value": "8BA75785-C0EF-4A65-B8E1-CC8264F0BFD8"
+          },
+          "description": "List IDFA of iOS device to get ad test (seperate by ',')",
+          "valueType": "STRING"
+        },
+        "ad_test_devices_android": {
+          "defaultValue": {
+            "value": "e7f4c538-3fff-479c-a9ee-161f4e819ba3"
+          },
+          "description": "List GAID of android device to get ad test (seperate by ',')",
+          "valueType": "STRING"
+        }
+      }
+    }
+  }
+}

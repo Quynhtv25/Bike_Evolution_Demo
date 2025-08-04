@@ -1,0 +1,19 @@
+{
+    "name": "ISEditor",
+    "rootNamespace": "",
+    "references": [
+        "GUID:cbb42e4cfd9484f52972c8f05e1c3252",
+        "GUID:5a52f65940e51456daf85c8527d171ae"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

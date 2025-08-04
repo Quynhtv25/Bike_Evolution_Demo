@@ -1,0 +1,1 @@
+    "com.google.firebase.remote-config": "file:../GooglePackages/com.google.firebase.remote-config-11.8.1.tgz",

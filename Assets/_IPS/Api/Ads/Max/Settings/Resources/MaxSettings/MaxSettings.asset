@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 442c762939732114a99e56100f301d21, type: 3}
+  m_Name: MaxSettings
+  m_EditorClassIdentifier: 
+  TestDevice_android: 
+  TestDevice_iOS: 
+  maxSDKKey: 1IEi8FsygmZAFeLuSBuobuAVh6x2bmQG9XXuWwvMp6a2iIXKx_KdNx92S2qMsaWQhAMZTx1rlhEpisxCZoWn7D
+  useAOAAd: 1
+  aoaTierId_Android: 11b11efa3f59c8a9
+  aoaTierId_iOS: 
+  useBannerAd: 1
+  bannerID_android: 01ecae897715051c
+  bannerID_iOS: 
+  useBannerAdaptive: 0
+  showBannerOnBottom: 1
+  useMRecAd: 0
+  mrecID_android: 
+  mrecID_iOS: 
+  ShowMRecOnBottom: 0
+  useInterstitialAd: 1
+  interstitialID_android: 700a9b89bccdb472
+  interstitialID_iOS: 
+  useRewardVideoAd: 1
+  rewardID_android: ffd734880b929941
+  rewardID_iOS: 

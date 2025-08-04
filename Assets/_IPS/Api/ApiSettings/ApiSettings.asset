@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b220df13c5c1f54aa4c912d8bee595d, type: 3}
+  m_Name: ApiSettings
+  m_EditorClassIdentifier: 
+  productionBuild: 0
+  useGDPR: 0
+  useFirebase: 1
+  useFacebook: 0
+  useByteBrew: 1
+  useAppmetrica: 0
+  useAdjust: 1
+  useAppsFlyer: 0
+  useAppsFlyerROI: 0
+  useAds: 1
+  useInAppReview: 1
+  useInAppPurchase: 0
+  useInAppUpdate: 1
+  useRemoteConfig: 1
+  useCloudMessaging: 1
+  useCloudStorage: 0
+  useFalconSDK: 0
+  useLionSDK: 0

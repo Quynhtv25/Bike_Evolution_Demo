@@ -1,0 +1,149 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a63a36e0b5d988d4d8475264284329f4, type: 3}
+  m_Name: Falcon_TrackingEvent
+  m_EditorClassIdentifier: 
+  MaxSDKKey: M4GLwqezVT2WDo75OWFGOV873pVg6-3S3Kpz8Rxe_-9CnHI9oXPB2TI5LpnRnqvr8hpH8kw7i4KTMcc891KCad
+  AppsFlyerKey: UAVHtuYSgwSPXxXQVDGA65
+  af_aoa_api_called: af_aoa_api_called
+  af_aoa_displayed: af_aoa_displayed
+  af_native_api_called: af_native_api_called
+  af_native_displayed: af_native_displayed
+  af_mrec_displayed: af_mrec_displayed
+  af_banner_displayed: af_banner_displayed
+  af_inters_ad_eligible: af_inters_show
+  af_inters_passed_capping_time: af_inters_passed_capping_time
+  af_inters_api_called: af_inters_api_called
+  af_inters_load_fail: af_inters_load_fail
+  af_inters_displayed: af_inters_displayed
+  af_inters_displayed_xcount: af_inters_displayed_
+  af_rewarded_ad_eligible: af_rewarded_show
+  af_rewarded_api_called: af_rewarded_api_called
+  af_rewarded_load_fail: af_rewarded_load_fail
+  af_rewarded_displayed: af_rewarded_displayed
+  af_rewarded_completed: af_rewarded_completed
+  af_rewarded_displayed_xcount: af_rewarded_displayed_
+  af_rewarded_displayed_param_placement: reward_type
+  af_rewarded_inter_ad_eligible: af_rewarded_inter_show
+  af_rewarded_inter_api_called: af_rewarded_inter_api_called
+  af_rewarded_inter_displayed: af_rewarded_inter_displayed
+  af_rewarded_inter_completed: af_rewarded_inter_completed
+  ad_revenue_sdk: ad_revenue_sdk
+  ad_aoa_loaded: ad_aoa_loaded
+  ad_aoa_show: ad_aoa_show
+  ad_aoa_click: ad_aoa_click
+  ad_mrec_show: ad_mrec_show
+  ad_native_loaded: ad_native_loaded
+  ad_native_show: ad_native_show
+  ad_banner_loaded: ad_banner_loaded
+  ad_banner_show: ad_banner_show
+  ad_inter_eligible: ad_inter_eligible
+  ad_inter_passed_capping_time: ad_inter_passed_capping_time
+  ad_inter_loaded: ad_inter_load_success
+  ad_inter_show: ad_inter_show
+  ad_inter_show_x: ad_interstitial_
+  ad_inter_show_xcount: 
+  ad_inter_show_xcount_MaxEventCount: 30
+  ad_inter_click: ad_inter_click
+  ad_inter_close: ad_inter_close
+  ad_reward_eligible: ads_reward_eligible
+  ad_reward_click: ads_reward_click
+  ad_reward_loaded: ads_reward_load
+  ad_reward_show: ads_reward_show_success
+  ad_reward_show_x: ad_rewarded_
+  ad_reward_show_xcount: 
+  ad_reward_show_xcount_MaxEventCount: 30
+  ad_reward_completed: ads_reward_completed
+  ad_reward_inter_eligible: ads_reward_inter_eligible
+  ad_reward_inter_click: ads_reward_inter_click
+  ad_reward_inter_loaded: ads_reward_inter_loaded
+  ad_reward_inter_show: ads_reward_inter_show
+  ad_reward_inter_show_x: ad_reward_inter_
+  ad_reward_inter_completed: ads_reward_inter_completed
+  last_placement: last_placement
+  last_placement_inter: last_placement_inter
+  total_interstitial_ads: total_interstitial_ads
+  last_placement_rewarded_video: last_placement_rewarded_video
+  total_rewarded_video_ads: total_rewarded_video_ads
+  last_placement_rewarded_inter: last_placement_rewarded_inter
+  total_rewarded_inter_ads: total_rewarded_inter_ads
+  ips_ad_aoa_loaded: ips_ad_aoa_loaded
+  ips_ad_aoa_show: ips_ad_aoa_show
+  ips_ad_mrec_show: ips_ad_mrec_show
+  ips_ad_native_loaded: ips_ad_native_loaded
+  ips_ad_native_show: ips_ad_native_show
+  ips_ad_banner_show: ips_ad_banner_show
+  ips_ad_inter_eligible: ips_ad_inter_eligible
+  ips_ad_inter_passed_capping_time: ips_ad_inter_passed_capping_time
+  ips_ad_inter_loaded: ips_ad_inter_loaded
+  ips_ad_inter_show: ips_ad_inter_show
+  ips_ad_inter_click: ips_ad_inter_click
+  ips_ad_reward_eligible: ips_ad_reward_eligible
+  ips_ad_reward_click: ips_ad_reward_click
+  ips_ad_reward_loaded: ips_ad_reward_loaded
+  ips_ad_reward_show: ips_ad_reward_show
+  ips_ad_reward_completed: ips_ad_reward_completed
+  ips_ad_reward_inter_eligible: ips_ad_reward_inter_eligible
+  ips_ad_reward_inter_click: ips_ad_reward_inter_click
+  ips_ad_reward_inter_loaded: ips_ad_reward_inter_loaded
+  ips_ad_reward_inter_show: ips_ad_reward_inter_show
+  ips_ad_reward_inter_completed: ips_ad_reward_inter_completed
+  property_days_played: days_played
+  property_retention_day: retention_day
+  property_level_max: level_max
+  property_current_level: level
+  property_last_level: last_level
+  aj_inters_show: 
+  aj_inters_displayed: 
+  aj_rewarded_show: 
+  aj_rewarded_displayed: 
+  aj_purchase: 
+  aj_content_id: 
+  aj_purchase_orders: 
+  aj_currency_code: 
+  aj_level_start: 
+  aj_level_achieved: 
+  aj_level_fail: 
+  af_tutorial_completion: af_tutorial_completion
+  af_level_start: 
+  af_level_achieved: af_level_achieved
+  af_level_win: 
+  af_level_lose: 
+  af_complete_level_x: 
+  af_level_param_id: lv
+  start_level_x: level_start_
+  win_level_x: level_complete_
+  lose_level_x: lose_level_
+  checkpoint_x: checkpoint_
+  open_app: 
+  loading_start: loading_start
+  loading_end: loading_finish
+  level_start_int: level_start
+  level_revive_int: level_revive
+  level_end_int: level_end
+  level_start_string: minigame_start
+  level_end_string: minigame_end
+  win_level: game_level_complete
+  lose_level: game_level_fail
+  level_param_duration: timeplayed
+  level_param_id: level
+  level_param_mode_id: mode
+  level_param_timestamp: 
+  button_click_x: click_
+  frame_show: 
+  frame_show_param: 
+  use_currency: use_currency
+  use_currency_param: placement
+  use_booster: use_booster
+  use_booster_param: placement
+  iap_sdk: iap_sdk
+  IapRevenueRatio: 0.63

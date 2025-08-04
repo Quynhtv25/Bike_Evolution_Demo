@@ -1,0 +1,494 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>IPS.Core.Pooling</name>
+    </assembly>
+    <members>
+        <member name="T:IPS.IPoolable">
+            <summary>
+            inherit this interface to mark the game object is poolable, it mean the gameobject will be add to pooled when recycle, else it will be destroy.
+            </summary>
+        </member>
+        <member name="M:IPS.IPoolable.OnSpawnCallback">
+            <summary>
+            This will be call automaticaly by "PoolManager.Spawn". Do not call this outside.
+            <para>Init your variable inside here.</para>
+            </summary>
+        </member>
+        <member name="M:IPS.IPoolable.OnRecycleCallback">
+            <summary>
+            This will be call automaticaly by "PoolManager.Recycle". Do not call this outside.
+            <para>Put your callback action inside here. This call before OnDisable</para>
+            </summary>
+        </member>
+        <member name="T:IPS.Poolable">
+            <summary>
+            Base MonoBehavior with interface IPoolable
+            </summary>
+        </member>
+        <member name="M:IPS.PoolExtensions.IsRegistered(UnityEngine.GameObject)">
+            <summary>
+            To check if gameobject has been registered with pool, no need to register again.
+            </summary>
+        </member>
+        <member name="M:IPS.PoolExtensions.HasPooled(UnityEngine.GameObject)">
+            <summary>
+            To check if gameobject can be spawn from pool, no need to instantiate new gameobject.
+            </summary>
+        </member>
+        <member name="M:IPS.PoolExtensions.HasSpawned(UnityEngine.GameObject)">
+            <summary>
+            To check if gameobject has been spawned (currently active in scene)
+            </summary>
+        </member>
+        <member name="M:IPS.PoolExtensions.RegisterPool``1(``0)">
+            <summary>
+            Call this to register gameobject with Pool, so the game object will be add to pooled when recycle, else it will be destroy.
+            <para>If your scrip inhenrit from interface "IPoolable", you no longer need to call this method.</para>
+            </summary>
+        </member>
+        <member name="M:IPS.PoolExtensions.RegisterPool``1(``0,System.Int32)">
+            <summary>
+            Call this to register gameobject with Pool, so the game object will be add to pooled when recycle, else it will be destroy.
+            <para>If your scrip inhenrit from interface "IPoolable", you no longer need to call this method.</para>
+            </summary>
+        </member>
+        <member name="M:IPS.PoolExtensions.RegisterPool(UnityEngine.GameObject)">
+            <summary>
+            Call this to register gameobject with Pool, so the game object will be add to pooled when recycle, else it will be destroy.
+            <para>If your scrip inhenrit from interface "IPoolable", you no longer need to call this method.</para>
+            </summary>
+        </member>
+        <member name="M:IPS.PoolExtensions.RegisterPool(UnityEngine.GameObject,System.Int32)">
+            <summary>
+            Call this to register gameobject with Pool, so the game object will be add to pooled when recycle, else it will be destroy.
+            <para>If your scrip inhenrit from interface "IPoolable", you no longer need to call this method.</para>
+            </summary>
+        </member>
+        <member name="M:IPS.PoolExtensions.UnRegisterPool(UnityEngine.GameObject)">
+            <summary>
+            Destroy gameobject which is register with pool (include pooled and spawned)
+            </summary>
+        </member>
+        <member name="M:IPS.PoolExtensions.UnRegisterPool``1(``0)">
+            <summary>
+            Destroy gameobject which is register with pool (include pooled and spawned)
+            </summary>
+        </member>
+        <member name="M:IPS.PoolExtensions.Spawn``1(``0,UnityEngine.Transform,UnityEngine.Vector3,UnityEngine.Vector3,UnityEngine.Quaternion)">
+            <summary>
+            Instantiate (clone) a game object from "prefab" object. New spawned object aready set active true.
+            <para>Source object is "IPoolable"</para>
+            <para>If "prefab" is inherit from interface "IPoolable", or was register by "CreatePool" before, output gameObject will be add into pooled list and can be reuse when recycle.</para>
+            </summary>
+            <param name="parent">default value = null</param>
+            <param name="position">defaul value = prefab.position</param>
+            <param name="scale">defaul value = prefab.localScale</param>
+            <param name="rotation">default value = prefab.rotation</param>
+            <returns></returns>
+        </member>
+        <member name="M:IPS.PoolExtensions.Spawn``1(``0,UnityEngine.Transform,UnityEngine.Vector3,UnityEngine.Vector3)">
+            <summary>
+            Instantiate (clone) a game object from "prefab" object. New spawned object aready set active true.
+            <para>Source object is "IPoolable"</para>
+            <para>If "prefab" is inherit from interface "IPoolable", or was register by "CreatePool" before, output gameObject will be add into pooled list and can be reuse when recycle.</para>
+            <para>- *position*: defaul value = prefab.position</para>
+            <para>- *scale*: defaul value = prefab.localScale</para>
+            <para>- *rotation*: default value = prefab.rotation</para>
+            </summary>
+        </member>
+        <member name="M:IPS.PoolExtensions.Spawn``1(``0,UnityEngine.Transform,UnityEngine.Vector3)">
+            <summary>
+            Instantiate (clone) a game object from "prefab" object. New spawned object aready set active true.
+            <para>Source object is "IPoolable"</para>
+            <para>If "prefab" is inherit from interface "IPoolable", or was register by "CreatePool" before, output gameObject will be add into pooled list and can be reuse when recycle.</para>
+            <para>- *position*: defaul value = prefab.position</para>
+            <para>- *scale*: defaul value = prefab.localScale</para>
+            <para>- *rotation*: default value = prefab.rotation</para>
+            </summary>
+        </member>
+        <member name="M:IPS.PoolExtensions.Spawn``1(``0,UnityEngine.Transform)">
+            <summary>
+            Instantiate (clone) a game object from "prefab" object. New spawned object aready set active true.
+            <para>Source object is "IPoolable"</para>
+            <para>If "prefab" is inherit from interface "IPoolable", or was register by "CreatePool" before, output gameObject will be add into pooled list and can be reuse when recycle.</para>
+            <para>- *position*: defaul value = prefab.position</para>
+            <para>- *scale*: defaul value = prefab.localScale</para>
+            <para>- *rotation*: default value = prefab.rotation</para>
+            </summary>
+        </member>
+        <member name="M:IPS.PoolExtensions.Spawn``1(``0)">
+            <summary>
+            Instantiate (clone) a game object from "prefab" object. New spawned object aready set active true.
+            <para>Source object is "IPoolable"</para>
+            <para>If "prefab" is inherit from interface "IPoolable", or was register by "CreatePool" before, output gameObject will be add into pooled list and can be reuse when recycle.</para>
+            <para>- *position*: defaul value = prefab.position</para>
+            <para>- *scale*: defaul value = prefab.localScale</para>
+            <para>- *rotation*: default value = prefab.rotation</para>
+            </summary>
+        </member>
+        <member name="M:IPS.PoolExtensions.Spawn``1(``0,UnityEngine.Transform,UnityEngine.Vector3,UnityEngine.Quaternion)">
+            <summary>
+            Instantiate (clone) a game object from "prefab" object. New spawned object aready set active true.
+            <para>Source object is "IPoolable"</para>
+            <para>If "prefab" is inherit from interface "IPoolable", or was register by "CreatePool" before, output gameObject will be add into pooled list and can be reuse when recycle.</para>
+            <para>- *position*: defaul value = prefab.position</para>
+            <para>- *scale*: defaul value = prefab.localScale</para>
+            <para>- *rotation*: default value = prefab.rotation</para>
+            </summary>
+        </member>
+        <member name="M:IPS.PoolExtensions.Spawn``1(``0,UnityEngine.Transform,UnityEngine.Quaternion)">
+            <summary>
+            Instantiate (clone) a game object from "prefab" object. New spawned object aready set active true.
+            <para>Source object is "IPoolable"</para>
+            <para>If "prefab" is inherit from interface "IPoolable", or was register by "CreatePool" before, output gameObject will be add into pooled list and can be reuse when recycle.</para>
+            <para>- *position*: defaul value = prefab.position</para>
+            <para>- *scale*: defaul value = prefab.localScale</para>
+            <para>- *rotation*: default value = prefab.rotation</para>
+            </summary>
+        </member>
+        <member name="M:IPS.PoolExtensions.Spawn``1(``0,UnityEngine.Vector3,UnityEngine.Vector3,UnityEngine.Quaternion)">
+            <summary>
+            Instantiate (clone) a game object from "prefab" object. New spawned object aready set active true.
+            <para>Source object is "IPoolable"</para>
+            <para>If "prefab" is inherit from interface "IPoolable", or was register by "CreatePool" before, output gameObject will be add into pooled list and can be reuse when recycle.</para>
+            <para>- *position*: defaul value = prefab.position</para>
+            <para>- *scale*: defaul value = prefab.localScale</para>
+            <para>- *rotation*: default value = prefab.rotation</para>
+            </summary>
+        </member>
+        <member name="M:IPS.PoolExtensions.Spawn``1(``0,UnityEngine.Vector3,UnityEngine.Vector3)">
+            <summary>
+            Instantiate (clone) a game object from "prefab" object. New spawned object aready set active true.
+            <para>Source object is "IPoolable"</para>
+            <para>If "prefab" is inherit from interface "IPoolable", or was register by "CreatePool" before, output gameObject will be add into pooled list and can be reuse when recycle.</para>
+            <para>- *position*: defaul value = prefab.position</para>
+            <para>- *scale*: defaul value = prefab.localScale</para>
+            <para>- *rotation*: default value = prefab.rotation</para>
+            </summary>
+        </member>
+        <member name="M:IPS.PoolExtensions.Spawn``1(``0,UnityEngine.Vector3,UnityEngine.Quaternion)">
+            <summary>
+            Instantiate (clone) a game object from "prefab" object. New spawned object aready set active true.
+            <para>Source object is "IPoolable"</para>
+            <para>If "prefab" is inherit from interface "IPoolable", or was register by "CreatePool" before, output gameObject will be add into pooled list and can be reuse when recycle.</para>
+            <para>- *position*: defaul value = prefab.position</para>
+            <para>- *scale*: defaul value = prefab.localScale</para>
+            <para>- *rotation*: default value = prefab.rotation</para>
+            </summary>
+        </member>
+        <member name="M:IPS.PoolExtensions.Spawn``1(``0,UnityEngine.Vector3)">
+            <summary>
+            Instantiate (clone) a game object from "prefab" object. New spawned object aready set active true.
+            <para>Source object is "IPoolable"</para>
+            <para>If "prefab" is inherit from interface "IPoolable", or was register by "CreatePool" before, output gameObject will be add into pooled list and can be reuse when recycle.</para>
+            <para>- *position*: defaul value = prefab.position</para>
+            <para>- *scale*: defaul value = prefab.localScale</para>
+            <para>- *rotation*: default value = prefab.rotation</para>
+            </summary>
+        </member>
+        <member name="M:IPS.PoolExtensions.Spawn``1(``0,UnityEngine.Quaternion)">
+            <summary>
+            Instantiate (clone) a game object from "prefab" object. New spawned object aready set active true.
+            <para>Source object is "IPoolable"</para>
+            <para>If "prefab" is inherit from interface "IPoolable", or was register by "CreatePool" before, output gameObject will be add into pooled list and can be reuse when recycle.</para>
+            <para>- *position*: defaul value = prefab.position</para>
+            <para>- *scale*: defaul value = prefab.localScale</para>
+            <para>- *rotation*: default value = prefab.rotation</para>
+            </summary>
+        </member>
+        <member name="M:IPS.PoolExtensions.Spawn``1(``0,UnityEngine.Transform,UnityEngine.Vector3,UnityEngine.Vector3,UnityEngine.Quaternion,System.Boolean)">
+            <summary>
+            Instantiate (clone) a game object from "prefab" object. New spawned object aready set active true.
+            <para>If "prefab" is inherit from interface "IPoolable", or was register by "CreatePool" before, output gameObject will be add into pooled list and can be reuse when recycle.</para>
+            <para>- *position*: defaul value = prefab.position</para>
+            <para>- *scale*: defaul value = prefab.localScale</para>
+            <para>- *rotation*: default value = prefab.rotation</para>
+            </summary>
+        </member>
+        <member name="M:IPS.PoolExtensions.Spawn``1(``0,UnityEngine.Transform,UnityEngine.Vector3,UnityEngine.Vector3,System.Boolean)">
+            <summary>
+            Instantiate (clone) a game object from "prefab" object. New spawned object aready set active true.
+            <para>If "prefab" is inherit from interface "IPoolable", or was register by "CreatePool" before, output gameObject will be add into pooled list and can be reuse when recycle.</para>
+            <para>- *position*: defaul value = prefab.position</para>
+            <para>- *scale*: defaul value = prefab.localScale</para>
+            <para>- *rotation*: default value = prefab.rotation</para>
+            </summary>
+        </member>
+        <member name="M:IPS.PoolExtensions.Spawn``1(``0,UnityEngine.Transform,UnityEngine.Vector3,System.Boolean)">
+            <summary>
+            Instantiate (clone) a game object from "prefab" object. New spawned object aready set active true.
+            <para>If "prefab" is inherit from interface "IPoolable", or was register by "CreatePool" before, output gameObject will be add into pooled list and can be reuse when recycle.</para>
+            <para>- *position*: defaul value = prefab.position</para>
+            <para>- *scale*: defaul value = prefab.localScale</para>
+            <para>- *rotation*: default value = prefab.rotation</para>
+            </summary>
+        </member>
+        <member name="M:IPS.PoolExtensions.Spawn``1(``0,UnityEngine.Transform,System.Boolean)">
+            <summary>
+            Instantiate (clone) a game object from "prefab" object. New spawned object aready set active true.
+            <para>If "prefab" is inherit from interface "IPoolable", or was register by "CreatePool" before, output gameObject will be add into pooled list and can be reuse when recycle.</para>
+            <para>- *position*: defaul value = prefab.position</para>
+            <para>- *scale*: defaul value = prefab.localScale</para>
+            <para>- *rotation*: default value = prefab.rotation</para>
+            </summary>
+        </member>
+        <member name="M:IPS.PoolExtensions.Spawn``1(``0,System.Boolean)">
+            <summary>
+            Instantiate (clone) a game object from "prefab" object. New spawned object aready set active true.
+            <para>If "prefab" is inherit from interface "IPoolable", or was register by "CreatePool" before, output gameObject will be add into pooled list and can be reuse when recycle.</para>
+            <para>- *position*: defaul value = prefab.position</para>
+            <para>- *scale*: defaul value = prefab.localScale</para>
+            <para>- *rotation*: default value = prefab.rotation</para>
+            </summary>
+        </member>
+        <member name="M:IPS.PoolExtensions.Spawn``1(``0,UnityEngine.Transform,UnityEngine.Vector3,UnityEngine.Quaternion,System.Boolean)">
+            <summary>
+            Instantiate (clone) a game object from "prefab" object. New spawned object aready set active true.
+            <para>If "prefab" is inherit from interface "IPoolable", or was register by "CreatePool" before, output gameObject will be add into pooled list and can be reuse when recycle.</para>
+            <para>- *position*: defaul value = prefab.position</para>
+            <para>- *scale*: defaul value = prefab.localScale</para>
+            <para>- *rotation*: default value = prefab.rotation</para>
+            </summary>
+        </member>
+        <member name="M:IPS.PoolExtensions.Spawn``1(``0,UnityEngine.Transform,UnityEngine.Quaternion,System.Boolean)">
+            <summary>
+            Instantiate (clone) a game object from "prefab" object. New spawned object aready set active true.
+            <para>If "prefab" is inherit from interface "IPoolable", or was register by "CreatePool" before, output gameObject will be add into pooled list and can be reuse when recycle.</para>
+            <para>- *position*: defaul value = prefab.position</para>
+            <para>- *scale*: defaul value = prefab.localScale</para>
+            <para>- *rotation*: default value = prefab.rotation</para>
+            </summary>
+        </member>
+        <member name="M:IPS.PoolExtensions.Spawn``1(``0,UnityEngine.Vector3,UnityEngine.Vector3,UnityEngine.Quaternion,System.Boolean)">
+            <summary>
+            Instantiate (clone) a game object from "prefab" object. New spawned object aready set active true.
+            <para>If "prefab" is inherit from interface "IPoolable", or was register by "CreatePool" before, output gameObject will be add into pooled list and can be reuse when recycle.</para>
+            <para>- *position*: defaul value = prefab.position</para>
+            <para>- *scale*: defaul value = prefab.localScale</para>
+            <para>- *rotation*: default value = prefab.rotation</para>
+            </summary>
+        </member>
+        <member name="M:IPS.PoolExtensions.Spawn``1(``0,UnityEngine.Vector3,UnityEngine.Vector3,System.Boolean)">
+            <summary>
+            Instantiate (clone) a game object from "prefab" object. New spawned object aready set active true.
+            <para>If "prefab" is inherit from interface "IPoolable", or was register by "CreatePool" before, output gameObject will be add into pooled list and can be reuse when recycle.</para>
+            <para>- *position*: defaul value = prefab.position</para>
+            <para>- *scale*: defaul value = prefab.localScale</para>
+            <para>- *rotation*: default value = prefab.rotation</para>
+            </summary>
+        </member>
+        <member name="M:IPS.PoolExtensions.Spawn``1(``0,UnityEngine.Vector3,UnityEngine.Quaternion,System.Boolean)">
+            <summary>
+            Instantiate (clone) a game object from "prefab" object. New spawned object aready set active true.
+            <para>If "prefab" is inherit from interface "IPoolable", or was register by "CreatePool" before, output gameObject will be add into pooled list and can be reuse when recycle.</para>
+            <para>- *position*: defaul value = prefab.position</para>
+            <para>- *scale*: defaul value = prefab.localScale</para>
+            <para>- *rotation*: default value = prefab.rotation</para>
+            </summary>
+        </member>
+        <member name="M:IPS.PoolExtensions.Spawn``1(``0,UnityEngine.Vector3,System.Boolean)">
+            <summary>
+            Instantiate (clone) a game object from "prefab" object. New spawned object aready set active true.
+            <para>If "prefab" is inherit from interface "IPoolable", or was register by "CreatePool" before, output gameObject will be add into pooled list and can be reuse when recycle.</para>
+            <para>- *position*: defaul value = prefab.position</para>
+            <para>- *scale*: defaul value = prefab.localScale</para>
+            <para>- *rotation*: default value = prefab.rotation</para>
+            </summary>
+        </member>
+        <member name="M:IPS.PoolExtensions.Spawn``1(``0,UnityEngine.Quaternion,System.Boolean)">
+            <summary>
+            Instantiate (clone) a game object from "prefab" object. New spawned object aready set active true.
+            <para>If "prefab" is inherit from interface "IPoolable", or was register by "CreatePool" before, output gameObject will be add into pooled list and can be reuse when recycle.</para>
+            <para>- *position*: defaul value = prefab.position</para>
+            <para>- *scale*: defaul value = prefab.localScale</para>
+            <para>- *rotation*: default value = prefab.rotation</para>
+            </summary>
+        </member>
+        <member name="M:IPS.PoolExtensions.Spawn(UnityEngine.GameObject,UnityEngine.Transform,UnityEngine.Vector3,UnityEngine.Vector3,UnityEngine.Quaternion,System.Boolean)">
+            <summary>
+            Instantiate (clone) a game object from "prefab" object. New spawned object aready set active true.
+            <para>If "prefab" is inherit from interface "IPoolable", or was register by "CreatePool" before, output gameObject will be add into pooled list and can be reuse when recycle.</para>
+            <para>- *position*: defaul value = prefab.position</para>
+            <para>- *scale*: defaul value = prefab.localScale</para>
+            <para>- *rotation*: default value = prefab.rotation</para>
+            </summary>
+        </member>
+        <member name="M:IPS.PoolExtensions.Spawn(UnityEngine.GameObject,UnityEngine.Transform,UnityEngine.Vector3,UnityEngine.Vector3,System.Boolean)">
+            <summary>
+            Instantiate (clone) a game object from "prefab" object. New spawned object aready set active true.
+            <para>If "prefab" is inherit from interface "IPoolable", or was register by "CreatePool" before, output gameObject will be add into pooled list and can be reuse when recycle.</para>
+            <para>- *position*: defaul value = prefab.position</para>
+            <para>- *scale*: defaul value = prefab.localScale</para>
+            <para>- *rotation*: default value = prefab.rotation</para>
+            </summary>
+        </member>
+        <member name="M:IPS.PoolExtensions.Spawn(UnityEngine.GameObject,UnityEngine.Transform,UnityEngine.Vector3,System.Boolean)">
+            <summary>
+            Instantiate (clone) a game object from "prefab" object. New spawned object aready set active true.
+            <para>If "prefab" is inherit from interface "IPoolable", or was register by "CreatePool" before, output gameObject will be add into pooled list and can be reuse when recycle.</para>
+            <para>- *position*: defaul value = prefab.position</para>
+            <para>- *scale*: defaul value = prefab.localScale</para>
+            <para>- *rotation*: default value = prefab.rotation</para>
+            </summary>
+        </member>
+        <member name="M:IPS.PoolExtensions.Spawn(UnityEngine.GameObject,UnityEngine.Transform,System.Boolean)">
+            <summary>
+            Instantiate (clone) a game object from "prefab" object. New spawned object aready set active true.
+            <para>If "prefab" is inherit from interface "IPoolable", or was register by "CreatePool" before, output gameObject will be add into pooled list and can be reuse when recycle.</para>
+            <para>- *position*: defaul value = prefab.position</para>
+            <para>- *scale*: defaul value = prefab.localScale</para>
+            <para>- *rotation*: default value = prefab.rotation</para>
+            </summary>
+        </member>
+        <member name="M:IPS.PoolExtensions.Spawn(UnityEngine.GameObject,System.Boolean)">
+            <summary>
+            Instantiate (clone) a game object from "prefab" object. New spawned object aready set active true.
+            <para>If "prefab" is inherit from interface "IPoolable", or was register by "CreatePool" before, output gameObject will be add into pooled list and can be reuse when recycle.</para>
+            <para>- *position*: defaul value = prefab.position</para>
+            <para>- *scale*: defaul value = prefab.localScale</para>
+            <para>- *rotation*: default value = prefab.rotation</para>
+            </summary>
+        </member>
+        <member name="M:IPS.PoolExtensions.Spawn(UnityEngine.GameObject,UnityEngine.Transform,UnityEngine.Vector3,UnityEngine.Quaternion,System.Boolean)">
+            <summary>
+            Instantiate (clone) a game object from "prefab" object. New spawned object aready set active true.
+            <para>If "prefab" is inherit from interface "IPoolable", or was register by "CreatePool" before, output gameObject will be add into pooled list and can be reuse when recycle.</para>
+            <para>- *position*: defaul value = prefab.position</para>
+            <para>- *scale*: defaul value = prefab.localScale</para>
+            <para>- *rotation*: default value = prefab.rotation</para>
+            </summary>
+        </member>
+        <member name="M:IPS.PoolExtensions.Spawn(UnityEngine.GameObject,UnityEngine.Transform,UnityEngine.Quaternion,System.Boolean)">
+            <summary>
+            Instantiate (clone) a game object from "prefab" object. New spawned object aready set active true.
+            <para>If "prefab" is inherit from interface "IPoolable", or was register by "CreatePool" before, output gameObject will be add into pooled list and can be reuse when recycle.</para>
+            <para>- *position*: defaul value = prefab.position</para>
+            <para>- *scale*: defaul value = prefab.localScale</para>
+            <para>- *rotation*: default value = prefab.rotation</para>
+            </summary>
+        </member>
+        <member name="M:IPS.PoolExtensions.Spawn(UnityEngine.GameObject,UnityEngine.Vector3,UnityEngine.Vector3,UnityEngine.Quaternion,System.Boolean)">
+            <summary>
+            Instantiate (clone) a game object from "prefab" object. New spawned object aready set active true.
+            <para>If "prefab" is inherit from interface "IPoolable", or was register by "CreatePool" before, output gameObject will be add into pooled list and can be reuse when recycle.</para>
+            <para>- *position*: defaul value = prefab.position</para>
+            <para>- *scale*: defaul value = prefab.localScale</para>
+            <para>- *rotation*: default value = prefab.rotation</para>
+            </summary>
+        </member>
+        <member name="M:IPS.PoolExtensions.Spawn(UnityEngine.GameObject,UnityEngine.Vector3,UnityEngine.Vector3,System.Boolean)">
+            <summary>
+            Instantiate (clone) a game object from "prefab" object. New spawned object aready set active true.
+            <para>If "prefab" is inherit from interface "IPoolable", or was register by "CreatePool" before, output gameObject will be add into pooled list and can be reuse when recycle.</para>
+            <para>- *position*: defaul value = prefab.position</para>
+            <para>- *scale*: defaul value = prefab.localScale</para>
+            <para>- *rotation*: default value = prefab.rotation</para>
+            </summary>
+        </member>
+        <member name="M:IPS.PoolExtensions.Spawn(UnityEngine.GameObject,UnityEngine.Vector3,UnityEngine.Quaternion,System.Boolean)">
+            <summary>
+            Instantiate (clone) a game object from "prefab" object. New spawned object aready set active true.
+            <para>If "prefab" is inherit from interface "IPoolable", or was register by "CreatePool" before, output gameObject will be add into pooled list and can be reuse when recycle.</para>
+            <para>- *position*: defaul value = prefab.position</para>
+            <para>- *scale*: defaul value = prefab.localScale</para>
+            <para>- *rotation*: default value = prefab.rotation</para>
+            </summary>
+        </member>
+        <member name="M:IPS.PoolExtensions.Spawn(UnityEngine.GameObject,UnityEngine.Vector3,System.Boolean)">
+            <summary>
+            Instantiate (clone) a game object from "prefab" object. New spawned object aready set active true.
+            <para>If "prefab" is inherit from interface "IPoolable", or was register by "CreatePool" before, output gameObject will be add into pooled list and can be reuse when recycle.</para>
+            <para>- *position*: defaul value = prefab.position</para>
+            <para>- *scale*: defaul value = prefab.localScale</para>
+            <para>- *rotation*: default value = prefab.rotation</para>
+            </summary>
+        </member>
+        <member name="M:IPS.PoolExtensions.Spawn(UnityEngine.GameObject,UnityEngine.Quaternion,System.Boolean)">
+            <summary>
+            Instantiate (clone) a game object from "prefab" object. New spawned object aready set active true.
+            <para>If "prefab" is inherit from interface "IPoolable", or was register by "CreatePool" before, output gameObject will be add into pooled list and can be reuse when recycle.</para>
+            <para>- *position*: defaul value = prefab.position</para>
+            <para>- *scale*: defaul value = prefab.localScale</para>
+            <para>- *rotation*: default value = prefab.rotation</para>
+            </summary>
+        </member>
+        <member name="M:IPS.PoolExtensions.Recycle``1(``0)">
+             <summary>
+             Remove game object from the scene (Disable or Destroy)
+            <para>If game object is "IPoolable" (or was register by "RegisterPool"), it will be set to DISABLE, else it will be DESTROY </para>
+             </summary>
+        </member>
+        <member name="M:IPS.PoolExtensions.Recycle(UnityEngine.GameObject)">
+             <summary>
+             Remove game object from the scene (Disable or Destroy)
+            <para>If game object is "IPoolable" (or was register by "RegisterPool"), it will be set to DISABLE, else it will be DESTROY </para>
+             </summary>
+        </member>
+        <member name="M:IPS.PoolExtensions.RecycleAll``1(``0)">
+             <summary>
+             Remove game object from the scene (Disable or Destroy)
+            <para>If game object is "IPoolable" (or was register by "RegisterPool"), it will be set to DISABLE, else it will be DESTROY </para>
+             </summary>
+        </member>
+        <member name="M:IPS.PoolExtensions.RecycleAll(UnityEngine.GameObject)">
+             <summary>
+             Remove game object from the scene (Disable or Destroy)
+            <para>If game object is "IPoolable" (or was register by "RegisterPool"), it will be set to DISABLE, else it will be DESTROY </para>
+             </summary>
+        </member>
+        <member name="T:IPS.PoolManager">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:IPS.PoolManager.RegisterPool(UnityEngine.GameObject,System.Int32)">
+            <summary>
+            Call this to register gameobject with Pool, so the game object will be add to pooled when recycle, else it will be destroy.
+            <para>If your scrip inhenrit from interface "IPoolable", you no longer need to call this method.</para>
+            </summary>
+        </member>
+        <member name="M:IPS.PoolManager.IsRegistered(UnityEngine.GameObject)">
+            <summary>
+            To check if gameobject has been registered with pool, no need to register again.
+            </summary>
+        </member>
+        <member name="M:IPS.PoolManager.HasPooled(UnityEngine.GameObject)">
+            <summary>
+            To check if gameobject can be spawn from pool, no need to instantiate new gameobject.
+            </summary>
+        </member>
+        <member name="M:IPS.PoolManager.HasSpawned(UnityEngine.GameObject)">
+            <summary>
+            To check if gameobject has been spawned (currently active in scene)
+            </summary>
+        </member>
+        <member name="M:IPS.PoolManager.UnRegisterPool(UnityEngine.GameObject)">
+            <summary>
+            Destroy gameobject which is register with pool (include pooled and spawned)
+            </summary>
+        </member>
+        <member name="M:IPS.PoolManager.UnRegisterPool``1(``0)">
+            <summary>
+            Destroy gameobject which is register with pool (include pooled and spawned)
+            </summary>
+        </member>
+        <member name="M:IPS.PoolManager.DestroyPooled(UnityEngine.GameObject)">
+            <summary>
+            Destroy all gameobject which is currently in pooled (currently disable in scene)
+            <para>No action with spawned (currently active in scene)</para>
+            </summary>
+        </member>
+        <member name="M:IPS.PoolManager.DestroyPooled``1(``0)">
+            <summary>
+            Destroy all gameobject which is currently in pooled (currently disable in scene)
+            <para>No action with spawned (currently active in scene)</para>
+            </summary>
+        </member>
+        <member name="M:IPS.PoolManager.DestroyAll">
+            <summary>
+            Destroy all gameobject which is managing by PoolManager, include all spawned and pooled.
+            </summary>
+        </member>
+    </members>
+</doc>

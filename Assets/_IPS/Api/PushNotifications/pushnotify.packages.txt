@@ -1,0 +1,1 @@
+    "com.google.firebase.messaging": "file:../GooglePackages/com.google.firebase.messaging-11.8.1.tgz",

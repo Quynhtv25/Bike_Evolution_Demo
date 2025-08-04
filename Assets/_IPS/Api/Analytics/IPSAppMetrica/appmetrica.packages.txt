@@ -1,0 +1,1 @@
+    "io.appmetrica.analytics": "https://github.com/appmetrica/appmetrica-unity-plugin.git#v6.2.0",

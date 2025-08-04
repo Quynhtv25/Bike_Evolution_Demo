@@ -1,0 +1,86 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>IPS.Core.Observer</name>
+    </assembly>
+    <members>
+        <member name="M:IPS.Observer.EventObserver`2.RemoveListener(`0)">
+            <summary> Remove ALL callback listener by `key`. Be carefully, use at OnDestroy only to free RAM. </summary> 
+        </member>
+        <member name="M:IPS.Observer.EventObserver`2.RemoveAllListener">
+            <summary> Remove all listener. Be carefully, use at OnDestroy or OnApplicationQuiting only to free RAM. </summary> 
+        </member>
+        <member name="T:IPS.Observer.ParamEventObserver">
+            <summary> Send multi params to dispatcher </summary>
+        </member>
+        <member name="T:IPS.IEventParam">
+            <summary> Send multi params to dispatcher </summary>
+        </member>
+        <member name="T:IPS.EventDispatcher">
+            <summary>
+            Use this when you want to dispatch a message to other listener in your system, to do reduce instance and reduce reference together.
+            <para>Call "SetEnableDebugLog" to show debug log</para>
+            </summary>
+        </member>
+        <member name="M:IPS.EventDispatcher.RemoveAllListener">
+            <summary> Becarefull. Should use when your game has only one scene, or all your game logic place in only one scene (except logoscene).</summary>
+        </member>
+        <member name="M:IPS.EventDispatcher.Dispatch(System.Int32)">
+            <summary>IntEventObserver listener</summary> 
+        </member>
+        <member name="M:IPS.EventDispatcher.AddListener(System.Int32,System.Action)">
+            <summary>IntEventObserver listener</summary> 
+        </member>
+        <member name="M:IPS.EventDispatcher.RemoveListener(System.Int32,System.Action)">
+            <summary>IntEventObserver listener</summary> 
+        </member>
+        <member name="M:IPS.EventDispatcher.RemoveListener(System.Int32)">
+            <summary> Remove ALL callback listener by `key`. Be carefully, use at OnDestroy only to free RAM. </summary> 
+        </member>
+        <member name="M:IPS.EventDispatcher.Dispatch``1">
+            <summary>ParamEventObserver listener</summary> 
+        </member>
+        <member name="M:IPS.EventDispatcher.Dispatch``1(``0)">
+            <summary>ParamEventObserver listener</summary> 
+        </member>
+        <member name="M:IPS.EventDispatcher.AddListener``1(System.Action{``0})">
+            <summary>ParamEventObserver listener</summary> 
+        </member>
+        <member name="M:IPS.EventDispatcher.AddListener``1(System.Action)">
+            <summary>ParamEventObserver listener</summary> 
+        </member>
+        <member name="M:IPS.EventDispatcher.RemoveListener``1(System.Action{``0})">
+            <summary>ParamEventObserver listener</summary> 
+        </member>
+        <member name="M:IPS.EventDispatcher.RemoveListener``1(System.Action)">
+            <summary>ParamEventObserver listener</summary> 
+        </member>
+        <member name="M:IPS.EventDispatcher.RemoveListener``1">
+            <summary> Remove ALL callback listener by `key`. Be carefully, use at OnDestroy only to free RAM. </summary> 
+        </member>
+        <member name="M:IPS.EventDispatcherExtension.AddListener``1(UnityEngine.MonoBehaviour,System.Action{``0},System.Boolean)">
+            <summary>
+            Short call of "EventDispatcher.Instance.AddListener", this will auto add a component into caller gameobject
+            <para>If "untilDisable" = true, observer will use OnEnable to register listener and OnDisable to remove listener, else use Awake and OnDestroy</para>
+            </summary>
+            <param name="untilDisable">If true, observer will use OnDisable to remove listener, else will use OnDestroy</param>
+        </member>
+        <member name="M:IPS.EventDispatcherExtension.AddListener``1(UnityEngine.MonoBehaviour,System.Action,System.Boolean)">
+            <summary>
+            Short call of "EventDispatcher.Instance.AddListener", this will auto add a component into caller gameobject
+            <para>If "untilDisable" = true, observer will use OnEnable to register listener and OnDisable to remove listener, else use Awake and OnDestroy</para>
+            </summary>
+            <param name="untilDisable">If true, observer will use OnDisable to remove listener, else will use OnDestroy</param>
+        </member>
+        <member name="M:IPS.EventDispatcherExtension.Dispatch``1(UnityEngine.MonoBehaviour)">
+            <summary>
+            Short call of "EventDispatcher.Instance.Dispatch" with key is T as IEventParams
+            </summary>
+        </member>
+        <member name="M:IPS.EventDispatcherExtension.Dispatch``1(UnityEngine.MonoBehaviour,``0)">
+            <summary>
+            Short call of "EventDispatcher.Instance.Dispatch" with key is T as IEventParams
+            </summary>
+        </member>
+    </members>
+</doc>

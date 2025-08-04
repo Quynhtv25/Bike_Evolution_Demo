@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f3a829b2ba8312449003917b48212cb, type: 3}
+  m_Name: BootstrapConfig
+  m_EditorClassIdentifier: 
+  TargetFrameRate: 60
+  ScreenNeverSleep: 1
+  levelInternetRequire: 0
+  EnableCoreLog: 0
+  DebugDeviceGAID:
+  - 84674929-2d69-4035-bb9f-2db27482b5e9
+  - 818c764b-94fd-4ad1-8f33-b03e05314105
+  - 76850258-4fb2-4699-ae3b-09d059eafe62
+  - 8BA75785-C0EF-4A65-B8E1-CC8264F0BFD8
+  IsTester: 0
+  MyGAID: 
+  VersionCode: 1
+  IsAAB: 0

@@ -1,0 +1,84 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>IPS.Api.IPSRemoteConfig</name>
+    </assembly>
+    <members>
+        <member name="M:IPS.RemoteConfig.GetString(System.String,System.String)">
+            <summary>
+            This method will return server value if server fetch success. else return default value.
+            <para>If the key not exist, return default. You can use 'AddDefault' to set custom default value.</para>
+            </summary>
+            <param name="key">key to get value</param>
+            <param name="configNamespace">the parent folder of the key</param>
+            <returns></returns>
+        </member>
+        <member name="M:IPS.RemoteConfig.GetBool(System.String,System.String)">
+            <summary>
+            This method will return server value if server fetch success. else return default value.
+            <para>If the key not exist, return default. You can use 'AddDefault' to set custom default value.</para>
+            </summary>
+            <param name="key">key to get value</param>
+            <param name="configNamespace">the parent folder of the key</param>
+            <returns></returns>
+        </member>
+        <member name="M:IPS.RemoteConfig.GetLong(System.String,System.String)">
+            <summary>
+            This method will return server value if server fetch success. else return default value.
+            <para>If the key not exist, return default. You can use 'AddDefault' to set custom default value.</para>
+            </summary>
+            <param name="key">key to get value</param>
+            <param name="configNamespace">the parent folder of the key</param>
+            <returns></returns>
+        </member>
+        <member name="M:IPS.RemoteConfig.GetDouble(System.String,System.String)">
+            <summary>
+            This method will return server value if server fetch success. else return default value.
+            <para>If the key not exist, return default. You can use 'AddDefault' to set custom default value.</para>
+            </summary>
+            <param name="key">key to get value</param>
+            <param name="configNamespace">the parent folder of the key</param>
+            <returns></returns>
+        </member>
+        <member name="M:IPS.RemoteConfig.GetStringAsync(System.String,System.Action{System.String},System.String)">
+            <summary>
+            This method will wait till the server is ready to fetch. You should use a time out countdown to control your logic cause of this callback can be never call.
+            <para>If the key not exist, return default. You can use 'AddDefault' to set custom default value.</para>
+            </summary>
+            <param name="key">key to get value</param>
+            <param name="action">the callback when fetch completed</param>
+            <param name="configNamespace">the parent folder of the key</param>
+            <returns></returns>
+        </member>
+        <member name="M:IPS.RemoteConfig.GetLongAsync(System.String,System.Action{System.Int64},System.String)">
+            <summary>
+            This method will wait till the server is ready to fetch. You should use a time out countdown to control your logic cause of this callback can be never call.
+            <para>If the key not exist, return default. You can use 'AddDefault' to set custom default value.</para>
+            </summary>
+            <param name="key">key to get value</param>
+            <param name="action">the callback when fetch completed</param>
+            <param name="configNamespace">the parent folder of the key</param>
+            <returns></returns>
+        </member>
+        <member name="M:IPS.RemoteConfig.GetBoolAsync(System.String,System.Action{System.Boolean},System.String)">
+            <summary>
+            This method will wait till the server is ready to fetch. You should use a time out countdown to control your logic cause of this callback can be never call.
+            <para>If the key not exist, return default. You can use 'AddDefault' to set custom default value.</para>
+            </summary>
+            <param name="key">key to get value</param>
+            <param name="action">the callback when fetch completed</param>
+            <param name="configNamespace">the parent folder of the key</param>
+            <returns></returns>
+        </member>
+        <member name="M:IPS.RemoteConfig.GetDoubleAsync(System.String,System.Action{System.Double},System.String)">
+            <summary>
+            This method will wait till the server is ready to fetch. You should use a time out countdown to control your logic cause of this callback can be never call.
+            <para>If the key not exist, return default. You can use 'AddDefault' to set custom default value.</para>
+            </summary>
+            <param name="key">key to get value</param>
+            <param name="action">the callback when fetch completed</param>
+            <param name="configNamespace">the parent folder of the key</param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

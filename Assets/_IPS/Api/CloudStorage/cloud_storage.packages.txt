@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "com.google.firebase.auth": "file:../GooglePackages/com.google.firebase.auth-11.8.1.tgz",
+    "com.google.firebase.storage": "file:../GooglePackages/com.google.firebase.storage-11.8.1.tgz",
+  }
+}
