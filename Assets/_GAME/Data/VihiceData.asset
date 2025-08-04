@@ -12,6 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6016d4f35b325c84f83747f822258f92, type: 3}
   m_Name: VihiceData
   m_EditorClassIdentifier: 
-  slingshotState: []
+  slingshotState:
+  - level: 0
+    InfoUpgrade:
+    - stepUpgrade: 0
+      speed: 0
+  - level: 0
+    InfoUpgrade: []
   bikeState: []
   incomeState: []
