@@ -1,9 +1,12 @@
 using IPS;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class LevelManager : MonoBehaviour
 {
-
+    private void OnEnable() {
+        this.AddListener<EndGameEvent>(OnEndGame);
+    }
+    private void OnEndGame() {
+        Logs.LogError("EndGame");
+    }
 }
