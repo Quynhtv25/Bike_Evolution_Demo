@@ -4,8 +4,8 @@ using UnityEngine;
 namespace IPS {
     public partial class GameData
     {
-        [SerializeField] private VihiceData vihiceData;
+        [SerializeField] private AtributesData atributesData;
 
-        public VihiceData VihiceData => vihiceData;
+        public AtributesData AtributesData => atributesData;
     }
 }

@@ -2,7 +2,12 @@ using UnityEngine;
 using IPS;
 
 public class DragInputHandler : MonoBehaviour {
-    [SerializeField] private float forceMultiplier = 10f;
+    [SerializeField] private Transform targetCenter;
+    [SerializeField] private Transform targetCenterBack;
+    [SerializeField] private Transform targetCenterLeft;
+    [SerializeField] private Transform targetCenterRight;
+
+
 
     private Vector3 dragStart;
     private Vector3 dragCurrent;
@@ -47,18 +52,18 @@ public class DragInputHandler : MonoBehaviour {
 
             this.Dispatch(new EndDragInput {
                 target = currentTarget,
-                startPos = dragStart,
-                endPos = dragEnd,
-                direction = (dragEnd - dragStart).normalized,
-                magnitude = Vector3.Distance(dragStart, dragEnd),
-                force = (dragEnd - dragStart) * forceMultiplier
+                endPos = dragEnd
             });
-
             isDragging = false;
             currentTarget = null;
         }
     }
-
+    private void OnEnable() {
+        this.AddListener<LimitDragEvent>(LimitDrag);
+    }
+    public void LimitDrag(LimitDragEvent param) {
+        Untilities.ClampLitmitDrag(param.startPos, param.target, targetCenterLeft, targetCenterRight, targetCenter, targetCenterBack);
+    }
     private Vector3 GetWorldPointFromScreen(Vector3 screenPos, Vector3 referenceWorldPos, bool convertY) {
         screenPos.z = Camera.main.WorldToScreenPoint(referenceWorldPos).z;
         Vector3 worldPos = Camera.main.ScreenToWorldPoint(screenPos);

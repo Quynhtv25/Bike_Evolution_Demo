@@ -356,13 +356,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 349602456}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 5, y: 0, z: -6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 464786022}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1534993052}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &464786021
 GameObject:
@@ -908,7 +908,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84fd4c9861f9469499a8610aa0a76c47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  forceMultiplier: 10
+  targetCenter: {fileID: 1482151595}
+  targetCenterBack: {fileID: 1192745915}
+  targetCenterLeft: {fileID: 1433731237}
+  targetCenterRight: {fileID: 349602457}
 --- !u!4 &1167990345
 Transform:
   m_ObjectHideFlags: 0
@@ -917,12 +920,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1167990343}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1534993052}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1192745914
 GameObject:
@@ -948,13 +951,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1192745914}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -13}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7473709}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1534993052}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1433731236
 GameObject:
@@ -980,13 +983,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1433731236}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -5, y: 0, z: -6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 115009852}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1534993052}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1482151594
 GameObject:
@@ -1012,12 +1015,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1482151594}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1534993052}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1534993051
 GameObject:
@@ -1028,6 +1031,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1534993052}
+  - component: {fileID: 1534993053}
   m_Layer: 0
   m_Name: LevelManager
   m_TagString: Untagged
@@ -1047,9 +1051,26 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1167990345}
+  - {fileID: 1482151595}
+  - {fileID: 1192745915}
+  - {fileID: 1433731237}
+  - {fileID: 349602457}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1534993053
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1534993051}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5e2490cd1cc39c47892f41774412a53, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1758487472
 GameObject:
   m_ObjectHideFlags: 0
@@ -1124,8 +1145,6 @@ MonoBehaviour:
   targetCenterBack: {fileID: 1192745915}
   targetCenterLeft: {fileID: 1433731237}
   targetCenterRight: {fileID: 349602457}
-  maxFlyDistance: 10
-  forceMultiplier: 10
 --- !u!54 &1758487478
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1160,10 +1179,5 @@ SceneRoots:
   - {fileID: 963194228}
   - {fileID: 705507995}
   - {fileID: 1758487476}
-  - {fileID: 1482151595}
-  - {fileID: 1192745915}
-  - {fileID: 1433731237}
-  - {fileID: 349602457}
-  - {fileID: 1167990345}
   - {fileID: 1534993052}
   - {fileID: 612209413}
