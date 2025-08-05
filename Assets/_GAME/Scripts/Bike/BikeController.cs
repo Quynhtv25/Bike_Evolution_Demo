@@ -56,13 +56,15 @@ public class BikeController : MonoBehaviour {
         currentTurnAngle = maxTurnAngle * horizontalInput;
         frontWheel.steerAngle = currentTurnAngle;
     }
+    private bool isGround;
+    public bool IsGround => isGround;
     private void Balance() {
         bool isGroundedFront, isGroundedRear;
         WheelHit hit;
         isGroundedFront = frontWheel.GetGroundHit(out hit);
         isGroundedRear = rearWheel.GetGroundHit(out hit);
-
-        if (!isGroundedFront && !isGroundedRear)
+        isGround = isGroundedFront && !isGroundedRear;
+        if (!IsGround)
             return;
 
         if (speed < 5f)
