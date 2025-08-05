@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 7bd8b0b9d5221284abf771c9fd8c1928
+guid: 61a752a36f2632442a0e1879fae16fb0
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -7,8 +7,8 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Way_Texture
-    second: {fileID: 2100000, guid: 07475998217272745b21e9464e402664, type: 2}
+      name: Combine_1
+    second: {fileID: 2100000, guid: 8ce2e66c9b7601b46a0ee288955df904, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -40,7 +40,7 @@ ModelImporter:
     isReadable: 0
   meshes:
     lODScreenPercentages: []
-    globalScale: 75
+    globalScale: 40
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1
@@ -95,7 +95,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 0.75
+    globalScale: 0.39999998
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0

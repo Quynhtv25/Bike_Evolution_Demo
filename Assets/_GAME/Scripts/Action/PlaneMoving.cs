@@ -10,6 +10,7 @@ public class PlaneMoving : MonoBehaviour, IInteract {
     [SerializeField] private Transform targetCenterBack;
     [SerializeField] private Transform targetCenterLeft;
     [SerializeField] private Transform targetCenterRight;
+    [SerializeField] private float baseScale = 10;
     private Rigidbody rb;
     private Vector3 startPos;
     private Vector3 endPos = Vector3.forward * 500f;
@@ -31,6 +32,7 @@ public class PlaneMoving : MonoBehaviour, IInteract {
         startPos = Tf;
         isFly = false;
     }
+
     private void Update() {
         if (!isFly) return;
         Logs.LogError("On MOve");
@@ -52,11 +54,10 @@ public class PlaneMoving : MonoBehaviour, IInteract {
             Logs.LogError("Touched this plane via IInteract");
         }
     }
-
-    private void OnDragInput(DragInputEvent param) {
-        if (!ReferenceEquals(param.target, this)) return;
-
-        Vector3 clampedPos = param.dragPos;
+    private void FixedUpdate() {
+        if (!isDrag) return;
+        rb.velocity = Vector3.zero;
+        rb.constraints = RigidbodyConstraints.FreezePosition & RigidbodyConstraints.FreezeRotation;
         this.Dispatch(new LimitDragEvent {
             startPos = clampedPos,
             target = transform
@@ -69,9 +70,20 @@ public class PlaneMoving : MonoBehaviour, IInteract {
             }
         }
     }
+    private Vector3 clampedPos;
+    private bool isDrag;
+    private void OnDragInput(DragInputEvent param) {
+        if (!ReferenceEquals(param.target, this)) return;
+        clampedPos = param.dragPos;
+        isDrag = true;
+
+
+    }
 
     private void OnEndDrag(EndDragInput param) {
         if (!ReferenceEquals(param.target, this)) return;
+        isDrag = false;
+        rb.constraints = RigidbodyConstraints.FreezeRotationY & RigidbodyConstraints.FreezePositionZ;
         //if (Vector3.Distance(Tf, param.endPos) <= 5f) {
         //    transform.DOMove(startPos, .5f);
         //    transform.DOLocalRotate(Vector3.zero, .5f);
@@ -87,7 +99,7 @@ public class PlaneMoving : MonoBehaviour, IInteract {
         float percent = Mathf.Clamp(1 - (distance / targetCenterBack.position.z), 0, 1);
 
         float baseSpeed = GameData.Instance.AtributesData.GetBikeData(1).GetInfoUpgradeData(1).speed;
-        float finalValue =  baseSpeed * percent;
+        float finalValue = baseSpeed * percent * baseScale;
         Vector3 finalForce = (transform.forward * finalValue) /*+ (finalValue * Vector3.up)*/;
 
         totalDistance = Vector3.Distance(startPos, endPos);
