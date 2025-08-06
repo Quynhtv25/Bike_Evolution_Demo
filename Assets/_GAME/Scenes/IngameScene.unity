@@ -175,10 +175,6 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4502325061229739053, guid: 82fabf0defdb7384b85c2069a92a18ac, type: 3}
-      propertyPath: baseScale
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 4502325061229739053, guid: 82fabf0defdb7384b85c2069a92a18ac, type: 3}
       propertyPath: targetCenter
       value: 
       objectReference: {fileID: 2014138579}
@@ -186,9 +182,9 @@ PrefabInstance:
       propertyPath: targetCenterBack
       value: 
       objectReference: {fileID: 1314428381}
-    - target: {fileID: 5710350593262008109, guid: 82fabf0defdb7384b85c2069a92a18ac, type: 3}
-      propertyPath: m_CenterOfMass.y
-      value: 1.5
+    - target: {fileID: 5272873133014628920, guid: 82fabf0defdb7384b85c2069a92a18ac, type: 3}
+      propertyPath: m_WarningMessage
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -487,6 +483,18 @@ PrefabInstance:
     - target: {fileID: 5019481061644962035, guid: c3ac819ab014e224cadc9a895bf49ced, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6084580220763973987, guid: c3ac819ab014e224cadc9a895bf49ced, type: 3}
+      propertyPath: m_UpdateMethod
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6084580220763973987, guid: c3ac819ab014e224cadc9a895bf49ced, type: 3}
+      propertyPath: m_BlendUpdateMethod
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7060412915323779045, guid: c3ac819ab014e224cadc9a895bf49ced, type: 3}
+      propertyPath: m_Follow
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
