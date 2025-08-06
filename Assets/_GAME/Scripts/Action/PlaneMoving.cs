@@ -57,7 +57,7 @@ public class PlaneMoving : MonoBehaviour, IInteract {
     private void FixedUpdate() {
         if (!isDrag) return;
         rb.velocity = Vector3.zero;
-        rb.constraints = RigidbodyConstraints.FreezePosition & RigidbodyConstraints.FreezeRotation;
+        //rb.constraints = RigidbodyConstraints.FreezePosition | RigidbodyConstraints.FreezeRotation;
         this.Dispatch(new LimitDragEvent {
             startPos = clampedPos,
             target = transform
@@ -83,7 +83,7 @@ public class PlaneMoving : MonoBehaviour, IInteract {
     private void OnEndDrag(EndDragInput param) {
         if (!ReferenceEquals(param.target, this)) return;
         isDrag = false;
-        rb.constraints = RigidbodyConstraints.FreezeRotationY & RigidbodyConstraints.FreezePositionZ;
+        //rb.constraints =RigidbodyConstraints.FreezeRotationZ;
         //if (Vector3.Distance(Tf, param.endPos) <= 5f) {
         //    transform.DOMove(startPos, .5f);
         //    transform.DOLocalRotate(Vector3.zero, .5f);

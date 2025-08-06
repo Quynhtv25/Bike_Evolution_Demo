@@ -26,6 +26,9 @@ public class BikeController : MonoBehaviour {
     private float verticalInput;
     private float horizontalInput;
     private float speed;
+    private float currentSteerAngle = 0f;
+    [SerializeField] private float steerSmoothSpeed = 5f;
+
     private void Start() {
         rb = GetComponent<Rigidbody>();
     }
@@ -36,6 +39,7 @@ public class BikeController : MonoBehaviour {
         Balance();
         UpdateWheel(frontWheel, frontTransform);
         UpdateWheel(rearWheel, backTransform);
+        RotatePedals();
 
     }
     private void Movement() {
@@ -54,49 +58,62 @@ public class BikeController : MonoBehaviour {
         rearWheel.brakeTorque = currentBreakForce;
 
         currentTurnAngle = maxTurnAngle * horizontalInput;
-        frontWheel.steerAngle = currentTurnAngle;
+        currentSteerAngle = Mathf.Lerp(currentSteerAngle, currentTurnAngle, Time.deltaTime * steerSmoothSpeed);
+        frontWheel.steerAngle = currentSteerAngle;
+
     }
     private bool isGround;
     public bool IsGround => isGround;
+
+    [SerializeField] private float balanceStrengthZ = 1.5f;
+    [SerializeField] private float balanceStrengthX = 0.4f;
+    [SerializeField] private float balanceTorqueMultiplier = 50f;
+    [SerializeField] private float balanceDamping = 0.02f;
+    //private void Balance() {
+    //    bool isGroundedFront, isGroundedRear;
+    //    WheelHit hit;
+    //    isGroundedFront = frontWheel.GetGroundHit(out hit);
+    //    isGroundedRear = rearWheel.GetGroundHit(out hit);
+    //    isGround = isGroundedFront && !isGroundedRear;
+
+    //    angleLeftRight = curveAngle.Evaluate(speed) * horizontalInput;
+
+    //    float angleX = transform.eulerAngles.x;
+    //    Vector3 desiredUp = Quaternion.AngleAxis(angleX, transform.forward) * Vector3.up;
+
+    //    Vector3 axisFromRotate = Vector3.Cross(transform.up, desiredUp);
+
+    //    axisFromRotate.x = 0;
+    //    axisFromRotate.z *= balanceStrengthZ;
+    //    axisFromRotate.y = 0f;
+
+    //    Vector3 torqueForce = axisFromRotate.normalized * axisFromRotate.magnitude * balanceTorqueMultiplier;
+
+    //    torqueForce -= rb.angularVelocity;
+
+    //    rb.AddTorque(torqueForce * rb.mass * balanceDamping, ForceMode.Impulse);
+
+    //    Debug.DrawLine(transform.position, transform.position + desiredUp * 10f, Color.green);
+    //}
+
+    [SerializeField] private float forceBalance = .02f;
+    [SerializeField] private float forceBalanceX = .4f;
+    [SerializeField] private float forceBalanceY = .4f;
+    [SerializeField] private float forceBalanceZ = .4f;
     private void Balance() {
-        bool isGroundedFront, isGroundedRear;
-        WheelHit hit;
-        isGroundedFront = frontWheel.GetGroundHit(out hit);
-        isGroundedRear = rearWheel.GetGroundHit(out hit);
-        isGround = isGroundedFront && !isGroundedRear;
-        if (!IsGround)
-            return;
-
-        if (speed < 5f)
-            return;
-
-        float rollAngle = Vector3.SignedAngle(Vector3.up, transform.up, transform.forward);
-
-        if (Mathf.Abs(rollAngle) > 35f)
-            return;
-
-        float torqueMultiplier = Mathf.Clamp01(speed / 30f);
-
-        angleLeftRight = curveAngle.Evaluate(speed);
-
-        Vector3 desiredUp = Quaternion.AngleAxis(-angleLeftRight, transform.forward) * Vector3.up;
-
-        Vector3 axisFromRotate = Vector3.Cross(transform.up, desiredUp);
-
-        axisFromRotate.x = 0f;
-        axisFromRotate.y = 0f;
-
-        Vector3 torqueForce = axisFromRotate.normalized * axisFromRotate.magnitude * 50f * torqueMultiplier;
-
-        if (Mathf.Abs(torqueForce.z) <= 0.1f) torqueForce.z = 0f;
-
+        angleLeftRight = curveAngle.Evaluate(speed) * horizontalInput;
+        float angleX = transform.eulerAngles.x;
+        Vector3 directLeftRight = Quaternion.AngleAxis(-angleLeftRight, transform.forward) * Vector3.up;
+        Vector3 dirForwBack = Quaternion.AngleAxis(angleX, transform.right) * directLeftRight;
+        Vector3 axisFromRotate = Vector3.Cross(transform.up,dirForwBack);
+        Vector3 torqueForce = axisFromRotate.normalized * axisFromRotate.magnitude * 50;
+        torqueForce.x = torqueForce.x * forceBalanceX;
+        torqueForce.y = torqueForce.y * forceBalanceY;
+        torqueForce.z = torqueForce.z * forceBalanceZ;
         torqueForce -= rb.angularVelocity;
-
-        rb.AddTorque(torqueForce * rb.mass * 0.02f, ForceMode.Impulse);
-
-        Debug.DrawLine(transform.position, transform.position + desiredUp * 1.2f, Color.green);
+        rb.AddTorque(torqueForce* rb.mass*forceBalance,ForceMode.Impulse);
+        Debug.DrawLine(transform.position, transform.position + directLeftRight * 100, Color.green);
     }
-
 
 
     private void UpdateWheel(WheelCollider col, Transform wheelTransform) {
@@ -114,7 +131,7 @@ public class BikeController : MonoBehaviour {
     }
     private void CtrlTurnSteer() {
         float angleTurn = SteerObj.localEulerAngles.y;
-        SteerObj.rotation = Quaternion.AngleAxis(currentTurnAngle - angleTurn, SteerObj.transform.up) * SteerObj.rotation;
+        SteerObj.rotation = Quaternion.AngleAxis(currentSteerAngle - angleTurn, SteerObj.transform.up) * SteerObj.rotation;
         frontTransform.rotation = helperTransform.rotation;
         frontTransform.rotation = Quaternion.FromToRotation(frontTransform.right, SteerObj.transform.right) * frontTransform.transform.rotation;
         frontTransform.position = Damper.position;
@@ -122,4 +139,34 @@ public class BikeController : MonoBehaviour {
         //float currentUp = helperTransform.localPosition.y - Damper.localPosition.y;
         //Damper.position = Damper.position + SteerObj.transform.up * (currentUp - .5f);
     }
+    [SerializeField] private Transform leftPedal;
+    [SerializeField] private Transform rightPedal;
+    private float pedalAngle = 0f;
+    private float currentPedalSpeed = 0f;
+
+    [SerializeField] private float pedalAccelerate = 300f;
+    [SerializeField] private float pedalDecelerate = 200f;
+    [SerializeField] private float maxPedalSpeed = 720f;
+
+    private void RotatePedals() {
+        float input = verticalInput;
+
+        if (Mathf.Abs(input) > 0.01f) {
+            float targetSpeed = maxPedalSpeed * Mathf.Sign(input);
+            currentPedalSpeed = Mathf.MoveTowards(currentPedalSpeed, targetSpeed, pedalAccelerate * Time.deltaTime);
+        }
+        else {
+            currentPedalSpeed = Mathf.MoveTowards(currentPedalSpeed, 0f, pedalDecelerate * Time.deltaTime);
+        }
+
+        pedalAngle += currentPedalSpeed * Time.deltaTime;
+        pedalAngle %= 360f;
+
+        leftPedal.localRotation = Quaternion.Euler(0f, 0f, pedalAngle);
+        rightPedal.localRotation = Quaternion.Euler(0f, 0f, pedalAngle);
+        //rightPedal.localRotation = Quaternion.Euler(0f, 0f, (pedalAngle + 180f) % 360f);
+    }
+
+
+
 }
