@@ -9,8 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0b26b44643e5d2e48b40c048338be226, type: 3}
-  m_Name: GameData
+  m_Script: {fileID: 11500000, guid: dbe3248929260db48ab6eb200a21bc69, type: 3}
+  m_Name: GameConfig
   m_EditorClassIdentifier: 
-  atributesData: {fileID: 11400000, guid: a1af0f819f7ab304880ae41f31625aaf, type: 2}
-  gameConfig: {fileID: 11400000, guid: 120808e5651fbdd41ae282e2c94a47e8, type: 2}
+  baseSpeedBike: 500
+  baseSlingShot: 500
+  baseBikeStrength: 100
