@@ -7,5 +7,7 @@ namespace IPS {
         [SerializeField] private AtributesData atributesData;
 
         public AtributesData AtributesData => atributesData;
+        [SerializeField] private GameConfig gameConfig;
+        public GameConfig GameConfig => gameConfig;
     }
 }
