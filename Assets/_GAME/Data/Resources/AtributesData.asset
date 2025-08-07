@@ -16,6 +16,8 @@ MonoBehaviour:
   - Type: 1
     defaultValue: 1
     stepValue: 0.1
+    defaultCost: 1
+    stepUpdateCost: 1
     OverrideValues:
     - level: 6
       value: 2
@@ -23,9 +25,13 @@ MonoBehaviour:
   - Type: 2
     defaultValue: 1
     stepValue: 0.1
+    defaultCost: 0
+    stepUpdateCost: 0
     OverrideValues: []
   - Type: 3
     defaultValue: 1
     stepValue: 0.1
+    defaultCost: 0
+    stepUpdateCost: 0
     OverrideValues: []
   defaultValue: 1

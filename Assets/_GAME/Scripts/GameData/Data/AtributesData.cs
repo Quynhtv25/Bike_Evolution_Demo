@@ -22,6 +22,9 @@ public struct AtributesState {
     public EAtribute Type;
     public float defaultValue;
     public float stepValue;
+
+    public float defaultCost;
+    public float stepUpdateCost;
     public OverrideValue[] OverrideValues;
     public float GetValue(int level) {
         float value = defaultValue;
