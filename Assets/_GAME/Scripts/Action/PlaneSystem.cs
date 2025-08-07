@@ -4,6 +4,7 @@ using MCL.Bike_Evolution;
 
 [RequireComponent(typeof(Rigidbody))]
 public class PlaneSystem : MonoBehaviour, IInteract {
+    [SerializeField] private BoxCollider colliderInteract;
     [SerializeField] private Transform targetCenter;
     [SerializeField] private Transform targetCenterBack;
     [SerializeField] private Transform targetCenterLeft;
@@ -29,6 +30,11 @@ public class PlaneSystem : MonoBehaviour, IInteract {
         this.AddListener<EndDragInput>(OnEndDrag);
         startPos = Tf;
         isFly = false;
+        SetupCollider(new Vector3(1.6f, 5.5f, 3.75f), new Vector3(0f, 3.5f, 0));
+    }
+    private void SetupCollider(Vector3 size,Vector3 center) {
+        colliderInteract.size = new Vector3(1.6f, 5.5f, 3.75f);
+        colliderInteract.center = new Vector3(0f, 3.5f, 0);
     }
 
     private void Update() {
@@ -37,7 +43,6 @@ public class PlaneSystem : MonoBehaviour, IInteract {
         if (rb.velocity.magnitude >= 2)
             isFly = true;
         if (!isFly) return;
-        Logs.LogError("On MOve");
         this.Dispatch(new SpeedBikeRuntime() {
             CurrentSpeed = rb.velocity.z,
             MinSpeed = 0,
@@ -109,5 +114,6 @@ public class PlaneSystem : MonoBehaviour, IInteract {
 
 
         rb.AddForce(finalForce, ForceMode.Impulse);
+        SetupCollider(new Vector3(.3f,1.5f,3.75f),new Vector3(0f,2f,0));
     }
 }
