@@ -12,18 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 441690e23cbee0c43a48a9536bddc002, type: 3}
   m_Name: AtributesData
   m_EditorClassIdentifier: 
-  slingshotState:
-  - level: 1
-    InfoUpgrade:
-    - stepUpgrade: 1
-      speed: 5
-  bikeState:
-  - level: 1
-    InfoUpgrade:
-    - stepUpgrade: 1
-      speed: 50
-  incomeState:
-  - level: 1
-    InfoUpgrade:
-    - stepUpgrade: 1
-      speed: 5
+  atributesStates:
+  - Type: 1
+    defaultValue: 1
+    stepValue: 0.1
+    OverrideValues:
+    - level: 6
+      value: 2
+      overrideStepValue: 0.1
+  - Type: 2
+    defaultValue: 1
+    stepValue: 0.1
+    OverrideValues: []
+  - Type: 3
+    defaultValue: 1
+    stepValue: 0.1
+    OverrideValues: []
+  defaultValue: 1

@@ -2,36 +2,48 @@ using System;
 using UnityEngine;
 [CreateAssetMenu(fileName = "AtributesData", menuName = "GAME" + "/AtributesData")]
 public class AtributesData : ScriptableObject {
-    [SerializeField] private AtributesState[] slingshotState;
-    [SerializeField] private AtributesState[] bikeState;
-    [SerializeField] private AtributesState[] incomeState;
+    [SerializeField] private AtributesState[] atributesStates;
+    [SerializeField] private int defaultValue = 1;
 
-    public AtributesState[] SlingshotState => slingshotState;
-    public AtributesState[] BikeState => bikeState;
-    public AtributesState[] IncomeState => incomeState;
 
-    public AtributesState GetBikeData(int level) {
-        for (int i = 0; i < bikeState.Length; i++) {
-            if (bikeState[i].level != level) continue;
-            return bikeState[i];
+    public AtributesState[] AtributesStates => atributesStates;
+    public float GetValue(EAtribute type, int level) {
+        if (atributesStates == null) return defaultValue;
+        for (int i = 0; i < atributesStates.Length; ++i) {
+            var atribu = atributesStates[i];
+            if (atribu.Type != type) continue;
+            return atribu.GetValue(level);
         }
-        return new AtributesState();
+        return defaultValue;
     }
 }
 [Serializable]
 public struct AtributesState {
-    public int level;
-    public InfoUpgrade[] InfoUpgrade;
-    public InfoUpgrade GetInfoUpgradeData(int step) {
-        for (int i = 0; i < InfoUpgrade.Length; i++) {
-            if (InfoUpgrade[i].stepUpgrade != step) continue;
-            return InfoUpgrade[i];
+    public EAtribute Type;
+    public float defaultValue;
+    public float stepValue;
+    public OverrideValue[] OverrideValues;
+    public float GetValue(int level) {
+        float value = defaultValue;
+        float current = 0;
+        float step = stepValue;
+        for (int i = OverrideValues.Length - 1; i > 0; i--) {
+            var o = OverrideValues[i];
+            if (o.level > level) continue;
+            current = o.level;
+            value = o.value;
+            if (o.overrideStepValue > 0)
+                step = o.overrideStepValue;
+            break;
+
         }
-        return new InfoUpgrade();
+        value += (level - current) * step;
+        return value;
     }
 }
 [Serializable]
-public struct InfoUpgrade {
-    public int stepUpgrade;
-    public float speed;
+public struct OverrideValue {
+    public int level;
+    public float value;
+    public float overrideStepValue;
 }

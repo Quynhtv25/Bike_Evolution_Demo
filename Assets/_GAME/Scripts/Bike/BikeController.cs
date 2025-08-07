@@ -63,13 +63,12 @@ public class BikeController : MonoBehaviour {
                 currentBreakForce = breakForce;
             }
             else {
-                currentBreakForce = 0f;
+                currentBreakForce = 0;
             }
 
             frontWheel.brakeTorque = currentBreakForce;
             rearWheel.brakeTorque = currentBreakForce;
         }
-
         currentTurnAngle = maxTurnAngle * horizontalInput;
         currentSteerAngle = Mathf.Lerp(currentSteerAngle, currentTurnAngle, Time.deltaTime * steerSmoothSpeed);
         frontWheel.steerAngle = currentSteerAngle;
