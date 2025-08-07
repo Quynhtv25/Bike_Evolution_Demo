@@ -34,21 +34,20 @@ public class PlaneSystem : MonoBehaviour, IInteract {
     private void Update() {
         if (GameManager.Instance.GameState != EGameState.Playing) return;
         if (isDrag) return;
-
-        if (rb.velocity.magnitude >= .5f)
+        if (rb.velocity.magnitude >= 2)
             isFly = true;
         if (!isFly) return;
         Logs.LogError("On MOve");
         this.Dispatch(new SpeedBikeRuntime() {
             CurrentSpeed = rb.velocity.z,
             MinSpeed = 0,
-            MaxSpeed = GameData.Instance.AtributesData.GetBikeData(1).GetInfoUpgradeData(1).speed
+            MaxSpeed = GameData.Instance.AtributesData.GetValue(EAtribute.SlingShot, UserData.GetLevelAtribute((byte)EAtribute.SlingShot))
         });
         float currentDistance = Vector3.Distance(startPos, Tf);
 
         this.Dispatch(new PercentDistanceTravel { CurrentDistanceTravel = currentDistance, TotalDistanceTravel = totalDistance });
 
-        if (Vector3.Distance(rb.velocity, Vector3.zero) < .5f) {
+        if (Vector3.Distance(rb.velocity, Vector3.zero) < 2) {
             isFly = false;
             this.Dispatch<EndGameEvent>();
         }
@@ -102,7 +101,7 @@ public class PlaneSystem : MonoBehaviour, IInteract {
         float distance = (targetCenterBack.position.z - transform.position.z);
         float percent = Mathf.Clamp(1 - (distance / targetCenterBack.position.z), 0, 1);
 
-        float baseSpeed = GameData.Instance.AtributesData.GetBikeData(1).GetInfoUpgradeData(1).speed;
+        float baseSpeed = GameData.Instance.AtributesData.GetValue(EAtribute.SlingShot, UserData.GetLevelAtribute((byte)EAtribute.SlingShot));
         float finalValue = baseSpeed * percent * baseScale;
         Vector3 finalForce = (transform.forward * finalValue) /*+ (finalValue * Vector3.up)*/;
 

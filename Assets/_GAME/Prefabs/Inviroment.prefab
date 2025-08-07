@@ -12202,6 +12202,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Congbaylen
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d54372e2e99805343b4c37412f520eb1, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

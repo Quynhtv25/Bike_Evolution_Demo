@@ -26,3 +26,8 @@ public struct PercentDistanceTravel : IEventParam {
     public float TotalDistanceTravel;
     public float CurrentDistanceTravel;
 }
+
+// ------------------- ATRIBUTE --------------------
+public struct OnUpdateAtribute: IEventParam {
+    public EAtribute type;
+}
