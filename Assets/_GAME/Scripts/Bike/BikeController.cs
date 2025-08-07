@@ -23,7 +23,7 @@ public class BikeController : MonoBehaviour {
     private float currentBreakForce = 0f;
     private float currentTurnAngle = 0f;
 
-    private float verticalInput;
+    //private float verticalInput;
     private float horizontalInput;
     private float speed;
     private float currentSteerAngle = 0f;
@@ -42,28 +42,44 @@ public class BikeController : MonoBehaviour {
         RotatePedals();
 
     }
+    private float lastInput = 0f;
+
     private void Movement() {
-        verticalInput = Input.GetAxis("Vertical");
+        //verticalInput = Input.GetAxis("Vertical");
         horizontalInput = Input.GetAxis("Horizontal");
 
-        currentAcceleration = acceleration * verticalInput;
-        rearWheel.motorTorque = currentAcceleration;
+        //bool isChangingDirection = Mathf.Sign(verticalInput) != Mathf.Sign(lastInput) && Mathf.Abs(verticalInput) > 0.1f && Mathf.Abs(lastInput) > 0.1f;
 
-        if (Input.GetKey(KeyCode.Space))
-            currentBreakForce = breakForce;
-        else
-            currentBreakForce = 0f;
+        //if (isChangingDirection) {
+        //    frontWheel.brakeTorque = breakForce * 2f;
+        //    rearWheel.brakeTorque = breakForce * 2f;
+        //    rearWheel.motorTorque = 0f;
+        //}
+        {
+            //currentAcceleration = acceleration * verticalInput;
+            rearWheel.motorTorque = currentAcceleration;
 
-        frontWheel.brakeTorque = currentBreakForce;
-        rearWheel.brakeTorque = currentBreakForce;
+            if (Input.GetKey(KeyCode.Space)) {
+                currentBreakForce = breakForce;
+            }
+            else {
+                currentBreakForce = 0f;
+            }
+
+            frontWheel.brakeTorque = currentBreakForce;
+            rearWheel.brakeTorque = currentBreakForce;
+        }
 
         currentTurnAngle = maxTurnAngle * horizontalInput;
         currentSteerAngle = Mathf.Lerp(currentSteerAngle, currentTurnAngle, Time.deltaTime * steerSmoothSpeed);
         frontWheel.steerAngle = currentSteerAngle;
 
+        //lastInput = verticalInput;
     }
-    private bool isGround;
-    public bool IsGround => isGround;
+    private bool isGroundedFront;
+    private bool isGroundedRear;
+    //private bool isGround;
+    public bool IsGround => isGroundedFront || isGroundedRear;
 
     [SerializeField] private float balanceStrengthZ = 1.5f;
     [SerializeField] private float balanceStrengthX = 0.4f;
@@ -101,17 +117,20 @@ public class BikeController : MonoBehaviour {
     [SerializeField] private float forceBalanceY = .4f;
     [SerializeField] private float forceBalanceZ = .4f;
     private void Balance() {
+        WheelHit hit;
+        isGroundedFront = frontWheel.GetGroundHit(out hit);
+        isGroundedRear = rearWheel.GetGroundHit(out hit);
         angleLeftRight = curveAngle.Evaluate(speed) * horizontalInput;
         float angleX = transform.eulerAngles.x;
         Vector3 directLeftRight = Quaternion.AngleAxis(-angleLeftRight, transform.forward) * Vector3.up;
         Vector3 dirForwBack = Quaternion.AngleAxis(angleX, transform.right) * directLeftRight;
-        Vector3 axisFromRotate = Vector3.Cross(transform.up,dirForwBack);
+        Vector3 axisFromRotate = Vector3.Cross(transform.up, dirForwBack);
         Vector3 torqueForce = axisFromRotate.normalized * axisFromRotate.magnitude * 50;
         torqueForce.x = torqueForce.x * forceBalanceX;
         torqueForce.y = torqueForce.y * forceBalanceY;
         torqueForce.z = torqueForce.z * forceBalanceZ;
         torqueForce -= rb.angularVelocity;
-        rb.AddTorque(torqueForce* rb.mass*forceBalance,ForceMode.Impulse);
+        rb.AddTorque(torqueForce * rb.mass * forceBalance, ForceMode.Impulse);
         Debug.DrawLine(transform.position, transform.position + directLeftRight * 100, Color.green);
     }
 
@@ -147,16 +166,26 @@ public class BikeController : MonoBehaviour {
     [SerializeField] private float pedalAccelerate = 300f;
     [SerializeField] private float pedalDecelerate = 200f;
     [SerializeField] private float maxPedalSpeed = 720f;
-
+    private float timeSinceGrounded = 0f;
+    [SerializeField] private float groundedDelay = 0.5f;
     private void RotatePedals() {
-        float input = verticalInput;
+        if (IsGround) {
+            timeSinceGrounded = Time.time;
 
-        if (Mathf.Abs(input) > 0.01f) {
-            float targetSpeed = maxPedalSpeed * Mathf.Sign(input);
-            currentPedalSpeed = Mathf.MoveTowards(currentPedalSpeed, targetSpeed, pedalAccelerate * Time.deltaTime);
+            float rpm = rearWheel.rpm;
+            if (rpm <= 0)
+                return;
+            if (speed <= 3)
+                return;
+            float pedalSpeed = (rpm * 360f) / 60f;
+            currentPedalSpeed = Mathf.Clamp(pedalSpeed, -maxPedalSpeed, maxPedalSpeed);
         }
         else {
             currentPedalSpeed = Mathf.MoveTowards(currentPedalSpeed, 0f, pedalDecelerate * Time.deltaTime);
+
+            if (Time.time - timeSinceGrounded > groundedDelay && Mathf.Abs(currentPedalSpeed) < 1f) {
+                return;
+            }
         }
 
         pedalAngle += currentPedalSpeed * Time.deltaTime;
@@ -164,8 +193,9 @@ public class BikeController : MonoBehaviour {
 
         leftPedal.localRotation = Quaternion.Euler(0f, 0f, pedalAngle);
         rightPedal.localRotation = Quaternion.Euler(0f, 0f, pedalAngle);
-        //rightPedal.localRotation = Quaternion.Euler(0f, 0f, (pedalAngle + 180f) % 360f);
+        //rightPedal.localRotation = Quaternion.Euler(0f, 0f, (pedalAngle + 180f) % 360f); 
     }
+
 
 
 

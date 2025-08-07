@@ -1,11 +1,9 @@
 ﻿using UnityEngine;
 using IPS;
-using DG.Tweening;
-using UnityEngine.Rendering;
 using MCL.Bike_Evolution;
 
 [RequireComponent(typeof(Rigidbody))]
-public class PlaneMoving : MonoBehaviour, IInteract {
+public class PlaneSystem : MonoBehaviour, IInteract {
     [SerializeField] private Transform targetCenter;
     [SerializeField] private Transform targetCenterBack;
     [SerializeField] private Transform targetCenterLeft;
@@ -34,6 +32,11 @@ public class PlaneMoving : MonoBehaviour, IInteract {
     }
 
     private void Update() {
+        if (GameManager.Instance.GameState != EGameState.Playing) return;
+        if (isDrag) return;
+
+        if (rb.velocity.magnitude >= .5f)
+            isFly = true;
         if (!isFly) return;
         Logs.LogError("On MOve");
         this.Dispatch(new SpeedBikeRuntime() {
@@ -41,13 +44,14 @@ public class PlaneMoving : MonoBehaviour, IInteract {
             MinSpeed = 0,
             MaxSpeed = GameData.Instance.AtributesData.GetBikeData(1).GetInfoUpgradeData(1).speed
         });
-
         float currentDistance = Vector3.Distance(startPos, Tf);
-        this.Dispatch(new PercentDistanceTravel { CurrentDistanceTravel = currentDistance, TotalDistanceTravel = totalDistance });
-        //if(Vector3.Distance(rb.velocity, Vector3.zero) < .05f){
-        //    isFly = false;
 
-        //}
+        this.Dispatch(new PercentDistanceTravel { CurrentDistanceTravel = currentDistance, TotalDistanceTravel = totalDistance });
+
+        if (Vector3.Distance(rb.velocity, Vector3.zero) < .5f) {
+            isFly = false;
+            this.Dispatch<EndGameEvent>();
+        }
     }
     private void OnTouchInput(TouchInputEvent param) {
         if (ReferenceEquals(param.target, this)) {
@@ -105,7 +109,6 @@ public class PlaneMoving : MonoBehaviour, IInteract {
         totalDistance = Vector3.Distance(startPos, endPos);
 
 
-        isFly = true;
         rb.AddForce(finalForce, ForceMode.Impulse);
     }
 }
