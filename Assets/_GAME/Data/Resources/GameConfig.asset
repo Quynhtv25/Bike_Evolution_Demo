@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: GameConfig
   m_EditorClassIdentifier: 
   baseSpeedBike: 500
-  baseSlingShot: 20000
+  baseSlingShot: 2000
   baseBikeStrength: 100
+  baseClaimCoinWithMeter: 0.1
