@@ -13,6 +13,7 @@ public struct LimitDragEvent :IEventParam {
     public Vector3 startPos;
     public Transform target;
 }
+public struct BikeStartFlyEvent : IEventParam { }
 
 
 // --------------- UI Event ----------------------

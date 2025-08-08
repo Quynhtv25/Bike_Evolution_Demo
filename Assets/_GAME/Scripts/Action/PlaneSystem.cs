@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using IPS;
 using MCL.Bike_Evolution;
+using DG.Tweening;
 
 [RequireComponent(typeof(Rigidbody))]
 public class PlaneSystem : MonoBehaviour, IInteract {
@@ -30,11 +31,12 @@ public class PlaneSystem : MonoBehaviour, IInteract {
         this.AddListener<EndDragInput>(OnEndDrag);
         startPos = Tf;
         isFly = false;
+        rb.isKinematic = true;
         SetupCollider(new Vector3(1.6f, 5.5f, 3.75f), new Vector3(0f, 3.5f, 0));
     }
     private void SetupCollider(Vector3 size,Vector3 center) {
-        colliderInteract.size = new Vector3(1.6f, 5.5f, 3.75f);
-        colliderInteract.center = new Vector3(0f, 3.5f, 0);
+        colliderInteract.size = size;
+        colliderInteract.center = center;
     }
 
     private void Update() {
@@ -72,11 +74,18 @@ public class PlaneSystem : MonoBehaviour, IInteract {
         });
 
         if (targetCenter != null) {
-            Vector3 lookDirection = (targetCenter.position - transform.position).normalized;
-            if (lookDirection.sqrMagnitude > 0.001f) {
-                transform.forward = lookDirection;
+            Vector3 lookDirection = targetCenter.position - transform.position;
+            if (lookDirection.z < 1f) {
+                lookDirection.x = 0;
+                transform.DOKill();
+                transform.DOLocalRotate(Vector3.zero, .5f);
+            }
+            if (lookDirection.sqrMagnitude > 0.1f) {
+                transform.DOKill();
+                transform.forward = lookDirection.normalized;
             }
         }
+
     }
     private Vector3 clampedPos;
     private bool isDrag;
@@ -84,7 +93,7 @@ public class PlaneSystem : MonoBehaviour, IInteract {
         if (!ReferenceEquals(param.target, this)) return;
         clampedPos = param.dragPos;
         isDrag = true;
-
+        rb.isKinematic = false;
 
     }
 
@@ -92,19 +101,23 @@ public class PlaneSystem : MonoBehaviour, IInteract {
         if (!ReferenceEquals(param.target, this)) return;
         isDrag = false;
         //rb.constraints =RigidbodyConstraints.FreezeRotationZ;
-        //if (Vector3.Distance(Tf, param.endPos) <= 5f) {
-        //    transform.DOMove(startPos, .5f);
-        //    transform.DOLocalRotate(Vector3.zero, .5f);
-        //    Logs.LogError("EndDragFail_");
-
-        //    return;
-        //}
-
+        float distance = (targetCenterBack.position.z - transform.position.z);
+        float percent = Mathf.Clamp(1 - (distance / targetCenterBack.position.z), 0, 1);
+        if (percent <= .2f) {
+            rb.velocity = Vector3.zero;
+            rb.isKinematic = true;
+            transform.DOKill();
+            transform.DOMove(startPos, .5f);
+            transform.DOLocalRotate(Vector3.zero, .5f);
+            Logs.LogError("EndDragFail_"+ startPos);
+            return;
+        }
+        Logs.LogError("fasf_"+percent);
+        SetupCollider(new Vector3(.3f, 1.5f, 3.75f), new Vector3(0f, 2f, 0));
         Vector3 dirToTarget = (targetCenter.position - transform.position).normalized;
 
 
-        float distance = (targetCenterBack.position.z - transform.position.z);
-        float percent = Mathf.Clamp(1 - (distance / targetCenterBack.position.z), 0, 1);
+
 
         float baseSpeed = GameData.Instance.AtributesData.GetValue(EAtribute.SlingShot, UserData.GetLevelAtribute((byte)EAtribute.SlingShot));
         float finalValue = baseSpeed * percent * baseScale;
@@ -114,6 +127,6 @@ public class PlaneSystem : MonoBehaviour, IInteract {
 
 
         rb.AddForce(finalForce, ForceMode.Impulse);
-        SetupCollider(new Vector3(.3f,1.5f,3.75f),new Vector3(0f,2f,0));
+        this.Dispatch(new BikeStartFlyEvent());
     }
 }

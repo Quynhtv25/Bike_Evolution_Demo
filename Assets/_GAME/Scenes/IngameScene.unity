@@ -727,6 +727,17 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1179075817 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7738706417077736888, guid: f5cb383edf1579b4196530ae3ef1b8e3, type: 3}
+  m_PrefabInstance: {fileID: 1826551481}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa8bb2d599622e248bc13f23d463fb02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1281885983
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -860,6 +871,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 853376182264468062, guid: f5cb383edf1579b4196530ae3ef1b8e3, type: 3}
+      propertyPath: frames.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 853376182264468062, guid: f5cb383edf1579b4196530ae3ef1b8e3, type: 3}
+      propertyPath: frames.Array.data[0]
+      value: 
+      objectReference: {fileID: 1179075817}
     - target: {fileID: 2794284497789290285, guid: f5cb383edf1579b4196530ae3ef1b8e3, type: 3}
       propertyPath: m_Name
       value: UICtrl

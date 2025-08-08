@@ -7,11 +7,14 @@ using UnityEngine;
 public class WinUI : Frame
 {
     [SerializeField] TextMeshProUGUI textDistance;
-
+    [SerializeField] private ButtonEffect bntClaim;
     private void OnEnable() {
+        bntClaim.AddListener(OnClickClaim);
     }
+    private void OnClickClaim() {
 
+    }
     public void SetTextDistance(float distance) {
-        textDistance.SetText($"Distance : {distance}");
+        textDistance.SetText($"Km : {Mathf.RoundToInt(distance)}");
     }
 }

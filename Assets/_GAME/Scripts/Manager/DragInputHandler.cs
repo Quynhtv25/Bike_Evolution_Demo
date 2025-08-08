@@ -13,10 +13,9 @@ public class DragInputHandler : MonoBehaviour {
     private Vector3 dragCurrent;
     private bool isDragging;
     private IInteract currentTarget;
-
+    private bool isBlockTouch;
     void Update() {
-        if (InputCtrl.IsPointerOverUI()) return;
-
+        if (InputCtrl.IsPointerOverUI() || isBlockTouch) return;
         Vector3 touchPos = InputCtrl.TouchPosition(0);
 
         if (InputCtrl.IsTouchBegin(0)) {
@@ -60,6 +59,11 @@ public class DragInputHandler : MonoBehaviour {
     }
     private void OnEnable() {
         this.AddListener<LimitDragEvent>(LimitDrag);
+        this.AddListener<BikeStartFlyEvent>(OnBikeStartFly);
+        isBlockTouch = false;
+    }
+    private void OnBikeStartFly() {
+        isBlockTouch = true;
     }
     public void LimitDrag(LimitDragEvent param) {
         Untilities.ClampLitmitDrag(param.startPos, param.target, targetCenterLeft, targetCenterRight, targetCenter, targetCenterBack);
