@@ -29,5 +29,9 @@ public class GameManager : SingletonBehaviourDontDestroy<GameManager>
     private void OnContinueGame() {
         gameState = EGameState.Playing;
     }
+    public void RequestLoadScene() {
+        Transition.Instance.LoadScene(0, true,onComplete: () => {
 
+        });
+    }
 }

@@ -1,7 +1,6 @@
 using IPS;
 using UnityEngine;
-
-public class LevelManager : MonoBehaviour
+public class LevelManager : SingletonBehaviour<LevelManager>
 {
     [SerializeField] private Transform startPos;
     [SerializeField] private Transform endPos;
@@ -15,5 +14,8 @@ public class LevelManager : MonoBehaviour
     }
     private void OnBikeStartFly() {
 
+    }
+
+    protected override void OnAwake() {
     }
 }

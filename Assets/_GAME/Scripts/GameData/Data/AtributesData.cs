@@ -69,7 +69,6 @@ public struct AtributesState {
             break;
 
         }
-        Debug.LogError(cost);
         return Mathf.CeilToInt(cost * Mathf.Pow(scale, level- current));
     }
 }
