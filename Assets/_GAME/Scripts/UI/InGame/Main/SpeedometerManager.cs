@@ -1,6 +1,7 @@
 using IPS;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 namespace MCL.Bike_Evolution {
@@ -19,21 +20,23 @@ namespace MCL.Bike_Evolution {
 
         private float needleVelocity = 0f;
         private float targetAngle;
-
+        [SerializeField] private TextMeshProUGUI currentSpeedText;
 
         private void OnEnable() {
             this.AddListener<SpeedBikeRuntime>(OnSetSpeedometer);
+            currentSpeedText.SetText("0");
         }
 
         private void OnSetSpeedometer(SpeedBikeRuntime param) { 
             minSpeed = param.MinSpeed;
             maxSpeed = param.MaxSpeed;
             currentSpeed = param.CurrentSpeed;
-            OnUpdateVisual();
+
+            OnUpdateVisual(Mathf.Round(currentSpeed).ToString());
         }
 
-        private void OnUpdateVisual() {
-
+        private void OnUpdateVisual(string text) {
+            currentSpeedText.SetText(text);
         }
     }
 }
