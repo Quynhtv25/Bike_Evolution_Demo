@@ -13,8 +13,7 @@ public class PlaneSystem : MonoBehaviour, IInteract {
     [SerializeField] private float baseScale = 10;
     private Rigidbody rb;
     private Vector3 startPos;
-    private Vector3 endPos = Vector3.forward * 500f;
-    private float totalDistance = 0f;
+    private float totalDistance = 1000f;
 
     private bool isFly;
     public Vector3 Tf => transform.position;
@@ -109,23 +108,17 @@ public class PlaneSystem : MonoBehaviour, IInteract {
             transform.DOKill();
             transform.DOMove(startPos, .5f);
             transform.DOLocalRotate(Vector3.zero, .5f);
-            Logs.LogError("EndDragFail_"+ startPos);
             return;
         }
-        Logs.LogError("fasf_"+percent);
         SetupCollider(new Vector3(.3f, 1.5f, 3.75f), new Vector3(0f, 2f, 0));
+
         Vector3 dirToTarget = (targetCenter.position - transform.position).normalized;
 
+        float baseSpeed = GameData.Instance.GameConfig.BaseSlingShot * GameData.Instance.AtributesData.GetValue(EAtribute.SlingShot, UserData.GetLevelAtribute((byte)EAtribute.SlingShot));
 
+        float finalValue = baseSpeed * percent;
 
-
-        float baseSpeed = GameData.Instance.AtributesData.GetValue(EAtribute.SlingShot, UserData.GetLevelAtribute((byte)EAtribute.SlingShot));
-        float finalValue = baseSpeed * percent * baseScale;
         Vector3 finalForce = (transform.forward * finalValue) /*+ (finalValue * Vector3.up)*/;
-
-        totalDistance = Vector3.Distance(startPos, endPos);
-
-
         rb.AddForce(finalForce, ForceMode.Impulse);
         this.Dispatch(new BikeStartFlyEvent());
     }

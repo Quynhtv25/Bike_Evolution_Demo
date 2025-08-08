@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class LevelManager : MonoBehaviour
 {
+    [SerializeField] private Transform startPos;
+    [SerializeField] private Transform endPos;
     private void OnEnable() {
         this.AddListener<EndGameEvent>(OnEndGame);
 

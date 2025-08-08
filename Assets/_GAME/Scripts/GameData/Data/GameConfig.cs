@@ -9,7 +9,7 @@ public class GameConfig : ScriptableObject
     [SerializeField] private float baseSpeedBike =100;
     [SerializeField] private float baseSlingShot = 100;
     [SerializeField] protected float baseBikeStrength = 100;
-
+    [SerializeField] protected float baseIncome = 10;
 
 
     #region Property

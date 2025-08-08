@@ -12,7 +12,7 @@ public class WinUI : Frame
         bntClaim.AddListener(OnClickClaim);
     }
     private void OnClickClaim() {
-
+        ItemCollectEffect.Instance.Collect()
     }
     public void SetTextDistance(float distance) {
         textDistance.SetText($"Km : {Mathf.RoundToInt(distance)}");

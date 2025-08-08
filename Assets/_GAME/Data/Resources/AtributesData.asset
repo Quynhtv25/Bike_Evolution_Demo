@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   atributesStates:
   - Type: 1
-    defaultValue: 100
+    defaultValue: 1
     stepValue: 0.1
     defaultCost: 150
     stepUpdateCost: 1.3
