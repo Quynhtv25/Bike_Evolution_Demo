@@ -28,6 +28,6 @@ public struct PercentDistanceTravel : IEventParam {
 }
 
 // ------------------- ATRIBUTE --------------------
-public struct OnUpdateAtribute: IEventParam {
+public struct UpdateAtributeEvt: IEventParam {
     public EAtribute type;
 }

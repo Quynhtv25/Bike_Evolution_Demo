@@ -18,9 +18,9 @@ namespace IPS {
         private static void DeCreaseAtribute(byte type, int value) {
             SetInt($"{atribute}{type}", GetLevelAtribute(type) - value);
         }
-        public static void IncreaseAtribute(EAtribute atributeType, int increaseCount) {
+        public static void IncreaseAtribute(EAtribute atributeType, int increaseCount =1) {
             IncreaseAtribute((byte)atributeType, increaseCount);
-            EventDispatcher.Instance.Dispatch(new OnUpdateAtribute() { type = atributeType });
+            EventDispatcher.Instance.Dispatch(new UpdateAtributeEvt() { type = atributeType });
 
             if (atributeType == EAtribute.None) {
                 Logs.LogError($"Missing Atribute Type: {atributeType}__value: {increaseCount}");
