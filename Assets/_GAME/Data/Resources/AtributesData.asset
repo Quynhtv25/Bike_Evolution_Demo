@@ -16,22 +16,34 @@ MonoBehaviour:
   - Type: 1
     defaultValue: 100
     stepValue: 0.1
-    defaultCost: 1
-    stepUpdateCost: 1
+    defaultCost: 150
+    stepUpdateCost: 1.3
     OverrideValues:
     - level: 6
       value: 2
       overrideStepValue: 0.1
+    - level: 11
+      value: 3
+      overrideStepValue: 0.2
+    OvrrideCosts:
+    - level: 6
+      cost: 600
+      scaleCost: 1.2
+    - level: 16
+      cost: 3200
+      scaleCost: 1.1
   - Type: 2
     defaultValue: 1
     stepValue: 0.1
-    defaultCost: 0
-    stepUpdateCost: 0
+    defaultCost: 150
+    stepUpdateCost: 1.3
     OverrideValues: []
+    OvrrideCosts: []
   - Type: 3
     defaultValue: 1
     stepValue: 0.1
-    defaultCost: 0
-    stepUpdateCost: 0
+    defaultCost: 250
+    stepUpdateCost: 1.3
     OverrideValues: []
+    OvrrideCosts: []
   defaultValue: 1
