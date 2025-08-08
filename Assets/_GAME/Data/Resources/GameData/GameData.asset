@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   atributesData: {fileID: 11400000, guid: a1af0f819f7ab304880ae41f31625aaf, type: 2}
   gameConfig: {fileID: 11400000, guid: 120808e5651fbdd41ae282e2c94a47e8, type: 2}
+  isCoinEnable: 1

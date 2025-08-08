@@ -56,7 +56,8 @@ namespace IPS {
 
                 var canvas = item.AddComponent<Canvas>();
                 canvas.overrideSorting = true;
-                canvas.sortingOrder = 10;
+                canvas.sortingLayerName ="UI";
+                canvas.sortingOrder = 200;
 
                 item.transform.position = fromPos;
                 Vector2 spawnPos = emission == 1 ? item.transform.localPosition

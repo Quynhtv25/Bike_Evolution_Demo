@@ -18,7 +18,7 @@ public class WinUI : Frame {
         ItemCollectEffect.Instance.Collect(textClaim.transform.position, tartGetCollect, () => {
             UserData.SetCoin(UserData.CurrentCoin + (ulong)claimCoin);
         }, () => {
-            //LevelManager.in
+            GameManager.Instance.RequestLoadScene();
         });
     }
     public void SetTextDistance(float distance) {
