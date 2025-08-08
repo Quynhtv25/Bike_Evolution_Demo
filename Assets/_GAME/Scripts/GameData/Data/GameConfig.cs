@@ -9,12 +9,13 @@ public class GameConfig : ScriptableObject
     [SerializeField] private float baseSpeedBike =100;
     [SerializeField] private float baseSlingShot = 100;
     [SerializeField] protected float baseBikeStrength = 100;
-    [SerializeField] protected float baseIncome = 10;
+    [SerializeField] protected float baseClaimCoinWithMeter = .1f;
 
 
     #region Property
     public float BaseSpeedBike => baseSpeedBike;
     public float BaseSlingShot => baseSlingShot;
     public float BaseBikeStrength => baseBikeStrength;
+    public float BaseClaim => baseClaimCoinWithMeter;
     #endregion Property
 }

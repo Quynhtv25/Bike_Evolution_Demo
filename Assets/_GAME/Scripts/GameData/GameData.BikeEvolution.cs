@@ -9,5 +9,7 @@ namespace IPS {
         public AtributesData AtributesData => atributesData;
         [SerializeField] private GameConfig gameConfig;
         public GameConfig GameConfig => gameConfig;
+        [SerializeField] private bool isCoinEnable;
+        public bool IsCoinEnable => isCoinEnable;
     }
 }

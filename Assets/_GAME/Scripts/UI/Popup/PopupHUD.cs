@@ -22,7 +22,8 @@ public class PopupHUD: HUD<PopupHUD> {
     }
 
     private void OnEndGame(EndGameEvent param) {
-        Get<WinUI>().SetTextDistance(currentDistance);
+        var win = Get<WinUI>();
+        win.SetTextDistance(currentDistance);
         Show<WinUI>();
     }
 
