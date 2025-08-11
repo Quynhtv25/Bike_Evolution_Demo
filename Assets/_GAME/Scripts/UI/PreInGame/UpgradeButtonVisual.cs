@@ -18,7 +18,11 @@ public class UpgradeButtonVisual : MonoBehaviour {
         levelText.text = currentLevel.ToString();
         if (!GameData.Instance.AtributesData.TryGetAtribute(atributeType, out var atribute)) return;
         upgradeValue.text = atribute.GetValue(currentLevel).ToString();
-        upgradeCost.text = atribute.GetCost(currentLevel).ToString();
+        var value = atribute.GetCost(currentLevel).ToString();
+        if (value.Length < 5) {
+            upgradeCost.SetText(value.ToDotCurrency());
+        }
+        else upgradeCost.SetText(value.ToBigNumber());
         if (imgStates == null || imgStates.Length <= 0) return;
         var current = currentLevel % imgStates.Length;
         if (current == 0)

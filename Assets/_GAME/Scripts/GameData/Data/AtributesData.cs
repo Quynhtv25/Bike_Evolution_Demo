@@ -31,16 +31,16 @@ public class AtributesData : ScriptableObject {
 [Serializable]
 public struct AtributesState {
     public EAtribute Type;
-    public float defaultValue;
+    public ulong defaultValue;
     public float stepValue;
 
-    public float defaultCost;
+    public ulong defaultCost;
     public float stepUpdateCost;
     public OverrideValue[] OverrideValues;
     public OvrrideCost[] OvrrideCosts;
     public float GetValue(int level) {
         float value = defaultValue;
-        float current = 1;
+        int current = 1;
         float step = stepValue;
         for (int i = OverrideValues.Length - 1; i >= 0; i--) {
             var o = OverrideValues[i];
@@ -52,13 +52,14 @@ public struct AtributesState {
             break;
 
         }
-        value += (level - current) * step;
+        value += ((level - current) *step);
         return value;
     }
-    public float GetCost(int level) {
-        float cost = defaultCost;
+    public ulong GetCost(int level) {
+        ulong cost = defaultCost;
         float scale = stepUpdateCost;
         int current = 1;
+
         for (int i = OvrrideCosts.Length - 1; i >= 0; i--) {
             var o = OvrrideCosts[i];
             if (o.level > level) continue;
@@ -67,20 +68,30 @@ public struct AtributesState {
             if (o.scaleCost > 1)
                 scale = o.scaleCost;
             break;
-
         }
-        return Mathf.CeilToInt(cost * Mathf.Pow(scale, level- current));
+
+        int steps = level - current;
+        if (steps > 0) {
+            var c = cost;
+            cost = Untilities.PowFloatToUlong(c,scale, steps);
+            if (cost < 10000) {
+                cost = Untilities.PowFloat(c,scale,steps);
+            }
+        }
+            
+        return cost;
     }
+
 }
 [Serializable]
 public struct OverrideValue {
     public int level;
-    public float value;
+    public ulong value;
     public float overrideStepValue;
 }
 [Serializable]
 public struct OvrrideCost {
     public int level;
-    public float cost;
+    public ulong cost;
     public float scaleCost;
 }

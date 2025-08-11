@@ -1,11 +1,12 @@
 using UnityEngine;
 using IPS;
+using static ElasticVisual;
 
 public class DragInputHandler : MonoBehaviour {
     [SerializeField] private Transform targetCenter;
     [SerializeField] private Transform targetCenterBack;
-    [SerializeField] private Transform targetCenterLeft;
-    [SerializeField] private Transform targetCenterRight;
+    private Transform targetCenterLeft;
+    private Transform targetCenterRight;
 
 
 
@@ -60,7 +61,14 @@ public class DragInputHandler : MonoBehaviour {
     private void OnEnable() {
         this.AddListener<LimitDragEvent>(LimitDrag);
         this.AddListener<BikeStartFlyEvent>(OnBikeStartFly);
+        this.AddListener<SpawnElasticEvt>(OnSpawnElastic);
         isBlockTouch = false;
+    }
+    private void OnSpawnElastic(SpawnElasticEvt param) {
+        if (param.elasticEvo == null) return;
+        targetCenterLeft = param.elasticEvo.TargetLeft;
+        targetCenterRight = param.elasticEvo.TargetRight;
+
     }
     private void OnBikeStartFly() {
         isBlockTouch = true;
