@@ -1,6 +1,5 @@
 using System;
 using UnityEngine;
-using static Cinemachine.DocumentationSortingAttribute;
 [CreateAssetMenu(fileName = "EvolutionData", menuName = "GAME" + "/EvolutionData")]
 public class EvolutionData : ScriptableObject {
     [SerializeField] private Evolution[] evolutions;
