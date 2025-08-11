@@ -21,7 +21,7 @@ public class PlaneSystem : MonoBehaviour, IInteract {
     private int currentIndexPos;
     private List<Vector3> allPos =new List<Vector3>();
     [SerializeField] float pathFollowStrength = 5f;
-    [SerializeField] private SplineSampler spline;
+    
     void Awake() {
         rb = GetComponent<Rigidbody>();
     }
@@ -34,7 +34,7 @@ public class PlaneSystem : MonoBehaviour, IInteract {
         isFly = false;
         rb.isKinematic = true;
         SetupCollider(new Vector3(1.6f, 5.5f, 3.75f), new Vector3(0f, 3.5f, 0));
-        PointPath[] paths = spline.GetPaths(100);
+        PointPath[] paths = LevelManager.Instance.RoadManager.GetPaths(100);
         for (int i = 0; i < paths.Length; i++) {
             allPos.Add(paths[i].PointForward);
         }
@@ -50,8 +50,9 @@ public class PlaneSystem : MonoBehaviour, IInteract {
         if (rb.velocity.magnitude >= 2)
             isFly = true;
         if (!isFly) return;
+        float km = Mathf.Abs(rb.velocity.z);
         this.Dispatch(new SpeedBikeRuntime() {
-            CurrentSpeed = rb.velocity.z,
+            CurrentSpeed = km,
             MinSpeed = 0,
             MaxSpeed = GameData.Instance.AtributesData.GetValue(EAtribute.SlingShot, UserData.GetLevelAtribute((byte)EAtribute.SlingShot))
         });
