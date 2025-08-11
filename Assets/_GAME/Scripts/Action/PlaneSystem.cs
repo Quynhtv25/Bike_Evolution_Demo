@@ -34,7 +34,7 @@ public class PlaneSystem : MonoBehaviour, IInteract {
         isFly = false;
         rb.isKinematic = true;
         SetupCollider(new Vector3(1.6f, 5.5f, 3.75f), new Vector3(0f, 3.5f, 0));
-        PointPath[] paths = LevelManager.Instance.RoadManager.GetPaths(100);
+        PointPath[] paths = LevelManager.Instance.RoadManager.GetPaths();
         for (int i = 0; i < paths.Length; i++) {
             allPos.Add(paths[i].PointForward);
         }

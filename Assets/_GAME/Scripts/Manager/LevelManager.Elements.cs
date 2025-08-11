@@ -7,6 +7,6 @@ public partial class LevelManager
     [SerializeField] protected RoadManager roadManager;
     public RoadManager RoadManager => roadManager;
     protected partial void InitElements() {
-        roadManager.Init();
+        roadManager.Init(100);
     }
 }
