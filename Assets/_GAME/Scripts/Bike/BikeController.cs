@@ -1,3 +1,4 @@
+using DG.Tweening;
 using IPS;
 using UnityEngine;
 using static ElasticVisual;
@@ -54,9 +55,12 @@ public class BikeController : MonoBehaviour {
     private float lastInput = 0f;
 
     private void Movement() {
+        frontWheel.motorTorque = 0f;
+        rearWheel.motorTorque = 0f;
+        frontWheel.brakeTorque = 0f;
+        rearWheel.brakeTorque = 0f;
         //verticalInput = Input.GetAxis("Vertical");
         horizontalInput = Input.GetAxis("Horizontal");
-
         //bool isChangingDirection = Mathf.Sign(verticalInput) != Mathf.Sign(lastInput) && Mathf.Abs(verticalInput) > 0.1f && Mathf.Abs(lastInput) > 0.1f;
 
         //if (isChangingDirection) {
@@ -169,6 +173,8 @@ public class BikeController : MonoBehaviour {
         CheckShowVisual(false);
 
     }
+
+    [SerializeField] private Transform bikeHolder;
     private void CheckShowVisual(bool isFirst = true) {
         var level = UserData.GetLevelAtribute((byte)type);
         if (!GameData.Instance.EvolutionData.TryGetEvolution(type, level, out var evoGraphic)) return;
@@ -183,6 +189,7 @@ public class BikeController : MonoBehaviour {
         rigPointController.OnChangeRigPoint(graphic.BikeRigs);
 
         if (isFirst) return;
+        bikeHolder.DOPunchScale(new Vector3(.1f, .1f, .1f), .3f, 0, 1);
         //show vfx evoluction;
     }
 }

@@ -88,7 +88,7 @@ public class PlaneSystem : MonoBehaviour, IInteract {
                 currentIndexPos = nearestIndex;
 
                 Vector3 targetPoint = allPos[Mathf.Min(currentIndexPos + 1, allPos.Count - 1)];
-                targetPoint.y = transform.position.y;
+                targetPoint.y = rb.position.y;
                 Vector3 pathDir = (targetPoint - transform.position).normalized;
 
                 float speed = rb.velocity.magnitude;

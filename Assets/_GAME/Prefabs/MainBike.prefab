@@ -107,7 +107,7 @@ Rigidbody:
   m_GameObject: {fileID: 241835993750412504}
   serializedVersion: 4
   m_Mass: 100
-  m_Drag: 0
+  m_Drag: 0.5
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0.26, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
@@ -121,7 +121,7 @@ Rigidbody:
   m_ImplicitCom: 0
   m_ImplicitTensor: 1
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -224,6 +224,7 @@ MonoBehaviour:
   maxPedalSpeed: 720
   groundedDelay: 0.5
   visualHolder: {fileID: 6528421945015090795}
+  bikeHolder: {fileID: 9085109005391620896}
 --- !u!1 &309018576534213321
 GameObject:
   m_ObjectHideFlags: 0
@@ -270,7 +271,7 @@ WheelCollider:
     spring: 35000
     damper: 4500
     targetPosition: 0.5
-  m_SuspensionDistance: 0.1
+  m_SuspensionDistance: 0
   m_ForceAppPointDistance: 0
   m_Mass: 20
   m_WheelDampingRate: 0.25
@@ -285,7 +286,7 @@ WheelCollider:
     m_ExtremumValue: 1
     m_AsymptoteSlip: 0.5
     m_AsymptoteValue: 0.75
-    m_Stiffness: 1.7
+    m_Stiffness: 0
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -554,7 +555,7 @@ WheelCollider:
     spring: 35000
     damper: 4500
     targetPosition: 0.5
-  m_SuspensionDistance: 0.1
+  m_SuspensionDistance: 0
   m_ForceAppPointDistance: 0
   m_Mass: 20
   m_WheelDampingRate: 0.25
@@ -569,7 +570,7 @@ WheelCollider:
     m_ExtremumValue: 1
     m_AsymptoteSlip: 0.5
     m_AsymptoteValue: 0.75
-    m_Stiffness: 1.7
+    m_Stiffness: 0
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -2863,7 +2864,12 @@ PrefabInstance:
       objectReference: {fileID: 9100000, guid: ab8f79341500d444b95a0412ff2f34ab, type: 2}
     - target: {fileID: 5866666021909216657, guid: ef7ba7815daf6794d995a22b981dd00a, type: 3}
       propertyPath: m_WarningMessage
-      value: 
+      value: "\nBinding warning: Some generic clip(s) animate transforms that are
+        already bound by a Humanoid avatar. These transforms can only be changed
+        by Humanoid clips.\n\tTransform 'Knee_R'\n\tTransform 'Wrist_L'\n\tTransform
+        'Hip_R'\n\tTransform 'Elbow_R'\n\tTransform 'Root_M'\n\tTransform 'Ankle_L'\n\tTransform
+        'Scapula_R'\n\tTransform 'Elbow_L'\n\tTransform 'Ankle_R'\n\tTransform 'Spine1_M'\n\tand
+        more ..."
       objectReference: {fileID: 0}
     - target: {fileID: 5870153181266675992, guid: ef7ba7815daf6794d995a22b981dd00a, type: 3}
       propertyPath: m_LocalPosition.x
