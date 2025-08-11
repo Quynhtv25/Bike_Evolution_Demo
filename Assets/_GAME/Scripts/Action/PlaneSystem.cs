@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using IPS;
-using MCL.Bike_Evolution;
 using DG.Tweening;
+using System.Collections.Generic;
 
 [RequireComponent(typeof(Rigidbody))]
 public class PlaneSystem : MonoBehaviour, IInteract {
@@ -17,9 +17,11 @@ public class PlaneSystem : MonoBehaviour, IInteract {
 
     private bool isFly;
     public Vector3 Tf => transform.position;
-
-
-
+    private bool isMove;
+    private int currentIndexPos;
+    private List<Vector3> allPos =new List<Vector3>();
+    [SerializeField] float pathFollowStrength = 5f;
+    [SerializeField] private SplineSampler spline;
     void Awake() {
         rb = GetComponent<Rigidbody>();
     }
@@ -32,6 +34,10 @@ public class PlaneSystem : MonoBehaviour, IInteract {
         isFly = false;
         rb.isKinematic = true;
         SetupCollider(new Vector3(1.6f, 5.5f, 3.75f), new Vector3(0f, 3.5f, 0));
+        PointPath[] paths = spline.GetPaths(100);
+        for (int i = 0; i < paths.Length; i++) {
+            allPos.Add(paths[i].PointForward);
+        }
     }
     private void SetupCollider(Vector3 size,Vector3 center) {
         colliderInteract.size = size;
@@ -64,9 +70,35 @@ public class PlaneSystem : MonoBehaviour, IInteract {
         }
     }
     private void FixedUpdate() {
-        if (!isDrag) return;
+        if (!isDrag && isMove) {
+            if (rb.velocity.sqrMagnitude > 0.01f) {
+                int nearestIndex = currentIndexPos;
+                float nearestDist = float.MaxValue;
+                for (int i = currentIndexPos; i < allPos.Count; i++) {
+                    float dist = (allPos[i] - transform.position).sqrMagnitude;
+                    if (dist < nearestDist) {
+                        nearestDist = dist;
+                        nearestIndex = i;
+                    }
+                    if (i > currentIndexPos && Vector3.Dot(allPos[i] - transform.position, rb.velocity) < 0) {
+                        break;
+                    }
+                }
+                currentIndexPos = nearestIndex;
+
+                Vector3 targetPoint = allPos[Mathf.Min(currentIndexPos + 1, allPos.Count - 1)];
+                Vector3 pathDir = (targetPoint - transform.position).normalized;
+
+                float speed = rb.velocity.magnitude;
+                rb.velocity = Vector3.Lerp(rb.velocity, pathDir * speed, pathFollowStrength * Time.fixedDeltaTime);
+
+                transform.forward = Vector3.Lerp(transform.forward, pathDir, pathFollowStrength * Time.fixedDeltaTime);
+            }
+            return;
+        }
+
         rb.velocity = Vector3.zero;
-        //rb.constraints = RigidbodyConstraints.FreezePosition | RigidbodyConstraints.FreezeRotation;
+
         this.Dispatch(new LimitDragEvent {
             startPos = clampedPos,
             target = transform
@@ -84,8 +116,8 @@ public class PlaneSystem : MonoBehaviour, IInteract {
                 transform.forward = lookDirection.normalized;
             }
         }
-
     }
+
     private Vector3 clampedPos;
     private bool isDrag;
     private void OnDragInput(DragInputEvent param) {
@@ -121,5 +153,6 @@ public class PlaneSystem : MonoBehaviour, IInteract {
         Vector3 finalForce = (transform.forward * finalValue) /*+ (finalValue * Vector3.up)*/;
         rb.AddForce(finalForce, ForceMode.Impulse);
         this.Dispatch(new BikeStartFlyEvent());
+        isMove = true;
     }
 }
