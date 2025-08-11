@@ -1,17 +1,26 @@
+using IPS;
 using UnityEngine;
+using static ElasticVisual;
 
+public enum EBikeRig {
+    None = 0,
+    HandLeft = 1,
+    HandRight = 2,
+    FootLeft = 3,
+    FootRight = 4,
+    Aim = 5,
+}
+[System.Serializable]
+public class BikeRig{
+    public EBikeRig eBike;
+    public GameObject part;
+}
 public class BikeController : MonoBehaviour {
     private Rigidbody rb;
-
+    private BikeGraphicController graphic;
+    [SerializeField] private RigPointController rigPointController;
     [SerializeField] private WheelCollider frontWheel;
     [SerializeField] private WheelCollider rearWheel;
-
-    [SerializeField] private Transform frontTransform;
-    [SerializeField] private Transform backTransform;
-    [SerializeField] private Transform helperTransform;
-    [SerializeField] private Transform SteerObj;
-    [SerializeField] private Transform Damper;
-    [SerializeField] private Transform backDamper;
     [SerializeField] private AnimationCurve curveAngle;
     public float acceleration = 400f;
     public float breakForce = 500f;
@@ -35,11 +44,11 @@ public class BikeController : MonoBehaviour {
     private void FixedUpdate() {
         Movement();
         speed = Mathf.Round((new Vector2(rb.velocity.x, rb.velocity.z).magnitude * 100f) * 0.01f);
-        CtrlTurnSteer();
+        graphic.CtrlTurnSteer(currentSteerAngle);
         Balance();
-        UpdateWheel(frontWheel, frontTransform);
-        UpdateWheel(rearWheel, backTransform);
-        RotatePedals();
+        graphic.UpdateFontWheel(frontWheel);
+        graphic.UpdateBackWheel(rearWheel);
+        graphic.RotatePedals(IsGround, speed, rearWheel);
 
     }
     private float lastInput = 0f;
@@ -77,7 +86,6 @@ public class BikeController : MonoBehaviour {
     }
     private bool isGroundedFront;
     private bool isGroundedRear;
-    //private bool isGround;
     public bool IsGround => isGroundedFront || isGroundedRear;
 
     [SerializeField] private float balanceStrengthZ = 1.5f;
@@ -134,29 +142,8 @@ public class BikeController : MonoBehaviour {
     }
 
 
-    private void UpdateWheel(WheelCollider col, Transform wheelTransform) {
-        Vector3 position;
-        Quaternion rotation;
 
-        col.GetWorldPose(out position, out rotation);
-        wheelTransform.position = position;
-        wheelTransform.rotation = rotation;
-        var w = wheelTransform.localEulerAngles;
-        var x = w.x;
-        w.x = w.y = 0;
-        w.z = x;
-        wheelTransform.localEulerAngles = w;
-    }
-    private void CtrlTurnSteer() {
-        float angleTurn = SteerObj.localEulerAngles.y;
-        SteerObj.rotation = Quaternion.AngleAxis(currentSteerAngle - angleTurn, SteerObj.transform.up) * SteerObj.rotation;
-        frontTransform.rotation = helperTransform.rotation;
-        frontTransform.rotation = Quaternion.FromToRotation(frontTransform.right, SteerObj.transform.right) * frontTransform.transform.rotation;
-        frontTransform.position = Damper.position;
 
-        //float currentUp = helperTransform.localPosition.y - Damper.localPosition.y;
-        //Damper.position = Damper.position + SteerObj.transform.up * (currentUp - .5f);
-    }
     [SerializeField] private Transform leftPedal;
     [SerializeField] private Transform rightPedal;
     private float pedalAngle = 0f;
@@ -165,37 +152,37 @@ public class BikeController : MonoBehaviour {
     [SerializeField] private float pedalAccelerate = 300f;
     [SerializeField] private float pedalDecelerate = 200f;
     [SerializeField] private float maxPedalSpeed = 720f;
-    private float timeSinceGrounded = 0f;
+
     [SerializeField] private float groundedDelay = 0.5f;
-    private void RotatePedals() {
-        if (IsGround) {
-            timeSinceGrounded = Time.time;
 
-            float rpm = rearWheel.rpm;
-            if (rpm <= 0)
-                return;
-            if (speed <= 3)
-                return;
-            float pedalSpeed = (rpm * 360f) / 60f;
-            currentPedalSpeed = Mathf.Clamp(pedalSpeed, -maxPedalSpeed, maxPedalSpeed);
-        }
-        else {
-            currentPedalSpeed = Mathf.MoveTowards(currentPedalSpeed, 0f, pedalDecelerate * Time.deltaTime);
-
-            if (Time.time - timeSinceGrounded > groundedDelay && Mathf.Abs(currentPedalSpeed) < 1f) {
-                return;
-            }
-        }
-
-        pedalAngle += currentPedalSpeed * Time.deltaTime;
-        pedalAngle %= 360f;
-
-        leftPedal.localRotation = Quaternion.Euler(0f, 0f, pedalAngle);
-        rightPedal.localRotation = Quaternion.Euler(0f, 0f, pedalAngle);
-        //rightPedal.localRotation = Quaternion.Euler(0f, 0f, (pedalAngle + 180f) % 360f); 
+    private void OnEnable() {
+        this.AddListener<UpdateAtributeEvt>(OnUpdateAtribute);
+        CheckShowVisual();
     }
 
 
+    [SerializeField] private Transform visualHolder;
+    private EAtribute type = EAtribute.Bike;
+     private int levelVisual;
+    private void OnUpdateAtribute(UpdateAtributeEvt param) {
+        if (param.type != type) return;
+        CheckShowVisual(false);
 
+    }
+    private void CheckShowVisual(bool isFirst = true) {
+        var level = UserData.GetLevelAtribute((byte)type);
+        if (!GameData.Instance.EvolutionData.TryGetEvolution(type, level, out var evoGraphic)) return;
+        if (levelVisual == evoGraphic.level) return;
+        levelVisual = evoGraphic.level;
+        if (graphic != null) Destroy(graphic.gameObject);
+        graphic = Instantiate(evoGraphic.graphicEvolution, visualHolder).GetComponent<BikeGraphicController>();
+        if (graphic == null) return;
+        graphic.transform.localPosition = Vector3.zero;
+        graphic.transform.localEulerAngles = Vector3.zero;
+        graphic.transform.localScale = Vector3.one;
+        rigPointController.OnChangeRigPoint(graphic.BikeRigs);
 
+        if (isFirst) return;
+        //show vfx evoluction;
+    }
 }

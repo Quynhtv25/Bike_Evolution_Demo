@@ -23,3 +23,13 @@ MonoBehaviour:
       name: Basic SlingShot Plus
       description: this is SlingShot start game but plus
       graphicEvolution: {fileID: 4311300611178724094, guid: 7cbf6b9231deb5148b34e303c0fccf5b, type: 3}
+  - Type: 2
+    evolutionSteps:
+    - level: 1
+      name: Basic Bike
+      description: this is Bike start game
+      graphicEvolution: {fileID: 5286959819352198373, guid: 34325f182c37ea64d95a380256ba687f, type: 3}
+    - level: 6
+      name: Basic Bike Plus
+      description: this is Bike start game but not same color haha
+      graphicEvolution: {fileID: 5286959819352198373, guid: f5fb397be6a5229429f5b5580837e256, type: 3}

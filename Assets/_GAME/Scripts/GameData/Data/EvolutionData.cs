@@ -7,7 +7,6 @@ public class EvolutionData : ScriptableObject {
     public bool TryGetEvolution(EAtribute type, int level, out EvolutionStep evo) {
         if (evolutions != null) {
             for (int i = 0; i < evolutions.Length; i++) {
-                Debug.LogError(i);
                 var e = evolutions[i];
                 if (e.Type != type) continue;
                 if (e.TryGetEvolution(level, out evo)) return true;
@@ -26,7 +25,6 @@ public class EvolutionData : ScriptableObject {
             if (evolutionSteps != null) {
                 for (int i = evolutionSteps.Length-1; i >= 0; i--) {
                     var e = evolutionSteps[i];
-                    Debug.LogError(i);
                     if (e.level>level) continue;
                     evo = e;
                     return true;
