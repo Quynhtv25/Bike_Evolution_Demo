@@ -4,7 +4,7 @@ using static Cinemachine.DocumentationSortingAttribute;
 [CreateAssetMenu(fileName = "AtributesData", menuName = "GAME" + "/AtributesData")]
 public class AtributesData : ScriptableObject {
     [SerializeField] private AtributesState[] atributesStates;
-    [SerializeField] private int defaultValue = 1;
+    [SerializeField] private ulong defaultValue = 1;
 
 
     public AtributesState[] AtributesStates => atributesStates;
@@ -12,7 +12,7 @@ public class AtributesData : ScriptableObject {
         if (TryGetAtribute(type, out var atribute)) return atribute.GetValue(level);
         return defaultValue;
     }
-    public float GetCost(EAtribute type, int level) {
+    public ulong GetCost(EAtribute type, int level) {
         if (TryGetAtribute(type, out var atribute)) return atribute.GetCost(level);
         return defaultValue;
     }

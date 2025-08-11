@@ -19,6 +19,10 @@ public class UpgradeButton : MonoBehaviour {
         ShowCurrentLevel();
     }
     private void OnClickUpgrade() {
+        var currentCoin = UserData.CurrentCoin;
+        var currentCost = GameData.Instance.AtributesData.GetCost(atributeType, UserData.GetLevelAtribute((byte)atributeType));
+        if (currentCoin < currentCost) return;
+        UserData.SetCoin(currentCoin - currentCost);
         UserData.IncreaseAtribute(atributeType);
     }
     private void OnUpdateAtribute(UpdateAtributeEvt param) {

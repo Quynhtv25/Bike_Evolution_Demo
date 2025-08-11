@@ -198,10 +198,6 @@ PrefabInstance:
       propertyPath: m_WarningMessage
       value: 
       objectReference: {fileID: 0}
-    - target: {fileID: 5710350593262008109, guid: 82fabf0defdb7384b85c2069a92a18ac, type: 3}
-      propertyPath: m_IsKinematic
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -263,6 +259,10 @@ PrefabInstance:
     - target: {fileID: 4173690890423244121, guid: 1f9efd016f56cef448f9e224a77abcab, type: 3}
       propertyPath: m_Name
       value: Contrusion (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4173690890423244121, guid: 1f9efd016f56cef448f9e224a77abcab, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -481,6 +481,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 20931796271681910, guid: f579ffa210e0f3349aa771d04ab69f18, type: 3}
+      propertyPath: targetPoint
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 20931796271681910, guid: f579ffa210e0f3349aa771d04ab69f18, type: 3}
       propertyPath: targetFollow
       value: 
@@ -811,17 +815,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7557551585273433069, guid: c3ac819ab014e224cadc9a895bf49ced, type: 3}
   m_PrefabInstance: {fileID: 1281885983}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1179075817 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7738706417077736888, guid: f5cb383edf1579b4196530ae3ef1b8e3, type: 3}
-  m_PrefabInstance: {fileID: 1826551481}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa8bb2d599622e248bc13f23d463fb02, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1281885983
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -943,6 +936,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 61490190310785307, guid: f5cb383edf1579b4196530ae3ef1b8e3, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 2.9949875
+      objectReference: {fileID: 0}
     - target: {fileID: 210443982922003559, guid: f5cb383edf1579b4196530ae3ef1b8e3, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 29.900002
@@ -998,7 +995,7 @@ PrefabInstance:
     - target: {fileID: 853376182264468062, guid: f5cb383edf1579b4196530ae3ef1b8e3, type: 3}
       propertyPath: frames.Array.data[0]
       value: 
-      objectReference: {fileID: 1179075817}
+      objectReference: {fileID: 0}
     - target: {fileID: 1531780070778509948, guid: f5cb383edf1579b4196530ae3ef1b8e3, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 29.900002
@@ -1022,6 +1019,18 @@ PrefabInstance:
     - target: {fileID: 7175920719373702186, guid: f5cb383edf1579b4196530ae3ef1b8e3, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7202444658926998266, guid: f5cb383edf1579b4196530ae3ef1b8e3, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 63.600006
+      objectReference: {fileID: 0}
+    - target: {fileID: 8526956726670481910, guid: f5cb383edf1579b4196530ae3ef1b8e3, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -307.59998
+      objectReference: {fileID: 0}
+    - target: {fileID: 8531685554135479873, guid: f5cb383edf1579b4196530ae3ef1b8e3, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 184.70001
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1085,6 +1094,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Contrusion (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 4173690890423244121, guid: 1f9efd016f56cef448f9e224a77abcab, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1141,6 +1154,10 @@ PrefabInstance:
     - target: {fileID: 4173690890423244121, guid: 1f9efd016f56cef448f9e224a77abcab, type: 3}
       propertyPath: m_Name
       value: Contrusion
+      objectReference: {fileID: 0}
+    - target: {fileID: 4173690890423244121, guid: 1f9efd016f56cef448f9e224a77abcab, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
