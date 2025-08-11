@@ -31,18 +31,24 @@ public class ElasticVisual : MonoBehaviour
         graphic.transform.localPosition = Vector3.zero;
         graphic.transform.localEulerAngles = Vector3.zero;
         graphic.transform.localScale = Vector3.one;
-
-        if(graphic.TryGetComponent<ElasticEvolution>(out var elastic)) {
+        if (graphic.TryGetComponent<ElasticEvolution>(out var elastic)) {
             this.Dispatch(new SpawnElasticEvt {elasticEvo = elastic });
             if (isFirst) return;
-            VFXEvolutionElement vfxType = GameData.Instance.VFXEvolutionData.GetVFXEvolutionElement(type);
-            VFXAllElement vfxLevel = vfxType.GetVFXAtributes(level);
-            VFXEvolution vfx = Instantiate(vfxLevel.prefab, LevelManager.Instance.transform);
-            if (vfx == null) {
-                return;
-            }
-            vfx.OnInit();
-            // this vfx trigger;
+            graphic.transform.localScale = Vector3.zero;
+            graphic.transform.DOScale(Vector3.one, .5f).SetEase(Ease.OutBack);
+            StopAllCoroutines();
+            StartCoroutine(DelayVfx(level));
         }
+    }
+    IEnumerator DelayVfx(int level) {
+        yield return Yielder.Wait(.25f);
+        VFXEvolutionElement vfxType = GameData.Instance.VFXEvolutionData.GetVFXEvolutionElement(type);
+        VFXAllElement vfxLevel = vfxType.GetVFXAtributes(level);
+        VFXEvolution vfx = Instantiate(vfxLevel.prefab, LevelManager.Instance.transform);
+        if (vfx == null) {
+            yield break;
+        }
+        vfx.OnInit();
+        // this vfx trigger;
     }
 }
