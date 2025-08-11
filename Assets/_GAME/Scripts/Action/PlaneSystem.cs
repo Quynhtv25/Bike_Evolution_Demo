@@ -93,7 +93,7 @@ public class PlaneSystem : MonoBehaviour, IInteract {
 
                 float speed = rb.velocity.magnitude;
                 rb.velocity = Vector3.Lerp(rb.velocity, pathDir * speed, pathFollowStrength * Time.fixedDeltaTime);
-
+                this.Dispatch(new NextRotateEvt {dir = pathDir,time = pathFollowStrength * Time.fixedDeltaTime });
                 transform.forward = Vector3.Lerp(transform.forward, pathDir, pathFollowStrength * Time.fixedDeltaTime);
             }
             return;

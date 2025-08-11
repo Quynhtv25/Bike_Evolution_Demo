@@ -24,7 +24,6 @@ public class EvolutionData : ScriptableObject {
             if (evolutionSteps != null) {
                 for (int i = evolutionSteps.Length-1; i >= 0; i--) {
                     var e = evolutionSteps[i];
-                    Debug.LogError(i);
                     if (e.level>level) continue;
                     evo = e;
                     return true;
