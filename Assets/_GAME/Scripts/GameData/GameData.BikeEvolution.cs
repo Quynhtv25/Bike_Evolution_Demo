@@ -5,6 +5,7 @@ namespace IPS {
     public partial class GameData
     {
         [SerializeField] private AtributesData atributesData;
+        [SerializeField] private VFXEvolutionData vfxEvolutionData;
 
         public AtributesData AtributesData => atributesData;
         [SerializeField] private GameConfig gameConfig;
@@ -14,5 +15,6 @@ namespace IPS {
 
         [SerializeField] private EvolutionData evolutionData;
         public EvolutionData EvolutionData => evolutionData;
+        public VFXEvolutionData VFXEvolutionData => vfxEvolutionData;
     }
 }

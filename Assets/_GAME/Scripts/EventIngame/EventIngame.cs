@@ -14,6 +14,7 @@ public struct LimitDragEvent :IEventParam {
     public Transform target;
 }
 public struct BikeStartFlyEvent : IEventParam { }
+public struct SpawnElasticEvt : IEventParam { public ElasticEvolution elasticEvo; }
 
 
 // --------------- UI Event ----------------------
