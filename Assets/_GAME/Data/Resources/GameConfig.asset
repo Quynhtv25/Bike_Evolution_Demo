@@ -15,4 +15,4 @@ MonoBehaviour:
   baseSpeedBike: 500
   baseSlingShot: 2000
   baseBikeStrength: 100
-  baseClaimCoinWithMeter: 0.1
+  baseClaimCoinWithMeter: 1
