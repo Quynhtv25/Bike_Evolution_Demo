@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 
 public class BuildRoad : MonoBehaviour {
     private RoadManager roadManager;
@@ -82,5 +84,16 @@ public class BuildRoad : MonoBehaviour {
         m.SetTriangles(tris, 0);
         m.SetUVs(0, uvs);
         _meshFilter.mesh = m;
+        _meshFilter.AddComponent<MeshCollider>();
     }
+    private float timeUpdate = 1;
+    private void Update() {
+        timeUpdate -= Time.deltaTime;
+        if (timeUpdate < 0) {
+            GetVerts();
+            BuildMesh();
+            timeUpdate = 1;
+        }
+    }
+
 }
