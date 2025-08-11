@@ -38,12 +38,9 @@ public class ElasticVisual : MonoBehaviour
             VFXEvolutionElement vfxType = GameData.Instance.VFXEvolutionData.GetVFXEvolutionElement(type);
             VFXAllElement vfxLevel = vfxType.GetVFXAtributes(level);
             VFXEvolution vfx = Instantiate(vfxLevel.prefab, LevelManager.Instance.transform);
-            Logs.LogError("ye1");
             if (vfx == null) {
-                Logs.LogError("no");
                 return;
             }
-            Logs.LogError("ye2");
             vfx.OnInit();
             // this vfx trigger;
         }
