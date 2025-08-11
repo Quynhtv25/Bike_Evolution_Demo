@@ -15,5 +15,7 @@ MonoBehaviour:
   allVfx:
   - type: 1
     allElements:
-    - level: 1
-      prefab: {fileID: 0}
+    - level: 6
+      prefab: {fileID: 8008600590167902510, guid: a82ce49024aae804788fd9f35aa6c3ae, type: 3}
+    - level: 12
+      prefab: {fileID: 8008600590167902510, guid: a82ce49024aae804788fd9f35aa6c3ae, type: 3}

@@ -27,6 +27,6 @@ public struct VFXEvolutionElement {
 [System.Serializable]
 public struct VFXAllElement {
     public int level;
-    public GameObject prefab;
+    public VFXEvolution prefab;
 
 }

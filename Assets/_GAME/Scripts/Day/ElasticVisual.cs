@@ -1,3 +1,4 @@
+using DG.Tweening;
 using IPS;
 using System.Collections;
 using System.Collections.Generic;
@@ -34,6 +35,16 @@ public class ElasticVisual : MonoBehaviour
         if(graphic.TryGetComponent<ElasticEvolution>(out var elastic)) {
             this.Dispatch(new SpawnElasticEvt {elasticEvo = elastic });
             if (isFirst) return;
+            VFXEvolutionElement vfxType = GameData.Instance.VFXEvolutionData.GetVFXEvolutionElement(type);
+            VFXAllElement vfxLevel = vfxType.GetVFXAtributes(level);
+            VFXEvolution vfx = Instantiate(vfxLevel.prefab, LevelManager.Instance.transform);
+            Logs.LogError("ye1");
+            if (vfx == null) {
+                Logs.LogError("no");
+                return;
+            }
+            Logs.LogError("ye2");
+            vfx.OnInit();
             // this vfx trigger;
         }
     }
