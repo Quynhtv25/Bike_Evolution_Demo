@@ -14,7 +14,12 @@ public struct LimitDragEvent :IEventParam {
     public Transform target;
 }
 public struct BikeStartFlyEvent : IEventParam { }
+<<<<<<< HEAD
 public struct NextRotateEvt: IEventParam { public Vector3 dir; public float time; }
+=======
+public struct SpawnElasticEvt : IEventParam { public ElasticEvolution elasticEvo; }
+
+>>>>>>> origin/main
 
 // --------------- UI Event ----------------------
 public struct SpeedBikeRuntime : IEventParam {
