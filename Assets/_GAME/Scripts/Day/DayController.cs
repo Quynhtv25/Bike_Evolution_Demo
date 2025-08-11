@@ -2,13 +2,14 @@ using IPS;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static ElasticVisual;
 
-public class DayController : MonoBehaviour
-{
+public class DayController : MonoBehaviour {
     [SerializeField] private Transform targetPoint;
     [SerializeField] private Transform targetFollow;
     [SerializeField] private float followSpeed = 5f;
     [SerializeField] private Vector3 offset;
+    [SerializeField] private ElasticVisual elasticVisual;
 
     private Vector3 baseStart;
     private bool isFollow;
@@ -16,9 +17,9 @@ public class DayController : MonoBehaviour
     // Bounce
     private bool isBouncing = false;
     private float bounceTime = 0f;
-    private float bounceDuration = 1.5f; 
-    private float bounceFrequency = 6f;  
-    private float bounceAmplitude = 0.7f; 
+    private float bounceDuration = 1.5f;
+    private float bounceFrequency = 6f;
+    private float bounceAmplitude = 0.7f;
 
     private Vector3 velocity = Vector3.zero;
 
@@ -29,8 +30,15 @@ public class DayController : MonoBehaviour
     private void OnEnable() {
         this.AddListener<EndDragInput>(EndDrag);
         this.AddListener<DragInputEvent>(DragInput);
+        this.AddListener<SpawnElasticEvt>(OnSpawnElastic);
+        elasticVisual.Init();
     }
 
+    private void OnSpawnElastic(SpawnElasticEvt param) {
+        if (param.elasticEvo == null) return;
+        targetPoint = param.elasticEvo.TargetFollow;
+
+    }
     private void DragInput() {
         isFollow = true;
         isBouncing = false;
@@ -43,8 +51,7 @@ public class DayController : MonoBehaviour
     }
 
     private void FixedUpdate() {
-        if (isFollow)
-        {
+        if (isFollow) {
             Vector3 targetPos = targetFollow.position + offset;
 
             targetPoint.position = Vector3.Lerp(
@@ -53,8 +60,7 @@ public class DayController : MonoBehaviour
                 followSpeed * Time.fixedDeltaTime
             );
         }
-        else if (isBouncing)
-        {
+        else if (isBouncing) {
             bounceTime += Time.fixedDeltaTime;
 
             float t = bounceTime / bounceDuration;
@@ -75,14 +81,12 @@ public class DayController : MonoBehaviour
                 Time.fixedDeltaTime
             );
 
-            if (t >= 1f)
-            {
+            if (t >= 1f) {
                 isBouncing = false;
                 targetPoint.position = baseStart;
             }
         }
-        else
-        {
+        else {
             targetPoint.position = Vector3.SmoothDamp(
                 targetPoint.position,
                 baseStart,

@@ -11,7 +11,6 @@ public class SpineRoad : MonoBehaviour {
     [SerializeField] private SplineSampler _splineSampler;
     [SerializeField] private MeshFilter _meshFilter;
     [SerializeField] private float _width = 5;
-    [SerializeField] private float _curveStep = .1f;
     [SerializeField][Range(0f, 1f)] private float _time;
     List<Vector3> _vertsP1;
     List<Vector3> _vertsP2;

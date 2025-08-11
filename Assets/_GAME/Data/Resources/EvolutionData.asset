@@ -16,6 +16,10 @@ MonoBehaviour:
   - Type: 1
     evolutionSteps:
     - level: 1
-      name: 
-      description: 
-      graphicEvolution: {fileID: 0}
+      name: Basic SlingShot
+      description: this is SlingShot start game
+      graphicEvolution: {fileID: 4311300611178724094, guid: abadc7bc0350b6d4ba2a6ac6c677d73f, type: 3}
+    - level: 6
+      name: Basic SlingShot Plus
+      description: this is SlingShot start game but plus
+      graphicEvolution: {fileID: 4311300611178724094, guid: 7cbf6b9231deb5148b34e303c0fccf5b, type: 3}
