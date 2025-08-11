@@ -11,5 +11,8 @@ namespace IPS {
         public GameConfig GameConfig => gameConfig;
         [SerializeField] private bool isCoinEnable;
         public bool IsCoinEnable => isCoinEnable;
+
+        [SerializeField] private EvolutionData evolutionData;
+        public EvolutionData EvolutionData => evolutionData;
     }
 }

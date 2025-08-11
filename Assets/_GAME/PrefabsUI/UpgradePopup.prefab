@@ -1509,7 +1509,12 @@ MonoBehaviour:
   levelText: {fileID: 5623414270471505188}
   upgradeCost: {fileID: 1773316179825122085}
   upgradeValue: {fileID: 6659215230976673415}
-  imgStates: []
+  imgStates:
+  - {fileID: 1211862082324549342}
+  - {fileID: 7802783969775122842}
+  - {fileID: 1608229342075329879}
+  - {fileID: 7101638300275949794}
+  - {fileID: 4510836017455657415}
   enableState: {fileID: 21300000, guid: 8a18dd04645a69e498e2e62840dee83c, type: 3}
   disableState: {fileID: 21300000, guid: b9b1f9f8ae452ee4d99fe73fe4dfc894, type: 3}
 --- !u!1 &1446392301825523941
