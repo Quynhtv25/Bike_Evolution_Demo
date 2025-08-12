@@ -13,10 +13,11 @@ public partial class LevelManager : SingletonBehaviour<LevelManager>
         Init();
     }
     private void Init() {
-        InitElements();
+        
         Invoke(nameof(PreStart), .05f);
     }
     private void PreStart() {
+        InitElements();
         this.Dispatch<PreStartGameEvent>();
     }
     private void OnEndGame() {

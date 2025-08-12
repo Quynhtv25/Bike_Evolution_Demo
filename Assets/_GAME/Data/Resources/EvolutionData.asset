@@ -23,6 +23,10 @@ MonoBehaviour:
       name: Basic SlingShot Plus
       description: this is SlingShot start game but plus
       graphicEvolution: {fileID: 4311300611178724094, guid: 7cbf6b9231deb5148b34e303c0fccf5b, type: 3}
+    - level: 11
+      name: Basic SlingShot Plus Extra
+      description: this is SlingShot start game but plus
+      graphicEvolution: {fileID: 4311300611178724094, guid: 5858ad912039cd145b7121da4df6acda, type: 3}
   - Type: 2
     evolutionSteps:
     - level: 1
@@ -33,3 +37,15 @@ MonoBehaviour:
       name: Basic Bike Plus
       description: this is Bike start game but not same color haha
       graphicEvolution: {fileID: 5286959819352198373, guid: f5fb397be6a5229429f5b5580837e256, type: 3}
+    - level: 11
+      name: Basic Bike Plus max
+      description: this is Bike start game but not same color haha
+      graphicEvolution: {fileID: 5286959819352198373, guid: 3d65076cf8e7884408d31b3c9cae60f3, type: 3}
+    - level: 16
+      name: Basic Bike Plus ultra max
+      description: this is Bike start game but not same color haha
+      graphicEvolution: {fileID: 5286959819352198373, guid: e076f5c0d30bcbc48987763b938a36a1, type: 3}
+    - level: 21
+      name: Basic Bike Plus ultra max 2000
+      description: this is Bike start game but not same color haha
+      graphicEvolution: {fileID: 5286959819352198373, guid: 4660f9b3156393840bb5734c11b0637e, type: 3}

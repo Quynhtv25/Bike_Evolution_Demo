@@ -169,7 +169,7 @@ GameObject:
   - component: {fileID: 584949860454624246}
   - component: {fileID: 6953139442829990258}
   m_Layer: 6
-  m_Name: Bike 1
+  m_Name: Bike 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -343,10 +343,22 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: -5259565014171121729, guid: 3cbca53f96a00694f86da41379a27d43, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: db76a4fc0509dc84e945500608549d19, type: 2}
+    - target: {fileID: -238517971978991840, guid: 3cbca53f96a00694f86da41379a27d43, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: db76a4fc0509dc84e945500608549d19, type: 2}
+    - target: {fileID: 36520357843471468, guid: 3cbca53f96a00694f86da41379a27d43, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: db76a4fc0509dc84e945500608549d19, type: 2}
     - target: {fileID: 570313880732900598, guid: 3cbca53f96a00694f86da41379a27d43, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: adfa86c0de490a540b29da43727895ac, type: 2}
+      objectReference: {fileID: 2100000, guid: 86967fbbd11466d42a89a8caa1006e47, type: 2}
     - target: {fileID: 919132149155446097, guid: 3cbca53f96a00694f86da41379a27d43, type: 3}
       propertyPath: m_Name
       value: Bike
@@ -359,6 +371,18 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 4803027328341269951, guid: 3cbca53f96a00694f86da41379a27d43, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: db76a4fc0509dc84e945500608549d19, type: 2}
+    - target: {fileID: 4816536954595838494, guid: 3cbca53f96a00694f86da41379a27d43, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: db76a4fc0509dc84e945500608549d19, type: 2}
+    - target: {fileID: 7723522230964439037, guid: 3cbca53f96a00694f86da41379a27d43, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: db76a4fc0509dc84e945500608549d19, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:

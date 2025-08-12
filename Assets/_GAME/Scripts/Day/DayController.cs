@@ -2,7 +2,6 @@ using IPS;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static ElasticVisual;
 
 public class DayController : MonoBehaviour {
     [SerializeField] private Transform targetPoint;
@@ -24,7 +23,7 @@ public class DayController : MonoBehaviour {
     private Vector3 velocity = Vector3.zero;
 
     private void Start() {
-        baseStart = targetPoint.position;
+        
     }
 
     private void OnEnable() {
@@ -32,6 +31,10 @@ public class DayController : MonoBehaviour {
         this.AddListener<DragInputEvent>(DragInput);
         this.AddListener<SpawnElasticEvt>(OnSpawnElastic);
         this.AddListener<SpawnBikeEvt>(OnSpawnBike);
+        this.AddListener<PreStartGameEvent>(OnPreStart);
+        
+    }
+    private void OnPreStart() {
         elasticVisual.Init();
     }
     private void OnSpawnBike(SpawnBikeEvt param) {
@@ -40,6 +43,7 @@ public class DayController : MonoBehaviour {
     private void OnSpawnElastic(SpawnElasticEvt param) {
         if (param.elasticEvo == null) return;
         targetPoint = param.elasticEvo.TargetFollow;
+        baseStart = targetPoint.position;
 
     }
     private void DragInput() {
@@ -54,6 +58,7 @@ public class DayController : MonoBehaviour {
     }
 
     private void FixedUpdate() {
+        if (targetPoint == null) return;
         if (isFollow) {
             Vector3 targetPos = targetFollow.position + offset;
 

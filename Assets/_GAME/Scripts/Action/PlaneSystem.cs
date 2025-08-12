@@ -2,30 +2,40 @@
 using IPS;
 using DG.Tweening;
 using System.Collections.Generic;
+using Unity.Mathematics;
+using UnityEngine.Splines;
 
 [RequireComponent(typeof(Rigidbody))]
 public class PlaneSystem : MonoBehaviour, IInteract {
     [SerializeField] private BoxCollider colliderInteract;
-    [SerializeField] private Transform targetCenter;
-    [SerializeField] private Transform targetCenterBack;
+    private Transform targetCenter;
+    private Transform targetCenterBack;
+    private RoadManager roadManager;
+    private BikeController bikeController;
 
     private Rigidbody rb;
     private Vector3 startPos;
     private float totalDistance = 1000f;
-
+    private float width;
+    public float Width => width*offset;
+     private float offset;
+    private float horizontalInput;
     private bool isFly;
     public Vector3 Tf => transform.position;
     private bool isMove;
     private int currentIndexPos;
-    private List<Vector3> allPos =new List<Vector3>();
+    private List<Vector3> allPos = new List<Vector3>();
     [SerializeField] float pathFollowStrength = 5f;
-    
+
     void Awake() {
         rb = GetComponent<Rigidbody>();
     }
     public void Init(Transform center, Transform centerBack) {
+        roadManager = LevelManager.Instance.RoadManager;
+        bikeController = GetComponent<BikeController>();
         targetCenter = center;
         targetCenterBack = centerBack;
+        totalDistance = LevelManager.Instance.RoadManager.GetLengthPath();
     }
     private void OnEnable() {
         this.AddListener<TouchInputEvent>(OnTouchInput);
@@ -35,12 +45,14 @@ public class PlaneSystem : MonoBehaviour, IInteract {
         isFly = false;
         rb.isKinematic = true;
         SetupCollider(new Vector3(1.6f, 5.5f, 3.75f), new Vector3(0f, 3.5f, 0));
-        PointPath[] paths = LevelManager.Instance.RoadManager.GetPaths();
+        roadManager = LevelManager.Instance.RoadManager;
+        width = roadManager.Width-.5f;
+        PointPath[] paths = roadManager.GetPaths();
         for (int i = 0; i < paths.Length; i++) {
             allPos.Add(paths[i].PointForward);
         }
     }
-    private void SetupCollider(Vector3 size,Vector3 center) {
+    private void SetupCollider(Vector3 size, Vector3 center) {
         colliderInteract.size = size;
         colliderInteract.center = center;
     }
@@ -57,15 +69,17 @@ public class PlaneSystem : MonoBehaviour, IInteract {
             MinSpeed = 0,
             MaxSpeed = GameData.Instance.AtributesData.GetValue(EAtribute.SlingShot, UserData.GetLevelAtribute((byte)EAtribute.SlingShot))
         });
-        float currentDistance = Vector3.Distance(startPos, Tf);
+        float currentDistance = roadManager.GetCurrentLength(currentIndexPos * 1f / allPos.Count);
 
         this.Dispatch(new PercentDistanceTravel { CurrentDistanceTravel = currentDistance, TotalDistanceTravel = totalDistance });
 
         if (Vector3.Distance(rb.velocity, Vector3.zero) < 2) {
             isFly = false;
+            rb.velocity = Vector3.zero;
             this.Dispatch<EndGameEvent>();
         }
     }
+    [SerializeField] private float rotateConfig=1;
     private void OnTouchInput(TouchInputEvent param) {
         if (ReferenceEquals(param.target, this)) {
             Logs.LogError("Touched this plane via IInteract");
@@ -73,30 +87,46 @@ public class PlaneSystem : MonoBehaviour, IInteract {
     }
     private void FixedUpdate() {
         if (!isDrag && isMove) {
-            if (rb.velocity.sqrMagnitude > 0.01f) {
-                int nearestIndex = currentIndexPos;
-                float nearestDist = float.MaxValue;
-                for (int i = currentIndexPos; i < allPos.Count; i++) {
-                    float dist = (allPos[i] - transform.position).sqrMagnitude;
-                    if (dist < nearestDist) {
-                        nearestDist = dist;
-                        nearestIndex = i;
-                    }
-                    if (i > currentIndexPos && Vector3.Dot(allPos[i] - transform.position, rb.velocity) < 0) {
-                        break;
-                    }
+            if (rb.velocity.sqrMagnitude <= 0.01f)
+                return;
+            int nearestIndex = currentIndexPos;
+            float nearestDist = float.MaxValue;
+            for (int i = currentIndexPos; i < allPos.Count; i++) {
+                float dist = (allPos[i] - transform.position).sqrMagnitude;
+                if (dist < nearestDist) {
+                    nearestDist = dist;
+                    nearestIndex = i;
                 }
-                currentIndexPos = nearestIndex;
-
-                Vector3 targetPoint = allPos[Mathf.Min(currentIndexPos + 1, allPos.Count - 1)];
-                targetPoint.y = rb.position.y;
-                Vector3 pathDir = (targetPoint - transform.position).normalized;
-
-                float speed = rb.velocity.magnitude;
-                rb.velocity = Vector3.Lerp(rb.velocity, pathDir * speed, pathFollowStrength * Time.fixedDeltaTime);
-                this.Dispatch(new NextRotateEvt {dir = pathDir,time = pathFollowStrength * Time.fixedDeltaTime });
-                transform.forward = Vector3.Lerp(transform.forward, pathDir, pathFollowStrength * Time.fixedDeltaTime);
+                if (i > currentIndexPos && Vector3.Dot(allPos[i] - transform.position, rb.velocity) < 0) {
+                    break;
+                }
             }
+            currentIndexPos = nearestIndex;
+            float speed = rb.velocity.magnitude;
+
+            if (bikeController.IsGround) {
+                horizontalInput = Input.GetAxis("Horizontal");
+                offset += horizontalInput * Time.deltaTime;
+                offset = Mathf.Clamp(offset, -1, 1);
+            }
+
+
+
+
+
+            Vector3 targetPoint = LevelManager.Instance.RoadManager.GetPointWithSameWidth(transform.position,Width);
+            targetPoint.y = rb.position.y;
+            Vector3 pathDir = (targetPoint - transform.position).normalized;
+            //pathDir.y = rb.velocity.normalized.y;
+            float fixTime = pathFollowStrength * Time.fixedDeltaTime;
+            rb.velocity = Vector3.Lerp(rb.velocity, pathDir * speed, fixTime);
+            this.Dispatch(new NextRotateEvt { dir = pathDir, time = fixTime });
+            transform.forward = Vector3.Lerp(transform.forward, pathDir, fixTime * speed / rotateConfig);
+
+            bikeController.UpdateSteer(transform.forward, pathDir);
+            //if (!bikeController.IsGround) {
+            //    rb.velocity += Vector3.down * 100;
+            //}
             return;
         }
 
@@ -120,7 +150,6 @@ public class PlaneSystem : MonoBehaviour, IInteract {
             }
         }
     }
-
     private Vector3 clampedPos;
     private bool isDrag;
     private void OnDragInput(DragInputEvent param) {
@@ -134,6 +163,8 @@ public class PlaneSystem : MonoBehaviour, IInteract {
     private void OnEndDrag(EndDragInput param) {
         if (!ReferenceEquals(param.target, this)) return;
         isDrag = false;
+        var pStart = this.transform.position;
+        offset = -Mathf.Clamp(pStart.x / 2 / width, -1, 1);
         //rb.constraints =RigidbodyConstraints.FreezeRotationZ;
         float distance = (targetCenterBack.position.z - transform.position.z);
         float percent = Mathf.Clamp(1 - (distance / targetCenterBack.position.z), 0, 1);

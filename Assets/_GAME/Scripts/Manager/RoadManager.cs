@@ -6,6 +6,7 @@ using System.Collections.Generic;
 
 public class RoadManager : MonoBehaviour {
     [SerializeField] private BuildRoad buildRoad;
+    public float Width => buildRoad.Width;
     [SerializeField] private SplineContainer _splineContainer;
     private int countPoint = 100;
     public Spline GetSpline(int indx = 0) {
@@ -83,6 +84,34 @@ public class RoadManager : MonoBehaviour {
         }
 
         return length;
+    }
+    public Vector3 GetPointWithSameWidth(Vector3 sourcePoint, float width) {
+        SplineUtility.GetNearestPoint(_splineContainer.Splines[0], sourcePoint, out float3 near, out float t);
+        float nextTarget = Mathf.Clamp01(t + .01f);
+        //Sample(nextTarget, out var p1, out var f);
+        //followBike.UpdatePoint(p1,f);
+        float x = -width;
+        SampleSplineWidth(nextTarget, x, out var p, out var p2);
+        return p;
+        //var spline = _splineContainer.Spline;
+
+        //float3 localSource = _splineContainer.transform.InverseTransformPoint(sourcePoint);
+
+        //Ray localRay = new Ray(localSource, Vector3.right);
+
+        //float3 pos, tangent, up, scale;
+        //spline.Evaluate(sourceT, out pos, out tangent, out up);
+        //Debug.LogError(sourceT + ":  " + pos);
+        //float width = Vector3.Distance(sourcePoint, pos);
+        //Debug.LogError(width);
+        //spline.Evaluate(targetT, out float3 targetPos, out float3 targetTangent, out float3 targetUp);
+        //quaternion targetRot = quaternion.LookRotationSafe(targetTangent, targetUp);
+
+        //targetUp = Vector3.up;
+        //float3 right = Vector3.Cross(targetTangent, targetUp).normalized;
+        //Vector3 newPos = (Vector3)(targetPos + right * (width * 0.5f));
+        ////Vector3 newPos = (Vector3)targetPos;
+        //return _splineContainer.transform.TransformPoint(newPos);
     }
 }
 

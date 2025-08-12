@@ -131,6 +131,7 @@ Transform:
   m_Children:
   - {fileID: 1053542968896158214}
   - {fileID: 5517307853651804416}
+  - {fileID: 3285291181830694492}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5880712009012996700
@@ -147,6 +148,51 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buildRoad: {fileID: 578398727552576433}
   _splineContainer: {fileID: 6519038661345053813}
+  followBike: {fileID: 6515684640497906737}
+--- !u!1 &2535187934966817169
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3285291181830694492}
+  - component: {fileID: 6515684640497906737}
+  m_Layer: 0
+  m_Name: FollowBike
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3285291181830694492
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2535187934966817169}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3626863664303350146}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6515684640497906737
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2535187934966817169}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf80fca40419c884a9fe1215f9e20c33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5341289263900896484
 GameObject:
   m_ObjectHideFlags: 0

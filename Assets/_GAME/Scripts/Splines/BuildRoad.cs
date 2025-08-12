@@ -9,6 +9,7 @@ public class BuildRoad : MonoBehaviour {
     [SerializeField] private MeshFilter _meshFilter;
     [SerializeField] private int _resolution = 30;
     [SerializeField] private float _width = 8;
+    public float Width => _width;
     List<Vector3> _vertsP1;
     List<Vector3> _vertsP2;
 

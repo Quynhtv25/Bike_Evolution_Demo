@@ -24,7 +24,7 @@ public class WinUI : Frame {
     public void SetTextDistance(float distance) {
         int value = Mathf.FloorToInt(distance);
         textDistance.SetText($"{value}m");
-        claimCoin = Mathf.FloorToInt(value * GameData.Instance.GameConfig.BaseClaim * GameData.Instance.AtributesData.GetValue(EAtribute.Income, UserData.CurrentLevel));
+        claimCoin = Mathf.FloorToInt(value * GameData.Instance.GameConfig.BaseClaim * GameData.Instance.AtributesData.GetValue(EAtribute.Income, UserData.GetLevelAtribute((byte)EAtribute.Income)));
         textClaim.text = claimCoin.ToString();
     }
 }
