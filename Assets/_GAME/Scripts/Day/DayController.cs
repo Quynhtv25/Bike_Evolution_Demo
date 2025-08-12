@@ -31,9 +31,12 @@ public class DayController : MonoBehaviour {
         this.AddListener<EndDragInput>(EndDrag);
         this.AddListener<DragInputEvent>(DragInput);
         this.AddListener<SpawnElasticEvt>(OnSpawnElastic);
+        this.AddListener<SpawnBikeEvt>(OnSpawnBike);
         elasticVisual.Init();
     }
-
+    private void OnSpawnBike(SpawnBikeEvt param) {
+        targetFollow = param.bike.transform;
+    }
     private void OnSpawnElastic(SpawnElasticEvt param) {
         if (param.elasticEvo == null) return;
         targetPoint = param.elasticEvo.TargetFollow;

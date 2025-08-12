@@ -1,4 +1,5 @@
 using IPS;
+using System.Collections;
 using UnityEngine;
 public partial class LevelManager : SingletonBehaviour<LevelManager>
 {
@@ -13,6 +14,10 @@ public partial class LevelManager : SingletonBehaviour<LevelManager>
     }
     private void Init() {
         InitElements();
+        Invoke(nameof(PreStart), .05f);
+    }
+    private void PreStart() {
+        this.Dispatch<PreStartGameEvent>();
     }
     private void OnEndGame() {
         Logs.LogError("EndGame");

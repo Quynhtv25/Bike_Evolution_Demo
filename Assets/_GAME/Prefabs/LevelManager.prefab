@@ -148,6 +148,8 @@ MonoBehaviour:
   startPos: {fileID: 0}
   endPos: {fileID: 0}
   roadManager: {fileID: 6400613987166603874}
+  planeSystem: {fileID: 4502325061229739053, guid: 82fabf0defdb7384b85c2069a92a18ac, type: 3}
+  dragInput: {fileID: 67644464569626597}
 --- !u!1 &3380420091355149622
 GameObject:
   m_ObjectHideFlags: 0

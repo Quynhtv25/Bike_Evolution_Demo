@@ -16,6 +16,7 @@ public struct LimitDragEvent :IEventParam {
 public struct BikeStartFlyEvent : IEventParam { }
 public struct NextRotateEvt: IEventParam { public Vector3 dir; public float time; }
 public struct SpawnElasticEvt : IEventParam { public ElasticEvolution elasticEvo; }
+public struct  SpawnBikeEvt: IEventParam { public PlaneSystem bike; }
 
 
 // --------------- UI Event ----------------------

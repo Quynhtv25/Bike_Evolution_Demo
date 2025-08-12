@@ -8,9 +8,7 @@ public class PlaneSystem : MonoBehaviour, IInteract {
     [SerializeField] private BoxCollider colliderInteract;
     [SerializeField] private Transform targetCenter;
     [SerializeField] private Transform targetCenterBack;
-    [SerializeField] private Transform targetCenterLeft;
-    [SerializeField] private Transform targetCenterRight;
-    [SerializeField] private float baseScale = 10;
+
     private Rigidbody rb;
     private Vector3 startPos;
     private float totalDistance = 1000f;
@@ -25,7 +23,10 @@ public class PlaneSystem : MonoBehaviour, IInteract {
     void Awake() {
         rb = GetComponent<Rigidbody>();
     }
-
+    public void Init(Transform center, Transform centerBack) {
+        targetCenter = center;
+        targetCenterBack = centerBack;
+    }
     private void OnEnable() {
         this.AddListener<TouchInputEvent>(OnTouchInput);
         this.AddListener<DragInputEvent>(OnDragInput);

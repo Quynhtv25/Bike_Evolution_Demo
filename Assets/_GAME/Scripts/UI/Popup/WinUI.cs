@@ -22,8 +22,9 @@ public class WinUI : Frame {
         });
     }
     public void SetTextDistance(float distance) {
-        textDistance.SetText($"{Mathf.RoundToInt(distance)}m");
-        claimCoin = Mathf.FloorToInt(distance * GameData.Instance.GameConfig.BaseClaim * GameData.Instance.AtributesData.GetValue(EAtribute.Income, UserData.CurrentLevel));
+        int value = Mathf.FloorToInt(distance);
+        textDistance.SetText($"{value}m");
+        claimCoin = Mathf.FloorToInt(value * GameData.Instance.GameConfig.BaseClaim * GameData.Instance.AtributesData.GetValue(EAtribute.Income, UserData.CurrentLevel));
         textClaim.text = claimCoin.ToString();
     }
 }
