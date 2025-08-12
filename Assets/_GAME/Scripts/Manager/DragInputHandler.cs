@@ -4,7 +4,9 @@ using static ElasticVisual;
 
 public class DragInputHandler : MonoBehaviour {
     [SerializeField] private Transform targetCenter;
+    public Transform TargetCenter => targetCenter;
     [SerializeField] private Transform targetCenterBack;
+    public Transform TargetCenterBack => targetCenterBack;
     private Transform targetCenterLeft;
     private Transform targetCenterRight;
 

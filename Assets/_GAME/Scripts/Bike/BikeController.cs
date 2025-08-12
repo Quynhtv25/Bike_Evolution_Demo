@@ -45,7 +45,7 @@ public class BikeController : MonoBehaviour {
     private void FixedUpdate() {
         Movement();
         speed = Mathf.Round((new Vector2(rb.velocity.x, rb.velocity.z).magnitude * 100f) * 0.01f);
-        graphic.CtrlTurnSteer(currentSteerAngle);
+       // graphic.CtrlTurnSteer(currentSteerAngle);
         Balance();
         graphic.UpdateFontWheel(frontWheel);
         graphic.UpdateBackWheel(rearWheel);
@@ -55,6 +55,8 @@ public class BikeController : MonoBehaviour {
     private float lastInput = 0f;
 
     private void Movement() {
+        //frontWheel.steerAngle = 0;
+        frontWheel.rotationSpeed = 0;
         frontWheel.motorTorque = 0f;
         rearWheel.motorTorque = 0f;
         frontWheel.brakeTorque = 0f;
@@ -68,23 +70,23 @@ public class BikeController : MonoBehaviour {
         //    rearWheel.brakeTorque = breakForce * 2f;
         //    rearWheel.motorTorque = 0f;
         //}
-        {
-            //currentAcceleration = acceleration * verticalInput;
-            rearWheel.motorTorque = currentAcceleration;
+        //{
+        //    //currentAcceleration = acceleration * verticalInput;
+        //    rearWheel.motorTorque = currentAcceleration;
 
-            if (Input.GetKey(KeyCode.Space)) {
-                currentBreakForce = breakForce;
-            }
-            else {
-                currentBreakForce = 0;
-            }
+        //    if (Input.GetKey(KeyCode.Space)) {
+        //        currentBreakForce = breakForce;
+        //    }
+        //    else {
+        //        currentBreakForce = 0;
+        //    }
 
-            frontWheel.brakeTorque = currentBreakForce;
-            rearWheel.brakeTorque = currentBreakForce;
-        }
+        //    frontWheel.brakeTorque = currentBreakForce;
+        //    rearWheel.brakeTorque = currentBreakForce;
+        //}
         currentTurnAngle = maxTurnAngle * horizontalInput;
         currentSteerAngle = Mathf.Lerp(currentSteerAngle, currentTurnAngle, Time.deltaTime * steerSmoothSpeed);
-        frontWheel.steerAngle = currentSteerAngle;
+        //frontWheel.steerAngle = currentSteerAngle;
 
         //lastInput = verticalInput;
     }
@@ -131,6 +133,7 @@ public class BikeController : MonoBehaviour {
         WheelHit hit;
         isGroundedFront = frontWheel.GetGroundHit(out hit);
         isGroundedRear = rearWheel.GetGroundHit(out hit);
+        return;
         angleLeftRight = curveAngle.Evaluate(speed) * horizontalInput;
         float angleX = transform.eulerAngles.x;
         Vector3 directLeftRight = Quaternion.AngleAxis(-angleLeftRight, transform.forward) * Vector3.up;
@@ -145,7 +148,12 @@ public class BikeController : MonoBehaviour {
         Debug.DrawLine(transform.position, transform.position + directLeftRight * 100, Color.green);
     }
 
-
+    public void UpdateSteer(Vector3 forward, Vector3 dir) {
+        Vector3 localDir = transform.InverseTransformDirection(dir);
+        float steerAngle = Mathf.Atan2(localDir.x, localDir.z) * Mathf.Rad2Deg;
+        graphic.CtrlTurnSteer(steerAngle);
+        //bikeHolder.transform.localEulerAngles = Vector3.Lerp(bikeHolder.transform.localEulerAngles, new Vector3(0, 0, steerAngle), .1f);
+    }
 
 
     [SerializeField] private Transform leftPedal;

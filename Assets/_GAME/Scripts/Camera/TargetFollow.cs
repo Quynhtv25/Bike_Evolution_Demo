@@ -24,6 +24,10 @@ public class TargetFollow : MonoBehaviour
     //}
     private void OnEnable() {
         this.AddListener<NextRotateEvt>(OnNextRotate);
+        this.AddListener<SpawnBikeEvt>(OnSpawnBike);
+    }
+    private void OnSpawnBike(SpawnBikeEvt param) {
+        tartget = param.bike.transform;
     }
     private void OnNextRotate(NextRotateEvt param) {
         dir = param.dir;

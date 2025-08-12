@@ -1,5 +1,4 @@
 using System;
-using System.Numerics;
 using UnityEngine;
 
 public static class Untilities {
@@ -35,9 +34,9 @@ public static class Untilities {
                 b *= b;
         }
 
-        return cost*(ulong)Math.Round(result);
+        return cost * (ulong)Math.Round(result);
     }
-    public static ulong PowFloat(ulong cost,float baseValue, int exponent) {
+    public static ulong PowFloat(ulong cost, float baseValue, int exponent) {
         float result = 1;
         float b = baseValue;
 
@@ -50,7 +49,12 @@ public static class Untilities {
                 b *= b;
         }
 
-        return (ulong)Mathf.RoundToInt(cost*result);
+        return (ulong)Mathf.RoundToInt(cost * result);
+    }
+    public static float InverseLerp(Vector3 a, Vector3 b, Vector3 value) {
+        Vector3 AB = b - a;
+        Vector3 AV = value - a;
+        return Vector3.Dot(AV, AB) / Vector3.Dot(AB, AB);
     }
 
 }
